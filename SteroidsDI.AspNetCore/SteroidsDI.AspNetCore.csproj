@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Scope Provider for ASP.NET Core</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Condition="$(TargetFramework) == 'netstandard2.0'" Include="Microsoft.AspNetCore.Http" Version="2.1.0" />
+    <FrameworkReference Condition="$(TargetFramework) == 'netcoreapp3.1'" Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SteroidsDI.Core\SteroidsDI.Core.csproj" />
+  </ItemGroup>
+
+</Project>

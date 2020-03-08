@@ -1,0 +1,24 @@
+namespace SteroidsDI.Core
+{
+    public static class GenericScope<T>
+    {
+        public static System.IDisposable? CurrentScope { get; set; }
+    }
+    public interface IScopeFactory
+    {
+        System.IDisposable CreateScope();
+    }
+    public interface IScopeProvider
+    {
+        System.IServiceProvider? GetScopedServiceProvider(System.IServiceProvider rootProvider);
+    }
+    public struct Scoped<T> : System.IDisposable
+    {
+        public Scoped(SteroidsDI.Core.IScopeFactory scopeFactory) { }
+        public void Dispose() { }
+    }
+}
+namespace System
+{
+    public abstract class Defer<T> { }
+}

@@ -1,0 +1,44 @@
+namespace Microsoft.Extensions.DependencyInjection
+{
+    public static class ServiceCollectionExtensions
+    {
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddDefer(this Microsoft.Extensions.DependencyInjection.IServiceCollection services) { }
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddDefer(this Microsoft.Extensions.DependencyInjection.IServiceCollection services, System.Action<SteroidsDI.ServiceProviderAdvancedOptions> configure) { }
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddFactory(this Microsoft.Extensions.DependencyInjection.IServiceCollection services, System.Type factoryType) { }
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddFactory<TFactory>(this Microsoft.Extensions.DependencyInjection.IServiceCollection services) { }
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddFunc<TService>(this Microsoft.Extensions.DependencyInjection.IServiceCollection services) { }
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddGenericScope<T>(this Microsoft.Extensions.DependencyInjection.IServiceCollection services) { }
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddMicrosoftScopeFactory(this Microsoft.Extensions.DependencyInjection.IServiceCollection services) { }
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddServiceProviderAdvancedOptions(this Microsoft.Extensions.DependencyInjection.IServiceCollection services, System.Action<SteroidsDI.ServiceProviderAdvancedOptions> configure) { }
+        public static SteroidsDI.BindingContext<TService> For<TService>(this Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+            where TService :  class { }
+    }
+}
+namespace SteroidsDI
+{
+    public sealed class BindingContext<TService>
+    {
+        public BindingContext(Microsoft.Extensions.DependencyInjection.IServiceCollection services) { }
+        public Microsoft.Extensions.DependencyInjection.IServiceCollection Services { get; }
+        public SteroidsDI.BindingContext<TService> Named<TImplementation>(object name)
+            where TImplementation : TService { }
+        public SteroidsDI.BindingContext<TService> Named<TImplementation>(object name, Microsoft.Extensions.DependencyInjection.ServiceLifetime lifetime = 2)
+            where TImplementation : TService { }
+    }
+    public sealed class GenericScopeProvider<T> : SteroidsDI.Core.IScopeProvider
+    {
+        public GenericScopeProvider() { }
+        public System.IServiceProvider? GetScopedServiceProvider(System.IServiceProvider root) { }
+    }
+    public sealed class MicrosoftScopeFactory : SteroidsDI.Core.IScopeFactory
+    {
+        public MicrosoftScopeFactory(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory serviceScopeFactory) { }
+        public System.IDisposable CreateScope() { }
+    }
+    public sealed class ServiceProviderAdvancedOptions
+    {
+        public ServiceProviderAdvancedOptions() { }
+        public bool AllowRootProviderResolve { get; set; }
+        public bool ValidateParallelScopes { get; set; }
+    }
+}

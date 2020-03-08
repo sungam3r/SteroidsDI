@@ -1,0 +1,15 @@
+namespace Microsoft.Extensions.DependencyInjection
+{
+    public static class ServiceCollectionExtensions
+    {
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddHttpScope(this Microsoft.Extensions.DependencyInjection.IServiceCollection services) { }
+    }
+}
+namespace SteroidsDI.AspNetCore
+{
+    public sealed class AspNetCoreHttpScopeProvider : SteroidsDI.Core.IScopeProvider
+    {
+        public AspNetCoreHttpScopeProvider() { }
+        public System.IServiceProvider? GetScopedServiceProvider(System.IServiceProvider rootProvider) { }
+    }
+}
