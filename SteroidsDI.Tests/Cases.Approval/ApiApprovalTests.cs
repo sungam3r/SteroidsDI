@@ -6,7 +6,7 @@ using SteroidsDI.AspNetCore;
 using SteroidsDI.Core;
 using System;
 
-namespace Opn.Lib.Dotnet.DependencyInjection.Tests.Cases
+namespace SteroidsDI.Tests.Cases
 {
     /// <summary> Tests for checking changes to the public API. </summary>
     /// <see href="https://github.com/JakeGinnivan/ApiApprover"/>
