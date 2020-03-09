@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SteroidsDI.AspNetCore\SteroidsDI.AspNetCore.csproj" />
+    <ProjectReference Include="..\SteroidsDI\SteroidsDI.csproj" />
+  </ItemGroup>
+
+</Project>
