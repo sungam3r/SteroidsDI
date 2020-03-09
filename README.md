@@ -46,7 +46,7 @@ only for constructor DI), we must follow these rules. So we have at least 3 opti
 1. Change the design of dependencies so as to satisfy the rules.
 
 The first method is far from always possible. The second method is much easier to implement, although this will lead to a decrease
-in performance due to the repeated creation of objects that were previously created 1 time. The third way... well, you understand,
+in performance due to the repeated creation of objects that were previously created once. The third way... well, you understand,
 life will not become easier. So it remains to somehow change the design. This project just offers such a way to solve the problem,
 introducing a number of auxiliary abstractions. As many already know
 
@@ -148,17 +148,17 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Note that unlike `AddFunc<T>`, the `AddDefer` method needs to be called only 1 time.
+Note that unlike `AddFunc<T>`, the `AddDefer` method needs to be called only once.
 
 ## Named factory
 
 This method is the most difficult to implement, but from the public API point of view it is just as simple as previous two.
-It assumes that you declare a factory interface:
+It assumes that you declare a factory interface with one or more methods without parameters. Method name does not matter.
+Each factory method should return some dependency type configured in DI container:
 
 ```c#
 public interface IMyRepositoryFactory
 {
-    // method name does not matter
     IRepository GetPersonsRepo();
 }
 ```
@@ -186,6 +186,9 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 Implementation for `IMyRepositoryFactory` will be generated at runtime.
+
+_In fact, a factory method can take one parameter of an arbitrary type. In this case, a named binding should be specified.
+This feature will be documented later._
 
 ## How it works?
 
