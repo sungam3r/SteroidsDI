@@ -3,7 +3,6 @@ using Microsoft.Extensions.Options;
 using SteroidsDI;
 using SteroidsDI.Core;
 using System;
-using System.Linq;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
