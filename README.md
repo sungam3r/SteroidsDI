@@ -55,11 +55,12 @@ introducing a number of auxiliary abstractions. As many already know
 
 The project provides three such abstractions:
 1. Well known `Func<T>` delegate.
-1. `Defer<T>` abstraction which looks like `Lazy<T>` but has a significant difference - `Defer<T>` does not cache the value.
+1. `Defer<T>` abstraction which looks like `Lazy<T>` but has a significant difference - `Defer<T>` **does not cache the value**.
 1. A named factory interface, when implementation type is generated at runtime.
 
-All these abstractions **solve the same problem**, approaching the design of their API from different angles.The challenge is to
+All these abstractions **solve the same problem**, approaching the design of their API from different angles. The challenge is to
 provide a dependency T through some intermediary object X where an explicit dependency on T is either not possible or not desirable.
+**Important! No implementation in this package caches dependency T.**
 
 As mentioned above an example of impossibility is a dependency on a scoped lifetime in an object with a singleton lifetime. And an
 example of non-desirability is creating dependency is expensive and not always required.
@@ -228,8 +229,9 @@ public void ConfigureServices(IServiceCollection services)
     services.AddFunc<IRepository>(options => options.ValidateParallelScopes = true);
     services.AddFactory<IRepositoryFactory>(options => options.ValidateParallelScopes = true);
 
-    // or using explicit extension method
-    services.AddServiceProviderAdvancedOptions(options => options.ValidateParallelScopes = true);
+    // or using extensions from Microsoft.Extensions.Options/Microsoft.Extensions.Options.ConfigurationExtensions packages
+    services.Configure<ServiceProviderAdvancedOptions>(options => options.AllowRootProviderResolve = true)
+    services.Configure<ServiceProviderAdvancedOptions>(Configuration.GetSection("Steroids"));
 }
 ```
 
@@ -237,14 +239,4 @@ All delegates applied will be called sequentially, modifying the same instance o
 
 ## Examples
 
-You can see how to use all the aforementioned APIs in the [example project](Example/Example.csproj):
-
-```c#
-public void ConfigureServices(IServiceCollection services)
-{
-    services.AddDefer(options => options.ValidateParallelScopes = true);
-    services.AddFunc<IRepository>();
-    services.AddFactory<IRepositoryFactory>(); // implementation will be generated at runtime
-    services.AddHttpScope();
-}
-```
+You can see how to use all the aforementioned APIs in the [example project](/Example).

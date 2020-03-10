@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using System;
 
 namespace SteroidsDI
@@ -7,10 +8,10 @@ namespace SteroidsDI
         private readonly IServiceProvider _provider;
         private readonly ServiceProviderAdvancedOptions _options;
 
-        public DelegatedDefer(IServiceProvider provider, ServiceProviderAdvancedOptions options)
+        public DelegatedDefer(IServiceProvider provider, IOptions<ServiceProviderAdvancedOptions> options)
         {
             _provider = provider;
-            _options = options;
+            _options = options.Value;
         }
 
         public override T Value => _provider.Resolve<T>(_options);

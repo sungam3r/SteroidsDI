@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 using SteroidsDI;
 using SteroidsDI.Core;
 using System;
@@ -9,6 +10,9 @@ namespace Microsoft.Extensions.DependencyInjection
     /// <summary> Extension methods for <see cref="IServiceCollection"/>. </summary>
     public static class ServiceCollectionExtensions
     {
+        private static IServiceCollection ConfigureOptions(this IServiceCollection services, Action<ServiceProviderAdvancedOptions> configure)
+            => services.Configure(configure).Configure<ServiceProviderAdvancedOptions>(opt => opt.Services = services);
+
         /// <summary> Gets the binding context for the type <typeparamref name="TService" />. </summary>
         /// <typeparam name="TService"> The service type which context is customized. </typeparam>
         /// <param name="services"> A collection of DI container services. </param>
@@ -33,7 +37,7 @@ namespace Microsoft.Extensions.DependencyInjection
             if (factoryType == null)
                 throw new ArgumentNullException(nameof(factoryType));
 
-            services.AddServiceProviderAdvancedOptions(configure);
+            services.ConfigureOptions(configure);
             services.TryAddSingleton(factoryType, FactoryGenerator.Generate(factoryType));
             return services;
         }
@@ -50,7 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="configure"> Delegate to configure DI options. </param>
         /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
         public static IServiceCollection AddFactory<TFactory>(this IServiceCollection services, Action<ServiceProviderAdvancedOptions> configure)
-            => services.AddServiceProviderAdvancedOptions(configure)
+            => services.ConfigureOptions(configure)
                        .AddFactory(typeof(TFactory));
 
         /// <summary>
@@ -75,12 +79,11 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="configure"> Delegate to configure DI options. </param>
         /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
         public static IServiceCollection AddFunc<TService>(this IServiceCollection services, Action<ServiceProviderAdvancedOptions> configure)
-            => services.AddServiceProviderAdvancedOptions(configure)
-                       .AddServiceProviderAdvancedOptions(_ => { })
+            => services.ConfigureOptions(configure)
                        .AddSingleton(provider =>
                         {
-                            var options = provider.GetRequiredService<ServiceProviderAdvancedOptions>();
-                            return new Func<TService>(() => provider.Resolve<TService>(options));
+                            var options = provider.GetRequiredService<IOptions<ServiceProviderAdvancedOptions>>();
+                            return new Func<TService>(() => provider.Resolve<TService>(options.Value));
                         });
 
         /// <summary>
@@ -101,7 +104,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="configure"> Delegate to configure DI options. </param>
         /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
         public static IServiceCollection AddDefer(this IServiceCollection services, Action<ServiceProviderAdvancedOptions> configure)
-            => services.AddServiceProviderAdvancedOptions(configure)
+            => services.ConfigureOptions(configure)
                        .AddSingleton(typeof(Defer<>), typeof(DelegatedDefer<>));
 
         /// <summary> Register <see cref="GenericScopeProvider{T}" />  in DI as one of the possible implementations of <see cref="IScopeProvider" />. </summary>
@@ -124,42 +127,6 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddMicrosoftScopeFactory(this IServiceCollection services)
         {
             services.TryAddSingleton<IScopeFactory, MicrosoftScopeFactory>();
-            return services;
-        }
-
-        /// <summary>
-        /// Setting options to customize the behavior of <see cref="IServiceProvider" /> when used in Func / Defer / Factory.
-        /// </summary>
-        /// <param name="services"> A collection of DI container services. </param>
-        /// <param name="configure"> Delegate to configure DI options. </param>
-        /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
-        public static IServiceCollection AddServiceProviderAdvancedOptions(this IServiceCollection services, Action<ServiceProviderAdvancedOptions> configure)
-        {
-            if (configure == null)
-                throw new ArgumentNullException(nameof(configure));
-
-            var descriptor = services.LastOrDefault(s => s.ServiceType == typeof(ServiceProviderAdvancedOptions));
-
-            if (descriptor == null)
-            {
-                var options = new ServiceProviderAdvancedOptions();
-                configure(options);
-                options.Services = services;
-
-                services.AddSingleton(options);
-            }
-            else if (descriptor.ImplementationInstance is ServiceProviderAdvancedOptions options)
-            {
-                if (options.Services != services)
-                    throw new InvalidOperationException("Unknown configuration");
-
-                configure(options);
-            }
-            else
-            {
-                throw new InvalidOperationException("Unknown configuration");
-            }
-
             return services;
         }
     }

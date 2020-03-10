@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -71,7 +72,7 @@ namespace SteroidsDI
             bindingsField = typeBuilder.DefineField("_bindings", typeof(List<NamedBinding>), FieldAttributes.Private);
             optionsField = typeBuilder.DefineField("_options", typeof(ServiceProviderAdvancedOptions), FieldAttributes.Private);
 
-            var ctorBuilder = typeBuilder.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new[] { typeof(IServiceProvider), typeof(IEnumerable<NamedBinding>), typeof(ServiceProviderAdvancedOptions) });
+            var ctorBuilder = typeBuilder.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new[] { typeof(IServiceProvider), typeof(IEnumerable<NamedBinding>), typeof(IOptions<ServiceProviderAdvancedOptions>) });
 
             var ctorIL = ctorBuilder.GetILGenerator();
 
@@ -86,6 +87,7 @@ namespace SteroidsDI
 
             ctorIL.Emit(OpCodes.Ldarg_0); // this
             ctorIL.Emit(OpCodes.Ldarg_3); // options arg
+            ctorIL.Emit(OpCodes.Callvirt, typeof(IOptions<ServiceProviderAdvancedOptions>).GetProperty("Value").GetGetMethod());
             ctorIL.Emit(OpCodes.Stfld, optionsField);
 
             ctorIL.Emit(OpCodes.Ret);

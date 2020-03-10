@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,11 @@ namespace SteroidsDI.Tests
         private readonly List<NamedBinding> _bindings; // all bindings
         private readonly ServiceProviderAdvancedOptions _options;
 
-        public IMegaFactory_Generated(IServiceProvider provider, IEnumerable<NamedBinding> bindings, ServiceProviderAdvancedOptions options)
+        public IMegaFactory_Generated(IServiceProvider provider, IEnumerable<NamedBinding> bindings, IOptions<ServiceProviderAdvancedOptions> options)
         {
             _provider = provider;
             _bindings = bindings.ToList();
-            _options = options;
+            _options = options.Value;
         }
 
         public IBuilder AAA() => _provider.Resolve<IBuilder>(_options);

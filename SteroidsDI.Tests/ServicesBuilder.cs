@@ -8,8 +8,9 @@ namespace SteroidsDI.Tests
         public static IServiceCollection BuildDefault(bool addScopeProvider = true)
         {
             var services = new ServiceCollection()
-                .AddDefer(options => options.ValidateParallelScopes = true)
+                .AddDefer()
                 .AddMicrosoftScopeFactory()
+                .Configure<ServiceProviderAdvancedOptions>(opt => opt.AllowRootProviderResolve = true)
 
                 .AddScoped<ScopedService>().AddFunc<ScopedService>()
                 .AddTransient<TransientService>().AddFunc<TransientService>()
