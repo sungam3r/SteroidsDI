@@ -240,3 +240,18 @@ All delegates applied will be called sequentially, modifying the same instance o
 ## Examples
 
 You can see how to use all the aforementioned APIs in the [example project](/Example).
+
+## FAQ
+
+**Q**. Wait a moment. Doesn't `Microsoft.Extensions.DependencyInjection` have support for this out of the box?
+
+**A**. Unfortunately no. I myself would rather be able to use the existing feature than to write my own package.
+
+<br/>
+
+**Q**. Isn't what you offer is a **ServiceLocator**? I heard that the ServiceLocator is antipattern.
+
+**A**. Yes, ServiceLocator is a [known antipattern](https://blog.ploeh.dk/2010/02/03/ServiceLocatorisanAnti-Pattern/).
+The fundamental difference with the proposed solutions is that ServiceLocator allows you to resolve
+any dependency in runtime while `Func<T>`, `Defer<T>` and Named Factory are designed to resolve
+only specific dependencies specified at the compile-time.
