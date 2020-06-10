@@ -104,7 +104,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
         public static IServiceCollection AddDefer(this IServiceCollection services, Action<ServiceProviderAdvancedOptions> configure)
             => services.ConfigureOptions(configure)
-                       .AddSingleton(typeof(Defer<>), typeof(DelegatedDefer<>));
+                       .AddSingleton(typeof(Defer<>), typeof(DelegatedDefer<>))
+                       .AddSingleton(typeof(IDefer<>), typeof(DelegatedDefer<>));
 
         /// <summary> Register <see cref="GenericScopeProvider{T}" />  in DI as one of the possible implementations of <see cref="IScopeProvider" />. </summary>
         /// <typeparam name="T">
