@@ -1,7 +1,7 @@
 <Project>
 
   <PropertyGroup>
-    <VersionPrefix>0.0.3</VersionPrefix>
+    <VersionPrefix>0.0.4</VersionPrefix>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
@@ -15,7 +15,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/sungam3r/SteroidsDI</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>dependency-injection;steroids</PackageTags>
+    <PackageTags>dependency;injection;steroids;func;defer;factory</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

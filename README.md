@@ -55,7 +55,8 @@ introducing a number of auxiliary abstractions. As many already know
 
 The project provides three such abstractions:
 1. Well known `Func<T>` delegate.
-1. `Defer<T>` abstraction which looks like `Lazy<T>` but has a significant difference - `Defer<T>` **does not cache the value**.
+1. `Defer<T>`/`IDefer<T>` abstractions which look like `Lazy<T>` but have a significant difference - `Defer<T>`/`IDefer<T>`
+**do not cache the value**.
 1. A named factory interface, when implementation type is generated at runtime.
 
 All these abstractions **solve the same problem**, approaching the design of their API from different angles. The challenge is to
@@ -151,7 +152,8 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Note that unlike `AddFunc<T>`, the `AddDefer` method needs to be called only once.
+Note that unlike `AddFunc<T>`, the `AddDefer` method needs to be called only once. Use `IDefer<T>` interface if you
+need covariance. 
 
 ## Named factory
 
