@@ -104,6 +104,7 @@ How to configure in DI:
 ```c#
 public void ConfigureServices(IServiceCollection services)
 {
+    // First register your IRepository and then call
     services.AddFunc<IRepository>();
 }
 ```
@@ -145,6 +146,7 @@ How to configure in DI:
 ```c#
 public void ConfigureServices(IServiceCollection services)
 {
+    // First register your IRepository and then call
     services.AddDefer();
 }
 ```
@@ -182,6 +184,7 @@ How to configure in DI:
 ```c#
 public void ConfigureServices(IServiceCollection services)
 {
+    // First register your IRepository and then call
     services.AddFactory<IMyRepositoryFactory>();
 }
 ```
@@ -255,3 +258,10 @@ You can see how to use all the aforementioned APIs in the [example project](/Exa
 The fundamental difference with the proposed solutions is that ServiceLocator allows you to resolve
 any dependency in runtime while `Func<T>`, `Defer<T>` and Named Factory are designed to resolve
 only specific dependencies specified at the compile-time.
+
+<br/>
+
+**Q**. Is this some kind of new dependency injection approach?
+
+**A**. Actually not. A description of this approach can be found in articles/blogs many years ago, for example
+[here](https://www.planetgeek.ch/2011/12/31/ninject-extensions-factory-introduction/).
