@@ -1,0 +1,11 @@
+"tests":
+  - src/SteroidsDI.Tests/**/*
+
+"CI":
+  - .github/workflows/**/*
+
+"code style":
+  - .editorconfig
+
+"documentation":
+  - README.md

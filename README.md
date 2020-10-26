@@ -1,10 +1,15 @@
 # SteroidsDI
 
+![License](https://img.shields.io/github/license/sungam3r/SteroidsDI)
+
 ![Activity](https://img.shields.io/github/commit-activity/w/sungam3r/SteroidsDI)
 ![Activity](https://img.shields.io/github/commit-activity/m/sungam3r/SteroidsDI)
 ![Activity](https://img.shields.io/github/commit-activity/y/sungam3r/SteroidsDI)
 
 ![Size](https://img.shields.io/github/repo-size/sungam3r/SteroidsDI)
+
+[![Build status](https://github.com/sungam3r/SteroidsDI/workflows/Publish%20preview%20to%20GitHub%20registry/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions?query=workflow%3A%22Publish+preview+to+GitHub+registry%22)
+[![Build status](https://github.com/sungam3r/SteroidsDI/workflows/Publish%20release%20to%20Nuget%20registry/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions?query=workflow%3A%22Publish+release+to+Nuget+registry%22)
 
 Advanced Dependency Injection to use every day.
 
@@ -198,17 +203,17 @@ This feature will be documented later._
 
 ## How it works?
 
-[Everything is simple here](SteroidsDI/Resolver.cs). All three methods come down to delegating dependency resolution to
+[Everything is simple here](src/SteroidsDI/Resolver.cs). All three methods come down to delegating dependency resolution to
 the _appropriate_ `IServiceProvider`. What does _appropriate_ mean? As a rule, in a ASP.NET Core application, everyone
 is used to working with one (scoped) provider obtained from `IHttpContextAccessor` - `HttpContext.RequestServices`.
 But in the general case, there can be many such providers. In addition, dependency-consuming code is not aware of their
 existence. This code may be a general purpose library no tightly coupled with application specific environment. Therefore
-abstraction for obtaining the _appropriate_ `IServiceProvider` is [introduced](SteroidsDI.Core/IScopeProvider.cs). Yes,
+abstraction for obtaining the _appropriate_ `IServiceProvider` is [introduced](src/SteroidsDI.Core/IScopeProvider.cs). Yes,
 one more abstraction again!
 
 This project provides two built-in providers:
-1. [`AspNetCoreHttpScopeProvider`](SteroidsDI.AspNetCore/AspNetCoreHttpScopeProvider.cs) for ASP.NET Core apps.
-1. [`GenericScopeProvider<T>`](SteroidsDI/GenericScopeProvider.cs) for general purpose libraries.
+1. [`AspNetCoreHttpScopeProvider`](src/SteroidsDI.AspNetCore/AspNetCoreHttpScopeProvider.cs) for ASP.NET Core apps.
+1. [`GenericScopeProvider<T>`](src/SteroidsDI/GenericScopeProvider.cs) for general purpose libraries.
 
 How to configure in DI:
 
@@ -224,7 +229,7 @@ And of course you can always write your own provider.
 
 ## Advanced behavior
 
-You can customize the behavior of `AddFunc`/`AddDefer`/`AddFactory` APIs via [ServiceProviderAdvancedOptions](SteroidsDI/ServiceProviderAdvancedOptions.cs):
+You can customize the behavior of `AddFunc`/`AddDefer`/`AddFactory` APIs via [ServiceProviderAdvancedOptions](src/SteroidsDI/ServiceProviderAdvancedOptions.cs):
 
 ```c#
 public void ConfigureServices(IServiceCollection services)
