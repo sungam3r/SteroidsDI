@@ -103,8 +103,8 @@ namespace SteroidsDI.Tests.Cases
             {
                 var controller = provider.GetRequiredService<Controller>();
 
-                Should.Throw<InvalidOperationException>(() => controller.Factory.CCC(null));
-                Should.Throw<InvalidOperationException>(() => controller.Generic.CCC(null));
+                Should.Throw<InvalidOperationException>(() => controller.Factory.CCC(null!));
+                Should.Throw<InvalidOperationException>(() => controller.Generic.CCC(null!));
             }
         }
 
@@ -128,7 +128,7 @@ namespace SteroidsDI.Tests.Cases
         [Category("Throw")]
         public void Named_Binding_With_Invalid_Properties_Should_Throw()
         {
-            Should.Throw<ArgumentNullException>(() => ServicesBuilder.BuildDefault().For<IBuilder>().Named<SpecialBuilder>(null).Services.BuildServiceProvider(validateScopes: true));
+            Should.Throw<ArgumentNullException>(() => ServicesBuilder.BuildDefault().For<IBuilder>().Named<SpecialBuilder>(null!).Services.BuildServiceProvider(validateScopes: true));
             Should.Throw<InvalidOperationException>(() => ServicesBuilder.BuildDefault().For<IBuilder>().Named<SpecialBuilderOver9000Level>("oops", ServiceLifetime.Transient).Services.BuildServiceProvider(validateScopes: true));
         }
 
@@ -136,8 +136,8 @@ namespace SteroidsDI.Tests.Cases
         [Category("Throw")]
         public void Null_Factory_Type_Should_Throw()
         {
-            Should.Throw<ArgumentNullException>(() => new ServiceCollection().AddFactory(null));
-            Should.Throw<ArgumentNullException>(() => FactoryGenerator.Generate(null));
+            Should.Throw<ArgumentNullException>(() => new ServiceCollection().AddFactory(null!));
+            Should.Throw<ArgumentNullException>(() => FactoryGenerator.Generate(null!));
         }
 
         [Test]

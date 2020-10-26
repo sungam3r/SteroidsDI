@@ -20,5 +20,6 @@ namespace SteroidsDI.Core
 }
 namespace System
 {
-    public abstract class Defer<T> { }
+    public abstract class Defer<T> : System.IDefer<T> { }
+    public interface IDefer<out T> { }
 }
