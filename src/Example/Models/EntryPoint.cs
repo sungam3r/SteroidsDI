@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Example
 {
@@ -10,9 +10,9 @@ namespace Example
     public class EntryPoint : IEntryPoint
     {
         //private IRepository _repository;
-        private Defer<IRepository> _repository1;
-        private Func<IRepository> _repository2;
-        private IRepositoryFactory _repoFactory;
+        private readonly Defer<IRepository> _repository1;
+        private readonly Func<IRepository> _repository2;
+        private readonly IRepositoryFactory _repoFactory;
 
         public EntryPoint(
             // Error while validating the service descriptor 'ServiceType: Example.IEntryPoint Lifetime: Singleton ImplementationType: Example.EntryPoint':

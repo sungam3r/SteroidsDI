@@ -1,10 +1,9 @@
+using System;
 using NUnit.Framework;
 using PublicApiGenerator;
 using Shouldly;
-using SteroidsDI;
 using SteroidsDI.AspNetCore;
 using SteroidsDI.Core;
-using System;
 
 namespace SteroidsDI.Tests.Cases
 {
@@ -20,14 +19,14 @@ namespace SteroidsDI.Tests.Cases
         [TestCase(typeof(AspNetCoreHttpScopeProvider))]
         public void PublicApi(Type type)
         {
-            string? publicApi = type?.Assembly.GeneratePublicApi(new ApiGeneratorOptions
+            string publicApi = type.Assembly.GeneratePublicApi(new ApiGeneratorOptions
             {
                 IncludeAssemblyAttributes = false,
                 WhitelistedNamespacePrefixes = new[] { "Microsoft.Extensions.DependencyInjection" },
                 ExcludeAttributes = new[] { "System.Diagnostics.DebuggerDisplayAttribute" },
             });
 
-            publicApi.ShouldMatchApproved(options => options!.WithDescriminator(type.Assembly.GetName().Name));
+            publicApi.ShouldMatchApproved(options => options!.WithDiscriminator(type.Assembly.GetName().Name!));
         }
     }
 }
