@@ -11,6 +11,10 @@ on:
       - src/**
       - .github/workflows/**
 
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
 jobs:
   pack:
     runs-on: ubuntu-latest
@@ -22,15 +26,11 @@ jobs:
         with:
           dotnet-version: '3.1.x'
           source-url: https://nuget.pkg.github.com/sungam3r/index.json
-        # Error: The NUGET_AUTH_TOKEN environment variable was not provided. In this step, add the following: 
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Install dependencies
         working-directory: src
         run: dotnet restore
-        env:
-          DOTNET_NOLOGO: true
-          DOTNET_CLI_TELEMETRY_OPTOUT: true
       - name: Build solution [Release]
         working-directory: src
         run: dotnet build --no-restore -c Release -p:VersionSuffix=$GITHUB_RUN_NUMBER
