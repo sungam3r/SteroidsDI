@@ -8,8 +8,8 @@
 
 ![Size](https://img.shields.io/github/repo-size/sungam3r/SteroidsDI)
 
-[![Build status](https://github.com/sungam3r/SteroidsDI/workflows/Publish%20preview%20to%20GitHub%20registry/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions?query=workflow%3A%22Publish+preview+to+GitHub+registry%22)
-[![Build status](https://github.com/sungam3r/SteroidsDI/workflows/Publish%20release%20to%20Nuget%20registry/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions?query=workflow%3A%22Publish+release+to+Nuget+registry%22)
+[![Build status](https://github.com/sungam3r/SteroidsDI/workflows/Publish%20preview%20to%20GitHub%20registry/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions)
+[![Build status](https://github.com/sungam3r/SteroidsDI/workflows/Publish%20release%20to%20Nuget%20registry/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions)
 
 Advanced Dependency Injection to use every day.
 
