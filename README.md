@@ -1,8 +1,8 @@
 # SteroidsDI
 
-![License](https://img.shields.io/github/license/sungam3r/SteroidsDI)
-
 <a href="https://www.buymeacoffee.com/sungam3r" target="_blank"><img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
+![License](https://img.shields.io/github/license/sungam3r/SteroidsDI)
 
 ![Activity](https://img.shields.io/github/commit-activity/w/sungam3r/SteroidsDI)
 ![Activity](https://img.shields.io/github/commit-activity/m/sungam3r/SteroidsDI)
