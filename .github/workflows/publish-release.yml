@@ -55,7 +55,7 @@ jobs:
       - name: Upload Nuget packages as release artifacts
         uses: actions/github-script@v2
         with:
-          github-token: ${{secrets.NUGET_API_KEY}}
+          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             console.log('environment', process.versions);
             const fs = require('fs').promises;
