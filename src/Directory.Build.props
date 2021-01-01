@@ -1,7 +1,7 @@
 <Project>
 
   <PropertyGroup>
-    <VersionPrefix>0.0.7-preview</VersionPrefix>
+    <VersionPrefix>0.0.8-preview</VersionPrefix>
     <LangVersion>latest</LangVersion>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\assets\icon.png" Pack="true" PackagePath="" />
+    <None Include="..\..\assets\icon.png" Pack="true" PackagePath="" Condition="'$(IsPackable)' == 'true'" />
   </ItemGroup>
 
 </Project>
