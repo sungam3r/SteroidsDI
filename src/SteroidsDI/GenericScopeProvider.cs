@@ -1,6 +1,6 @@
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using SteroidsDI.Core;
-using System;
 
 namespace SteroidsDI
 {

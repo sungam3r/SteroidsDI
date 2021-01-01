@@ -1,4 +1,4 @@
-﻿namespace SteroidsDI.Tests
+namespace SteroidsDI.Tests
 {
     public enum ManagerType
     {

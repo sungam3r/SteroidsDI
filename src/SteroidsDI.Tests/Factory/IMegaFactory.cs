@@ -1,4 +1,4 @@
-﻿namespace SteroidsDI.Tests
+namespace SteroidsDI.Tests
 {
     /// <summary> An factory for which implementation is generated in runtime. </summary>
     public interface IMegaFactory

@@ -31,7 +31,7 @@ namespace Example
             services.AddFactory<IRepositoryFactory>(); // implementation will be generated at runtime
             services.AddHttpScope();
             services.Configure<ServiceProviderAdvancedOptions>(Configuration.GetSection("Steroids"));
-            
+
             // register standard stuff
             services.AddControllers();
         }

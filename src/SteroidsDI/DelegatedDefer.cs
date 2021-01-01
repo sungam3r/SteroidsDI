@@ -1,5 +1,5 @@
-using Microsoft.Extensions.Options;
 using System;
+using Microsoft.Extensions.Options;
 
 namespace SteroidsDI
 {

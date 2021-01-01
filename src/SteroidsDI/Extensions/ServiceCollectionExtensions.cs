@@ -1,8 +1,8 @@
+using System;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using SteroidsDI;
 using SteroidsDI.Core;
-using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -66,7 +66,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services"> A collection of DI container services. </param>
         /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
         public static IServiceCollection AddFunc<TService>(this IServiceCollection services) => services.AddFunc<TService>(_ => { });
-       
+
         /// <summary>
         /// Register the factory <see cref="Func {TService}" /> to create an object of type <typeparamref name="TService" />.
         /// This factory can find/select the correct scope (if one exists at all) through which you need to get the required object.

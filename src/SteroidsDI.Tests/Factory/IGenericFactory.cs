@@ -1,4 +1,4 @@
-﻿namespace SteroidsDI.Tests
+namespace SteroidsDI.Tests
 {
     /// <summary> An generic factory for which implementation is generated in runtime. </summary>
     /// <typeparam name="TBuilder"> The first generic parameter. </typeparam>

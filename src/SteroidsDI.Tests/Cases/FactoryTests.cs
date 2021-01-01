@@ -1,8 +1,8 @@
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Shouldly;
 using SteroidsDI.Core;
-using System;
 
 namespace SteroidsDI.Tests.Cases
 {

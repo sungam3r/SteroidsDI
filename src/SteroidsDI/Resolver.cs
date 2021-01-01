@@ -1,8 +1,8 @@
-using Microsoft.Extensions.DependencyInjection;
-using SteroidsDI.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using SteroidsDI.Core;
 
 namespace SteroidsDI
 {
