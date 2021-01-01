@@ -19,7 +19,7 @@ namespace Example
             // Cannot consume scoped service 'Example.IRepository' from singleton 'Example.IEntryPoint'.
             //IRepository repository
             Defer<IRepository> repository1,
-            Func<IRepository> repository2, 
+            Func<IRepository> repository2,
             IRepositoryFactory repoFactory)
         {
             _repository1 = repository1;

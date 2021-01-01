@@ -1,7 +1,7 @@
+using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using SteroidsDI.Core;
-using System;
 
 namespace SteroidsDI.AspNetCore
 {

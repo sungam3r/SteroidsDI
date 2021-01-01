@@ -1,4 +1,4 @@
-﻿namespace System
+namespace System
 {
     /// <summary>
     /// Covariant interface for <see cref="Defer{T}" /> which is an analogue of <see cref="Func{TResult}" />

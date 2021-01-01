@@ -1,5 +1,5 @@
-using SteroidsDI.Core;
 using System;
+using SteroidsDI.Core;
 
 namespace SteroidsDI.Tests
 {
