@@ -8,7 +8,7 @@ namespace SteroidsDI.Tests.Cases
 {
     [TestFixture]
     [Category("Factory")]
-    internal class FactoryTests
+    public class FactoryTests
     {
         [Test]
         public void Factory_And_Named_Bindings_Should_Work()

@@ -11,7 +11,7 @@ namespace SteroidsDI.Tests.Cases
         [Test]
         public void Should_Throw_If_Null()
         {
-            Should.Throw<ArgumentNullException>(() => new Scoped<int>(null)).ParamName.ShouldBe("scopeFactory");
+            Should.Throw<ArgumentNullException>(() => new Scoped<int>(null!)).ParamName.ShouldBe("scopeFactory");
         }
 
         [Test]
