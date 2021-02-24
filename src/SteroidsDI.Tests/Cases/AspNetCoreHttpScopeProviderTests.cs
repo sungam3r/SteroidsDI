@@ -7,7 +7,7 @@ using SteroidsDI.AspNetCore;
 namespace SteroidsDI.Tests.Cases
 {
     [TestFixture]
-    internal class AspNetCoreHttpScopeProviderTests
+    public class AspNetCoreHttpScopeProviderTests
     {
         [Test]
         [Category("Throw")]

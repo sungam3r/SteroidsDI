@@ -8,7 +8,7 @@ namespace SteroidsDI.Tests.Cases
 {
     [TestFixture]
     [Category("Func")]
-    internal class FuncTests
+    public class FuncTests
     {
         [Test]
         public void Func_Should_Work_With_Proper_Create_And_Dispose()

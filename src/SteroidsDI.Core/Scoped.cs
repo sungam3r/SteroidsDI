@@ -23,7 +23,7 @@ namespace SteroidsDI.Core
                 throw new ArgumentNullException(nameof(scopeFactory));
 
             if (GenericScope<T>.CurrentScope != null)
-                throw new InvalidOperationException($"The current scope of GenericScope<{typeof(T).Name} is not null when trying to initialize it.");
+                throw new InvalidOperationException($"The current scope of GenericScope<{typeof(T).Name}> is not null when trying to initialize it.");
 
             Scope = scopeFactory.CreateScope();
             GenericScope<T>.CurrentScope = Scope;

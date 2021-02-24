@@ -67,7 +67,7 @@ jobs:
         if: ${{ startsWith(matrix.os, 'ubuntu') }}
         uses: codecov/codecov-action@v1.2.1
         with:
-          files: .coverage/SteroidsDI.Tests/coverage.net5.opencover.xml
+          files: .coverage/SteroidsDI.Tests/coverage.netcoreapp3.1.opencover.xml
 
   buildcheck:
     needs:
