@@ -14,7 +14,7 @@ namespace SteroidsDI
         public bool ValidateParallelScopes { get; set; }
 
         /// <summary>
-        /// Allows resolving objects through the root provider if the current scope is missing. The object must have 
+        /// Allows resolving objects through the root provider if the current scope is missing. The object must have
         /// lifetime different from scoped. Getting scoped objects through the root provider is ALWAYS FORBIDDEN.
         /// Defaults to <see langword="false"/>.
         /// </summary>

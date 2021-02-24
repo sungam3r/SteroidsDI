@@ -10,10 +10,12 @@
 
 ![Size](https://img.shields.io/github/repo-size/sungam3r/SteroidsDI)
 
-[![Build status](https://github.com/sungam3r/SteroidsDI/workflows/Publish%20preview%20to%20GitHub%20registry/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions)
-[![Build status](https://github.com/sungam3r/SteroidsDI/workflows/Publish%20release%20to%20Nuget%20registry/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions)
-[![CodeQL analysis](https://github.com/sungam3r/SteroidsDI/workflows/CodeQL%20analysis/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions?query=workflow%3A%22%22CodeQL+analysis%22%22)
+[![Run unit tests](https://github.com/sungam3r/SteroidsDI/actions/workflows/test.yml/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions/workflows/test.yml)
+[![Publish preview to GitHub registry](https://github.com/sungam3r/SteroidsDI/actions/workflows/publish-preview.yml/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions/workflows/publish-preview.yml)
+[![Publish release to Nuget registry](https://github.com/sungam3r/SteroidsDI/actions/workflows/publish-release.yml/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions/workflows/publish-release.yml)
+[![CodeQL analysis](https://github.com/sungam3r/SteroidsDI/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions/workflows/codeql-analysis.yml)
 
+[![codecov](https://codecov.io/gh/sungam3r/SteroidsDI/branch/master/graph/badge.svg?token=0ZRHIUEQM4)](https://codecov.io/gh/sungam3r/SteroidsDI)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/sungam3r/SteroidsDI.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/sungam3r/SteroidsDI/alerts/)
 [![Language grade: C#](https://img.shields.io/lgtm/grade/csharp/g/sungam3r/SteroidsDI.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/sungam3r/SteroidsDI/context:csharp)
 
@@ -87,7 +89,7 @@ This method is the easiest and offers to inject `Func<T>` instead of `T`:
 
 Before:
 
-```c#
+```csharp
 class MyObject
 {
     private IRepository _repo;
@@ -100,7 +102,7 @@ class MyObject
 
 After:
 
-```c#
+```csharp
 class MyObject
 {
     private Func<IRepository> _repo;
@@ -113,7 +115,7 @@ class MyObject
 
 How to configure in DI:
 
-```c#
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     // First register your IRepository and then call
@@ -129,7 +131,7 @@ This method suggests more explicit API - inject `Defer<T>` instead of `T`:
 
 Before:
 
-```c#
+```csharp
 class MyObject
 {
     private IRepository _repo;
@@ -142,7 +144,7 @@ class MyObject
 
 After:
 
-```c#
+```csharp
 class MyObject
 {
     private Defer<IRepository> _repo;
@@ -155,7 +157,7 @@ class MyObject
 
 How to configure in DI:
 
-```c#
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     // First register your IRepository and then call
@@ -172,7 +174,7 @@ This method is the most difficult to implement, but from the public API point of
 It assumes that you declare a factory interface with one or more methods without parameters. Method name does not matter.
 Each factory method should return some dependency type configured in DI container:
 
-```c#
+```csharp
 public interface IMyRepositoryFactory
 {
     IRepository GetPersonsRepo();
@@ -181,7 +183,7 @@ public interface IMyRepositoryFactory
 
 And inject this factory into your "parent" type:
 
-```c#
+```csharp
 class MyObject
 {
     private IMyRepositoryFactory _factory;
@@ -194,7 +196,7 @@ class MyObject
 
 How to configure in DI:
 
-```c#
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     // First register your IRepository and then call
@@ -223,7 +225,7 @@ This project provides two built-in providers:
 
 How to configure in DI:
 
-```c#
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddHttpScope();
@@ -236,22 +238,15 @@ And of course you can always write your own provider.
 ## Advanced behavior
 
 You can customize the behavior of `AddFunc`/`AddDefer`/`AddFactory` APIs via [ServiceProviderAdvancedOptions](src/SteroidsDI/ServiceProviderAdvancedOptions.cs):
+Just use standard extension methods from `Microsoft.Extensions.Options/Microsoft.Extensions.Options.ConfigurationExtensions` packages.
 
-```c#
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    // using optional delegate parameter in all methods
-    services.AddDefer(options => options.ValidateParallelScopes = true);
-    services.AddFunc<IRepository>(options => options.ValidateParallelScopes = true);
-    services.AddFactory<IRepositoryFactory>(options => options.ValidateParallelScopes = true);
-
-    // or using extensions from Microsoft.Extensions.Options/Microsoft.Extensions.Options.ConfigurationExtensions packages
     services.Configure<ServiceProviderAdvancedOptions>(options => options.AllowRootProviderResolve = true)
     services.Configure<ServiceProviderAdvancedOptions>(Configuration.GetSection("Steroids"));
 }
 ```
-
-All delegates applied will be called sequentially, modifying the same instance of options.
 
 ## Examples
 

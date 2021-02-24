@@ -23,7 +23,7 @@ namespace SteroidsDI.Tests.Cases
                 {
                     GenericScope<ServicesBuilder>.CurrentScope = scope1;
 
-                    controller1 = scope1.ServiceProvider.GetService<Controller>();
+                    controller1 = scope1.ServiceProvider.GetService<Controller>()!;
                     service1 = controller1.ScopedFunc();
                     var service11 = controller1.ScopedFunc();
                     service11.ShouldBeSameAs(service1);
@@ -51,7 +51,7 @@ namespace SteroidsDI.Tests.Cases
                 {
                     GenericScope<ServicesBuilder>.CurrentScope = scope2;
 
-                    controller2 = scope2.ServiceProvider.GetService<Controller>();
+                    controller2 = scope2.ServiceProvider.GetService<Controller>()!;
                     controller2.ShouldBeSameAs(controller1);
 
                     service2 = controller2.ScopedFunc();
@@ -74,7 +74,7 @@ namespace SteroidsDI.Tests.Cases
                 {
                     GenericScope<ServicesBuilder>.CurrentScope = scope3;
 
-                    controller3 = scope3.ServiceProvider.GetService<Controller>();
+                    controller3 = scope3.ServiceProvider.GetService<Controller>()!;
                     controller3.ShouldBeSameAs(controller1);
 
                     service3 = controller3.ScopedFunc();
@@ -105,7 +105,7 @@ namespace SteroidsDI.Tests.Cases
                 {
                     using (var scope = provider.CreateScope())
                     {
-                        var controller = scope.ServiceProvider.GetService<Controller>();
+                        var controller = scope.ServiceProvider.GetService<Controller>()!;
                         var service = controller.ScopedFunc();
                     }
                 }
