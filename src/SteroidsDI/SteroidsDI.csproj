@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Advanced Dependency Injection for Microsoft.Extensions.DependencyInjection: AddDefer, AddFunc, AddFactory.</Description>
   </PropertyGroup>
 

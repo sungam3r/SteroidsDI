@@ -10,9 +10,10 @@
 
 ![Size](https://img.shields.io/github/repo-size/sungam3r/SteroidsDI)
 
-[![Build status](https://github.com/sungam3r/SteroidsDI/workflows/Publish%20preview%20to%20GitHub%20registry/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions)
-[![Build status](https://github.com/sungam3r/SteroidsDI/workflows/Publish%20release%20to%20Nuget%20registry/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions)
-[![CodeQL analysis](https://github.com/sungam3r/SteroidsDI/workflows/CodeQL%20analysis/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions?query=workflow%3A%22%22CodeQL+analysis%22%22)
+[![Run unit tests](https://github.com/sungam3r/SteroidsDI/actions/workflows/test.yml/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions/workflows/test.yml)
+[![Publish preview to GitHub registry](https://github.com/sungam3r/SteroidsDI/actions/workflows/publish-preview.yml/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions/workflows/publish-preview.yml)
+[![Publish release to Nuget registry](https://github.com/sungam3r/SteroidsDI/actions/workflows/publish-release.yml/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions/workflows/publish-release.yml)
+[![CodeQL analysis](https://github.com/sungam3r/SteroidsDI/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions/workflows/codeql-analysis.yml)
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/sungam3r/SteroidsDI.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/sungam3r/SteroidsDI/alerts/)
 [![Language grade: C#](https://img.shields.io/lgtm/grade/csharp/g/sungam3r/SteroidsDI.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/sungam3r/SteroidsDI/context:csharp)

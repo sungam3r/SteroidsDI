@@ -17,6 +17,6 @@ jobs:
         stale-pr-label: 'stale'
         days-before-stale: 30
         days-before-close: 60
-        exempt-issue-label: 'not so stale' 
+        exempt-issue-label: 'not so stale'
         exempt-pr-label: 'not so stale'
         operations-per-run: 30

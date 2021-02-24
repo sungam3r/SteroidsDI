@@ -13,9 +13,6 @@ namespace Example
         }
 
         [HttpGet]
-        public object Get()
-        {
-            return new { Count = _entry.DoSomethingImportant() };
-        }
+        public object Get() => new { Count = _entry.DoSomethingImportant() };
     }
 }

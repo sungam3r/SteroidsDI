@@ -15,6 +15,7 @@ namespace SteroidsDI.Core
     public struct Scoped<T> : System.IDisposable
     {
         public Scoped(SteroidsDI.Core.IScopeFactory scopeFactory) { }
+        public System.IDisposable Scope { get; }
         public void Dispose() { }
     }
 }

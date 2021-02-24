@@ -13,8 +13,6 @@ namespace SteroidsDI.Core
     /// </typeparam>
     public struct Scoped<T> : IDisposable
     {
-        private readonly IDisposable _scope;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Scoped{T}"/>.
         /// </summary>
@@ -27,15 +25,20 @@ namespace SteroidsDI.Core
             if (GenericScope<T>.CurrentScope != null)
                 throw new InvalidOperationException($"The current scope of GenericScope<{typeof(T).Name} is not null when trying to initialize it.");
 
-            _scope = scopeFactory.CreateScope();
-            GenericScope<T>.CurrentScope = _scope;
+            Scope = scopeFactory.CreateScope();
+            GenericScope<T>.CurrentScope = Scope;
         }
+
+        /// <summary>
+        /// Gets current scope.
+        /// </summary>
+        public IDisposable Scope { get; }
 
         /// <summary> Dispose scope. </summary>
         public void Dispose()
         {
             GenericScope<T>.CurrentScope = null;
-            _scope.Dispose();
+            Scope.Dispose();
         }
     }
 }

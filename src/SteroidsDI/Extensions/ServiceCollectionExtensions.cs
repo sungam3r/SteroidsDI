@@ -9,8 +9,8 @@ namespace Microsoft.Extensions.DependencyInjection
     /// <summary> Extension methods for <see cref="IServiceCollection"/>. </summary>
     public static class ServiceCollectionExtensions
     {
-        private static IServiceCollection ConfigureOptions(this IServiceCollection services, Action<ServiceProviderAdvancedOptions> configure)
-            => services.Configure(configure).Configure<ServiceProviderAdvancedOptions>(opt => opt.Services = services);
+        private static IServiceCollection AddAdvancedOptions(this IServiceCollection services)
+            => services.Configure<ServiceProviderAdvancedOptions>(opt => opt.Services = services);
 
         /// <summary> Gets the binding context for the type <typeparamref name="TService" />. </summary>
         /// <typeparam name="TService"> The service type which context is customized. </typeparam>
@@ -24,19 +24,11 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="factoryType"> Factory type. </param>
         /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
         public static IServiceCollection AddFactory(this IServiceCollection services, Type factoryType)
-            => services.AddFactory(factoryType, _ => { });
-
-        /// <summary> Add the specified type <paramref name="factoryType" /> to the DI container as a factory that performs factory methods for creating objects. </summary>
-        /// <param name="services"> A collection of DI container services. </param>
-        /// <param name="factoryType"> Factory type. </param>
-        /// <param name="configure"> Delegate to configure DI options. </param>
-        /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
-        public static IServiceCollection AddFactory(this IServiceCollection services, Type factoryType, Action<ServiceProviderAdvancedOptions> configure)
         {
             if (factoryType == null)
                 throw new ArgumentNullException(nameof(factoryType));
 
-            services.ConfigureOptions(configure);
+            services.AddAdvancedOptions();
             services.TryAddSingleton(factoryType, FactoryGenerator.Generate(factoryType));
             return services;
         }
@@ -45,16 +37,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <typeparam name="TFactory"> Factory type. </typeparam>
         /// <param name="services"> A collection of DI container services. </param>
         /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
-        public static IServiceCollection AddFactory<TFactory>(this IServiceCollection services) => services.AddFactory<TFactory>(_ => { });
-
-        /// <summary> Add the specified type <typeparamref name="TFactory"/> to the DI container as a factory that performs factory methods for creating objects. </summary>
-        /// <typeparam name="TFactory"> Factory type. </typeparam>
-        /// <param name="services"> A collection of DI container services. </param>
-        /// <param name="configure"> Delegate to configure DI options. </param>
-        /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
-        public static IServiceCollection AddFactory<TFactory>(this IServiceCollection services, Action<ServiceProviderAdvancedOptions> configure)
-            => services.ConfigureOptions(configure)
-                       .AddFactory(typeof(TFactory));
+        public static IServiceCollection AddFactory<TFactory>(this IServiceCollection services)
+            => services.AddAdvancedOptions().AddFactory(typeof(TFactory));
 
         /// <summary>
         /// Register the factory <see cref="Func {TService}" /> to create an object of type <typeparamref name="TService" />.
@@ -65,25 +49,12 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <typeparam name="TService"> Service type. </typeparam>
         /// <param name="services"> A collection of DI container services. </param>
         /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
-        public static IServiceCollection AddFunc<TService>(this IServiceCollection services) => services.AddFunc<TService>(_ => { });
-
-        /// <summary>
-        /// Register the factory <see cref="Func {TService}" /> to create an object of type <typeparamref name="TService" />.
-        /// This factory can find/select the correct scope (if one exists at all) through which you need to get the required object.
-        /// Differs from <see cref="AddDefer(IServiceCollection)" >AddDefer</see > by the fact that it works for only one specified
-        /// type, that is, this method may need to be called several times.
-        /// </summary>
-        /// <typeparam name="TService"> Service type. </typeparam>
-        /// <param name="services"> A collection of DI container services. </param>
-        /// <param name="configure"> Delegate to configure DI options. </param>
-        /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
-        public static IServiceCollection AddFunc<TService>(this IServiceCollection services, Action<ServiceProviderAdvancedOptions> configure)
-            => services.ConfigureOptions(configure)
-                       .AddSingleton(provider =>
-                        {
-                            var options = provider.GetRequiredService<IOptions<ServiceProviderAdvancedOptions>>();
-                            return new Func<TService>(() => provider.Resolve<TService>(options.Value));
-                        });
+        public static IServiceCollection AddFunc<TService>(this IServiceCollection services)
+            => services.AddAdvancedOptions().AddSingleton(provider =>
+                {
+                    var options = provider.GetRequiredService<IOptions<ServiceProviderAdvancedOptions>>();
+                    return new Func<TService>(() => provider.Resolve<TService>(options.Value));
+                });
 
         /// <summary>
         /// Adds support for <see cref="Defer{T}" /> - deferring resolving the object in the desired scope. The effect is completely
@@ -92,18 +63,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services"> A collection of DI container services. </param>
         /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
-        public static IServiceCollection AddDefer(this IServiceCollection services) => services.AddDefer(_ => { });
-
-        /// <summary>
-        /// Adds support for <see cref="Defer{T}" /> - deferring resolving the object in the desired scope. The effect is completely
-        /// similar to one from <see cref="AddFunc{TService}(IServiceCollection)">AddFunc</see> with the difference that this method
-        /// works immediately for all objects registered in the DI container.
-        /// </summary>
-        /// <param name="services"> A collection of DI container services. </param>
-        /// <param name="configure"> Delegate to configure DI options. </param>
-        /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
-        public static IServiceCollection AddDefer(this IServiceCollection services, Action<ServiceProviderAdvancedOptions> configure)
-            => services.ConfigureOptions(configure)
+        public static IServiceCollection AddDefer(this IServiceCollection services)
+            => services.AddAdvancedOptions()
                        .AddSingleton(typeof(Defer<>), typeof(DelegatedDefer<>))
                        .AddSingleton(typeof(IDefer<>), typeof(DelegatedDefer<>));
 
