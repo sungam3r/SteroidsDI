@@ -41,8 +41,8 @@ namespace SteroidsDI.Tests.Cases
         {
             var services = new ServiceCollection()
                .AddDefer()
-               .AddSingleton<IScopeProvider, GenericScopeProvider<A>>()
-               .AddSingleton<IScopeProvider, GenericScopeProvider<B>>()
+               .AddGenericScope<A>()
+               .AddGenericScope<B>()
                .AddScoped<Scoped>()
                .AddSingleton<Service>();
 
@@ -65,8 +65,8 @@ Be sure to add the required provider (IScopeProvider) to the container using the
             var services = new ServiceCollection()
                //.Configure<ServiceProviderAdvancedOptions>(opt => opt.ValidateParallelScopes = false) // false by default
                .AddDefer()
-               .AddSingleton<IScopeProvider, GenericScopeProvider<A>>()
-               .AddSingleton<IScopeProvider, GenericScopeProvider<B>>()
+               .AddGenericScope<A>()
+               .AddGenericScope<B>()
                .AddScoped<Scoped>()
                .AddSingleton<Service>();
 
@@ -84,13 +84,36 @@ Be sure to add the required provider (IScopeProvider) to the container using the
         }
 
         [Test]
+        public void Should_Work_When_Only_One_Scope_And_ValidateParallelScopes_Enabled()
+        {
+            var services = new ServiceCollection()
+               .Configure<ServiceProviderAdvancedOptions>(opt => opt.ValidateParallelScopes = true)
+               .AddDefer()
+               .AddGenericScope<A>()
+               .AddGenericScope<B>()
+               .AddScoped<Scoped>()
+               .AddSingleton<Service>();
+
+            GenericScope<A>.CurrentScope = new TestScope();
+
+            using (var provider = services.BuildServiceProvider())
+            {
+                using (var scope = provider.CreateScope())
+                {
+                    var service = scope.ServiceProvider.GetService<Service>()!;
+                    service.Scoped.Value.ShouldNotBeNull();
+                }
+            }
+        }
+
+        [Test]
         public void Should_Throw_When_More_Than_One_Scope_And_ValidateParallelScopes_Enabled()
         {
             var services = new ServiceCollection()
                .Configure<ServiceProviderAdvancedOptions>(opt => opt.ValidateParallelScopes = true)
                .AddDefer()
-               .AddSingleton<IScopeProvider, GenericScopeProvider<A>>()
-               .AddSingleton<IScopeProvider, GenericScopeProvider<B>>()
+               .AddGenericScope<A>()
+               .AddGenericScope<B>()
                .AddScoped<Scoped>()
                .AddSingleton<Service>();
 

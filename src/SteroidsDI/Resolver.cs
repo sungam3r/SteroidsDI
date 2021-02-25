@@ -44,8 +44,8 @@ namespace SteroidsDI
                         if (parallelScopeProviders.Count > 0)
                         {
                             parallelScopeProviders.Add(scopeProvider);
-                            throw new InvalidOperationException($"When '{nameof(ServiceProviderAdvancedOptions)}.{nameof(ServiceProviderAdvancedOptions.ValidateParallelScopes)}' option is turned on, the simultaneous existence of several scopes from different providers was detected." + Environment.NewLine +
-                                                                $"Scopes obtained from the following providers: {string.Join(", ", parallelScopeProviders.Select(p => p.ToString()))}");
+                            throw new InvalidOperationException(@$"When '{nameof(ServiceProviderAdvancedOptions)}.{nameof(ServiceProviderAdvancedOptions.ValidateParallelScopes)}' option is turned on, the simultaneous existence of several scopes from different providers was detected.
+Scopes obtained from the following providers: {string.Join(", ", parallelScopeProviders.Select(p => p.ToString()))}");
                         }
                     }
 
@@ -68,9 +68,9 @@ Be sure to add the required provider (IScopeProvider) to the container using the
             if (options.AllowRootProviderResolve)
                 return provider.GetRequiredService(type);
 
-            throw new InvalidOperationException($"The current scope is missing. Unable to get object of type '{type.Name}' from the root provider." + Environment.NewLine +
-                "Be sure to add the required provider (IScopeProvider) to the container using the TryAddEnumerable method or a special method from your transport library." + Environment.NewLine +
-                "An object can be obtained from the root provider if it has a non-scoped lifetime and the parameter AllowRootProviderResolve = true.");
+            throw new InvalidOperationException($@"The current scope is missing. Unable to get object of type '{type.Name}' from the root provider.
+Be sure to add the required provider (IScopeProvider) to the container using the TryAddEnumerable method or a special method from your transport library.
+An object can be obtained from the root provider if it has a non-scoped lifetime and the parameter '{nameof(ServiceProviderAdvancedOptions)}.{nameof(ServiceProviderAdvancedOptions.AllowRootProviderResolve)}' = true.");
         }
     }
 }
