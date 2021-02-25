@@ -12,7 +12,7 @@ namespace SteroidsDI
         {
             var binding = bindings.Where(b => b.ServiceType == typeof(TService)).SingleOrDefault(b => b.Name.Equals(name));
             if (binding == null)
-                throw new InvalidOperationException($"Destination type not found for named binding '{name}' to type {typeof(TService)}. Verify that a named binding is specified in the DI container.");
+                throw new InvalidOperationException($"Destination type not found for named binding '{name}' to type '{typeof(TService)}'. Verify that a named binding is specified in the DI container.");
 
             return (TService)provider.Resolve(binding.ImplementationType, options);
         }
@@ -44,8 +44,8 @@ namespace SteroidsDI
                         if (parallelScopeProviders.Count > 0)
                         {
                             parallelScopeProviders.Add(scopeProvider);
-                            throw new InvalidOperationException($"When the option {nameof(options.ValidateParallelScopes)} is turned on, the simultaneous existence of several scopes from different providers was detected." + Environment.NewLine +
-                                                                $"Scopes obtained from the following providers: {string.Join(", ", parallelScopeProviders.Select(p => p.GetType().Name))}");
+                            throw new InvalidOperationException($"When '{nameof(ServiceProviderAdvancedOptions)}.{nameof(ServiceProviderAdvancedOptions.ValidateParallelScopes)}' option is turned on, the simultaneous existence of several scopes from different providers was detected." + Environment.NewLine +
+                                                                $"Scopes obtained from the following providers: {string.Join(", ", parallelScopeProviders.Select(p => p.ToString()))}");
                         }
                     }
 
@@ -58,17 +58,17 @@ namespace SteroidsDI
             bool scopeRequired = options.Services.LastOrDefault(s => s.ServiceType == type)?.Lifetime == ServiceLifetime.Scoped;
             if (scopeRequired)
             {
-                throw new InvalidOperationException($"An error occurred while resolving the dependency {type.Name}." + Environment.NewLine +
-                                                     "The service is declared as Scoped within the context of the request, but an attempt to resolve the dependency is made outside the context of the request." + Environment.NewLine +
-                                                     "An application can simultaneously have several entry points that initialize their request contexts: HTTP, RabbitMQ, Kafka, NServiceBus, Timers and others." + Environment.NewLine +
-                                                     "Be sure to add the required provider (IScopeProvider) to the container using the TryAddEnumerable method or a special method from your transport library.");
+                throw new InvalidOperationException($@"An error occurred while resolving the type '{type.Name}'
+The type is declared as scoped within the context of the request, but an attempt to resolve the type is made outside the context of the request.
+An application can simultaneously have several entry points that initialize their request contexts.
+Be sure to add the required provider (IScopeProvider) to the container using the TryAddEnumerable method.");
             }
 
             // In the absence of scopes and the possibility of obtaining TService from the root provider, use it to resolve the dependency
             if (options.AllowRootProviderResolve)
                 return provider.GetRequiredService(type);
 
-            throw new InvalidOperationException($"The current scope is missing. Unable to get object of type {type.Name} from the root provider." + Environment.NewLine +
+            throw new InvalidOperationException($"The current scope is missing. Unable to get object of type '{type.Name}' from the root provider." + Environment.NewLine +
                 "Be sure to add the required provider (IScopeProvider) to the container using the TryAddEnumerable method or a special method from your transport library." + Environment.NewLine +
                 "An object can be obtained from the root provider if it has a non-scoped lifetime and the parameter AllowRootProviderResolve = true.");
         }

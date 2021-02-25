@@ -21,17 +21,15 @@
 
 Advanced Dependency Injection to use every day.
 
-**The documentation is not complete and is under development.**
-
 ## Installation
 
 This repository provides the following packages:
 
 | Package | Downloads | Nuget Latest | Description |
 |---------|-----------|--------------|-------------|
-| SteroidsDI | [![Nuget](https://img.shields.io/nuget/dt/SteroidsDI)](https://www.nuget.org/packages/SteroidsDI) | [![Nuget](https://img.shields.io/nuget/v/SteroidsDI)](https://www.nuget.org/packages/SteroidsDI) | Advanced Dependency Injection for Microsoft.Extensions.DependencyInjection: AddDefer, AddFunc, AddFactory |
 | SteroidsDI.Core | [![Nuget](https://img.shields.io/nuget/dt/SteroidsDI.Core)](https://www.nuget.org/packages/SteroidsDI.Core) | [![Nuget](https://img.shields.io/nuget/v/SteroidsDI.Core)](https://www.nuget.org/packages/SteroidsDI.Core) | Dependency Injection primitives |
-| SteroidsDI.AspNetCore | [![Nuget](https://img.shields.io/nuget/dt/SteroidsDI.AspNetCore)](https://www.nuget.org/packages/SteroidsDI.AspNetCore) | [![Nuget](https://img.shields.io/nuget/v/SteroidsDI.AspNetCore)](https://www.nuget.org/packages/SteroidsDI.AspNetCore) | Scope Provider for ASP.NET Core |
+| SteroidsDI | [![Nuget](https://img.shields.io/nuget/dt/SteroidsDI)](https://www.nuget.org/packages/SteroidsDI) | [![Nuget](https://img.shields.io/nuget/v/SteroidsDI)](https://www.nuget.org/packages/SteroidsDI) | Advanced Dependency Injection for Microsoft.Extensions.DependencyInjection: AddDefer, AddFunc, AddFactory; depends on SteroidsDI.Core |
+| SteroidsDI.AspNetCore | [![Nuget](https://img.shields.io/nuget/dt/SteroidsDI.AspNetCore)](https://www.nuget.org/packages/SteroidsDI.AspNetCore) | [![Nuget](https://img.shields.io/nuget/v/SteroidsDI.AspNetCore)](https://www.nuget.org/packages/SteroidsDI.AspNetCore) | Scope Provider for ASP.NET Core; depends on SteroidsDI.Core |
 
 You can install the latest stable version via NuGet:
 ```
@@ -233,7 +231,27 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-And of course you can always write your own provider.
+And of course you can always write your own provider:
+
+```csharp
+public class MyScopeProvider : IScopeProvider
+{
+    public IServiceProvider? GetScopedServiceProvider(IServiceProvider rootProvider) => rootProvider.ReturnSomeMagic();
+}
+```
+
+And provide its registration in DI:
+
+```csharp
+public static class ServiceCollectionExtensions
+{
+    public static IServiceCollection AddMyScope(this IServiceCollection services)
+    {
+        services.TryAddEnumerable(ServiceDescriptor.Singleton<IScopeProvider, MyScopeProvider>());
+        return services;
+    }
+}
+```
 
 ## Advanced behavior
 
@@ -250,7 +268,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## Examples
 
-You can see how to use all the aforementioned APIs in the [example project](/Example).
+You can see how to use all the aforementioned APIs in the [example project](https://github.com/sungam3r/SteroidsDI/tree/master/src/Example).
 
 ## FAQ
 
