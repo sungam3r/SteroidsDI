@@ -33,7 +33,7 @@ namespace SteroidsDI.Tests.Cases
             {
                 using (var scope = provider.CreateScope())
                 {
-                    var service = scope.ServiceProvider.GetService<Service>();
+                    var service = scope.ServiceProvider.GetService<Service>()!;
                     service.Scoped.Value.ShouldNotBeNull();
                 }
             }
