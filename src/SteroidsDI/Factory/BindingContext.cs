@@ -40,8 +40,10 @@ namespace SteroidsDI
 
             var existing = Services.SingleOrDefault(descriptor => descriptor.ServiceType == typeof(TImplementation));
             if (existing != null && (existing.ImplementationType != typeof(TImplementation) || existing.Lifetime != lifetime || existing.ImplementationFactory != null || existing.ImplementationInstance != null))
+            {
                 throw new InvalidOperationException($@"It is not possible to add a named binding '{name}' for type {typeof(TService)}, because the DI container
 already has a binding on type {typeof(TImplementation)} with different characteristics. This is a limitation of the current implementation.");
+            }
 
             if (existing == null)
                 Services.Add(new ServiceDescriptor(typeof(TImplementation), typeof(TImplementation), lifetime));
@@ -68,8 +70,8 @@ already has a binding on type {typeof(TImplementation)} with different character
         private ServiceLifetime GetServiceLifetime()
         {
             return Services.FirstOrDefault(s => s.ServiceType == typeof(TService))?.Lifetime
-                ?? throw new InvalidOperationException($"The DI container does not have a default binding for the type {typeof(TService)}, so it is not possible to determine the value of Lifetime." +
-                                                        "Use the 'Named' overload with explicit Lifetime or first set the default binding in the DI container.");
+                ?? throw new InvalidOperationException($@"The DI container does not have a default binding for the type '{typeof(TService)}', so it is not possible to determine the value of Lifetime.
+Use the 'Named' overload with explicit Lifetime or first set the default binding in the DI container.");
         }
     }
 }
