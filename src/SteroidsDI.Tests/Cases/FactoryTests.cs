@@ -11,6 +11,15 @@ namespace SteroidsDI.Tests.Cases
     public class FactoryTests
     {
         [Test]
+        public void Named_Binding_Should_Throw_On_Unknown_Lifetime()
+        {
+            var services = new ServiceCollection();
+            var context = services.For<IBuilder>();
+            Should.Throw<InvalidOperationException>(() => context.Named<SpecialBuilder>("xxx")).Message.ShouldBe(@"The DI container does not have a default binding for the type 'SteroidsDI.Tests.IBuilder', so it is not possible to determine the value of Lifetime.
+Use the 'Named' overload with explicit Lifetime or first set the default binding in the DI container.");
+        }
+
+        [Test]
         public void Factory_And_Named_Bindings_Should_Work()
         {
             using (var provider = ServicesBuilder.BuildDefault().BuildServiceProvider(validateScopes: true))
