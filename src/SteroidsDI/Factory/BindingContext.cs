@@ -40,7 +40,7 @@ namespace SteroidsDI
 
             var existing = Services.SingleOrDefault(descriptor => descriptor.ServiceType == typeof(TImplementation));
             if (existing != null && (existing.ImplementationType != typeof(TImplementation) || existing.Lifetime != lifetime || existing.ImplementationFactory != null || existing.ImplementationInstance != null))
-                throw new InvalidOperationException(@$"It is not possible to add a named binding '{name}' for type {typeof(TService)}, because the DI container
+                throw new InvalidOperationException($@"It is not possible to add a named binding '{name}' for type {typeof(TService)}, because the DI container
 already has a binding on type {typeof(TImplementation)} with different characteristics. This is a limitation of the current implementation.");
 
             if (existing == null)
