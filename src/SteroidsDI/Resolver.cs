@@ -11,10 +11,9 @@ namespace SteroidsDI
         internal static TService ResolveByNamedBinding<TService>(this IServiceProvider provider, object name, IEnumerable<NamedBinding> bindings, ServiceProviderAdvancedOptions options)
         {
             var binding = bindings.Where(b => b.ServiceType == typeof(TService)).SingleOrDefault(b => b.Name.Equals(name));
-            if (binding == null)
-                throw new InvalidOperationException($"Destination type not found for named binding '{name}' to type '{typeof(TService)}'. Verify that a named binding is specified in the DI container.");
-
-            return (TService)provider.Resolve(binding.ImplementationType, options);
+            return binding == null
+                ? throw new InvalidOperationException($"Destination type not found for named binding '{name}' to type '{typeof(TService)}'. Verify that a named binding is specified in the DI container.")
+                : (TService)provider.Resolve(binding.ImplementationType, options);
         }
 
         internal static TService Resolve<TService>(this IServiceProvider provider, ServiceProviderAdvancedOptions options) => (TService)provider.Resolve(typeof(TService), options);
@@ -65,10 +64,9 @@ Be sure to add the required provider (IScopeProvider) to the container using the
             }
 
             // In the absence of scopes and the possibility of obtaining TService from the root provider, use it to resolve the dependency
-            if (options.AllowRootProviderResolve)
-                return provider.GetRequiredService(type);
-
-            throw new InvalidOperationException($@"The current scope is missing. Unable to get object of type '{type.Name}' from the root provider.
+            return options.AllowRootProviderResolve
+                ? provider.GetRequiredService(type)
+                : throw new InvalidOperationException($@"The current scope is missing. Unable to get object of type '{type.Name}' from the root provider.
 Be sure to add the required provider (IScopeProvider) to the container using the TryAddEnumerable method or a special method from your transport library.
 An object can be obtained from the root provider if it has a non-scoped lifetime and the parameter '{nameof(ServiceProviderAdvancedOptions)}.{nameof(ServiceProviderAdvancedOptions.AllowRootProviderResolve)}' = true.");
         }

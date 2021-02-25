@@ -73,7 +73,7 @@ An object can be obtained from the root provider if it has a non-scoped lifetime
             {
                 using (var scope = provider.CreateScope())
                 {
-                    var service = scope.ServiceProvider.GetService<Service>()!;
+                    var service = scope.ServiceProvider.GetService<Service>();
                     service.ShouldBeNull();
                 }
             }
