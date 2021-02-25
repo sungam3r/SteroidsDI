@@ -44,7 +44,7 @@ namespace SteroidsDI
                         if (parallelScopeProviders.Count > 0)
                         {
                             parallelScopeProviders.Add(scopeProvider);
-                            throw new InvalidOperationException(@$"When '{nameof(ServiceProviderAdvancedOptions)}.{nameof(ServiceProviderAdvancedOptions.ValidateParallelScopes)}' option is turned on, the simultaneous existence of several scopes from different providers was detected.
+                            throw new InvalidOperationException($@"When '{nameof(ServiceProviderAdvancedOptions)}.{nameof(ServiceProviderAdvancedOptions.ValidateParallelScopes)}' option is turned on, the simultaneous existence of several scopes from different providers was detected.
 Scopes obtained from the following providers: {string.Join(", ", parallelScopeProviders.Select(p => p.ToString()))}");
                         }
                     }
