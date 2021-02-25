@@ -37,6 +37,7 @@ namespace SteroidsDI.Tests.Cases
         }
 
         [Test]
+        [Category("Throw")]
         public void Should_Throw_When_No_Scopes()
         {
             var services = new ServiceCollection()
@@ -107,6 +108,7 @@ Be sure to add the required provider (IScopeProvider) to the container using the
         }
 
         [Test]
+        [Category("Throw")]
         public void Should_Throw_When_More_Than_One_Scope_And_ValidateParallelScopes_Enabled()
         {
             var services = new ServiceCollection()
