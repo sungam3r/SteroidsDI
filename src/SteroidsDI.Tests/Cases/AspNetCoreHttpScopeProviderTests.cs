@@ -25,7 +25,15 @@ namespace SteroidsDI.Tests.Cases
         }
 
         [Test]
-        public void Should_Return_Provider_If_Called_With_HttpContext()
+        public void Should_Return_Null_If_Called_With_HttpContext_Without_Provider()
+        {
+            var provider = new ServiceCollection().AddHttpScope().BuildServiceProvider();
+            new HttpContextAccessor().HttpContext = new DefaultHttpContext();
+            new AspNetCoreHttpScopeProvider().GetScopedServiceProvider(provider).ShouldBeNull();
+        }
+
+        [Test]
+        public void Should_Return_Provider_If_Called_With_HttpContext_With_Provider()
         {
             var provider = new ServiceCollection().AddHttpScope().BuildServiceProvider();
             new HttpContextAccessor().HttpContext = new DefaultHttpContext()

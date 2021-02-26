@@ -62,6 +62,7 @@ An object can be obtained from the root provider if it has a non-scoped lifetime
         }
 
         [Test]
+        [Category("Throw")]
         public void Should_Throw_When_No_Scopes_And_No_Service_Registered_And_AllowRootProviderResolve_Enabled()
         {
             var services = new ServiceCollection()
