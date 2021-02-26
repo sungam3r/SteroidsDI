@@ -40,6 +40,7 @@ namespace SteroidsDI.Tests.Cases
         }
 
         [Test]
+        [Category("Throw")]
         public void Should_Throw_When_No_Scopes_And_AllowRootProviderResolve_Disabled()
         {
             var services = new ServiceCollection()
@@ -61,20 +62,19 @@ An object can be obtained from the root provider if it has a non-scoped lifetime
         }
 
         [Test]
-        public void Should_Resolve_Null_When_No_Scopes_And_No_Service_Registered_And_AllowRootProviderResolve_Enabled()
+        public void Should_Throw_When_No_Scopes_And_No_Service_Registered_And_AllowRootProviderResolve_Enabled()
         {
             var services = new ServiceCollection()
                .Configure<ServiceProviderAdvancedOptions>(opt => opt.AllowRootProviderResolve = true)
                .AddDefer()
-               .AddSingleton<ScopedAsSingleton>();
-               //.AddSingleton<Service>();
+               .AddSingleton<Service>();
 
             using (var provider = services.BuildServiceProvider())
             {
                 using (var scope = provider.CreateScope())
                 {
-                    var service = scope.ServiceProvider.GetService<Service>();
-                    service.ShouldBeNull();
+                    var service = scope.ServiceProvider.GetService<Service>()!;
+                    Should.Throw<InvalidOperationException>(() => service.Scoped.Value).Message.ShouldBe("No service for type 'SteroidsDI.Tests.Cases.AllowRootProviderResolveTests+ScopedAsSingleton' has been registered.");
                 }
             }
         }

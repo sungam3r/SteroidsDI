@@ -9,12 +9,14 @@ namespace SteroidsDI.Tests.Cases
     public class ScopedTests
     {
         [Test]
+        [Category("Throw")]
         public void Should_Throw_If_Null()
         {
             Should.Throw<ArgumentNullException>(() => new Scoped<int>(null!)).ParamName.ShouldBe("scopeFactory");
         }
 
         [Test]
+        [Category("Throw")]
         public void Should_Throw_If_Current_Scope_Exist()
         {
             GenericScope<int>.CurrentScope = new NoopScope();

@@ -11,6 +11,7 @@ namespace SteroidsDI.Tests.Cases
     public class FactoryTests
     {
         [Test]
+        [Category("Throw")]
         public void Named_Binding_Should_Throw_On_Unknown_Lifetime()
         {
             var services = new ServiceCollection();
