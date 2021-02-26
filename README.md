@@ -173,7 +173,7 @@ It assumes that you declare a factory interface with one or more methods without
 Each factory method should return some dependency type configured in DI container:
 
 ```csharp
-public interface IMyRepositoryFactory
+public interface IRepositoryFactory
 {
     IRepository GetPersonsRepo();
 }
@@ -184,9 +184,9 @@ And inject this factory into your "parent" type:
 ```csharp
 class MyObject
 {
-    private IMyRepositoryFactory _factory;
+    private IRepositoryFactory _factory;
 
-    public MyObject(IMyRepositoryFactory factory) { _factory = factory; }
+    public MyObject(IRepositoryFactory factory) { _factory = factory; }
     
     public void DoSomething() { _factory.GetPersonsRepo().DoMagic(); }
 }
@@ -198,14 +198,81 @@ How to configure in DI:
 public void ConfigureServices(IServiceCollection services)
 {
     // First register your IRepository and then call
-    services.AddFactory<IMyRepositoryFactory>();
+    services.AddFactory<IRepositoryFactory>();
 }
 ```
 
-Implementation for `IMyRepositoryFactory` will be generated at runtime.
+Implementation for `IRepositoryFactory` will be generated at runtime.
 
-_In fact, a factory method can take one parameter of an arbitrary type. In this case, a named binding should be specified.
-This feature will be documented later._
+In fact, each factory method can take one parameter of an arbitrary type - string, enum, custom class, whatever.
+In this case, a _named binding_ should be specified.
+
+```csharp
+public interface IRepositoryFactory
+{
+    IRepository GetPersonsRepo(string mode);
+}
+
+public interface IRepository
+{
+    void Save(Person person); 
+}
+
+public class DemoRepository : IRepository
+{
+...
+}
+
+public class ProductionRepository : IRepository
+{
+...
+}
+
+public class RandomRepository : IRepository
+{
+...
+}
+
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddTransient<IRepository, DemoRepository>()
+            .AddTransient<IRepository, ProductionRepository>()
+            .AddTransient<IRepository, RandomRepository>()
+            .AddFactory<IRepositoryFactory>()
+                .For<IRepository>()
+                    .Named<DemoRepository>("demo")
+                    .Named<ProductionRepository>("prod")
+                    .Named<RandomRepository>("rnd");
+}
+
+public class Person
+{
+    public string Name { get; set; }
+}
+
+public class SomeClassWithDependency
+{
+    private readonly IRepositoryFactory _factory;
+
+    public SomeClassWithDependency(IRepositoryFactory factory)
+    {
+        _factory = factory;
+    }
+
+    public void DoSomething(Person person)
+    {
+        if (person.Name == "demoUser")
+            _factory.GetPersonsRepo("demo").Save(person);
+        else if (person.Name.StartsWith("tester"))
+            _factory.GetPersonsRepo("rnd").Save(person);
+        else
+            _factory.GetPersonsRepo("prod").Save(person);
+    }
+}
+```
+
+In the example above, the `GetPersonsRepo` method will return the corresponding implementation of the `IRepository`
+interface, configured for the provided name.
 
 ## How it works?
 
