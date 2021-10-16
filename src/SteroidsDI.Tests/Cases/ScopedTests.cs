@@ -23,6 +23,13 @@ namespace SteroidsDI.Tests.Cases
             Should.Throw<InvalidOperationException>(() => new Scoped<int>(new NoopScopeFactory())).Message.ShouldBe($"The current scope of GenericScope<Int32> is not null when trying to initialize it.");
         }
 
+        [Test]
+        public void Should_Not_Throw_If_Null_Scope()
+        {
+            using var s = new Scoped<int>(new NullScopeFactory());
+            s.Scope.ShouldBeNull();
+        }
+
         private sealed class NoopScope : IDisposable
         {
             public void Dispose()
@@ -33,6 +40,11 @@ namespace SteroidsDI.Tests.Cases
         private sealed class NoopScopeFactory : IScopeFactory
         {
             public IDisposable CreateScope() => new NoopScope();
+        }
+
+        private sealed class NullScopeFactory : IScopeFactory
+        {
+            public IDisposable CreateScope() => null!;
         }
     }
 }
