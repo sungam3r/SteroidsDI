@@ -8,7 +8,10 @@ namespace SteroidsDI.Core
     public interface IScopeFactory
     {
         /// <summary> Create scope. </summary>
-        /// <returns> Scope object which should be destroyed at the end of scope. </returns>
+        /// <returns>
+        /// Scope object which should be destroyed at the end of scope.
+        /// It SHOULD NOT be null, but MAY be null.
+        /// </returns>
         IDisposable CreateScope();
     }
 }

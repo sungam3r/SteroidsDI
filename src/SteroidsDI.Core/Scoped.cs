@@ -38,7 +38,7 @@ namespace SteroidsDI.Core
         public void Dispose()
         {
             GenericScope<T>.CurrentScope = null;
-            Scope.Dispose();
+            Scope?.Dispose(); // in some cases scopeFactory.CreateScope() MAY return null
         }
     }
 }
