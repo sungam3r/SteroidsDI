@@ -32,14 +32,14 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v2
       - name: Setup .NET Core 3.1 SDK
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '3.1.x'
           source-url: https://nuget.pkg.github.com/sungam3r/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Setup .NET Core 5.0 SDK
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '5.0.x'
           source-url: https://nuget.pkg.github.com/sungam3r/index.json
