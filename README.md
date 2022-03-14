@@ -359,6 +359,8 @@ only specific dependencies specified at the compile-time.
 **A**. Actually not. A description of this approach can be found in articles/blogs many years ago, for example
 [here](https://www.planetgeek.ch/2011/12/31/ninject-extensions-factory-introduction/).
 
+<br/>
+
 **Q**. What if I want to create my own scope to work with, i.e. not only consume it but also provide?
 
 **A**. First you should somehow get an instance of root `IServiceProvider`.
