@@ -9,7 +9,7 @@ namespace Example
 
     public class EntryPoint : IEntryPoint
     {
-        //private IRepository _repository;
+        //private IRepository _repository; - this is an example of what you wanted to do but got the error below
         private readonly Defer<IRepository> _repository1;
         private readonly Func<IRepository> _repository2;
         private readonly IRepositoryFactory _repoFactory;

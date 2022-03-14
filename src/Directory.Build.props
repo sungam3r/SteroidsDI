@@ -21,6 +21,8 @@
     <PackageTags>dependency;injection;steroids;func;defer;factory</PackageTags>
     <Nullable>enable</Nullable>
     <PackageReadmeFile Condition="'$(IsPackable)' == 'true'">README.md</PackageReadmeFile>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(IsPackable)' == 'true'">

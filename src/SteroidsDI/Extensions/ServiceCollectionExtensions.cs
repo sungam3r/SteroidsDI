@@ -57,9 +57,10 @@ namespace Microsoft.Extensions.DependencyInjection
                 });
 
         /// <summary>
-        /// Adds support for <see cref="Defer{T}" /> - deferring resolving the object in the desired scope. The effect is completely
-        /// similar to one from <see cref="AddFunc{TService}(IServiceCollection)">AddFunc</see> with the difference that this method
-        /// works immediately for all objects registered in the DI container.
+        /// Adds support for <see cref="IDefer{T}" /> and <see cref="Defer{T}" /> - deferring resolving
+        /// the object in the desired scope. The effect is completely similar to one from
+        /// <see cref="AddFunc{TService}(IServiceCollection)">AddFunc</see> with the difference
+        /// that this method works immediately for all objects registered in the DI container.
         /// </summary>
         /// <param name="services"> A collection of DI container services. </param>
         /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>

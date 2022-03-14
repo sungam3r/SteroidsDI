@@ -123,9 +123,9 @@ public void ConfigureServices(IServiceCollection services)
 
 Note that you should call `AddFunc` for each dependency which you want to inject as `Func<T>`.
 
-## Defer\<T>
+## IDefer\<T> and Defer\<T>
 
-This method suggests more explicit API - inject `Defer<T>` instead of `T`:
+This method suggests more explicit API - inject `IDefer<T>` or `Defer<T>` instead of `T`:
 
 Before:
 
@@ -358,3 +358,22 @@ only specific dependencies specified at the compile-time.
 
 **A**. Actually not. A description of this approach can be found in articles/blogs many years ago, for example
 [here](https://www.planetgeek.ch/2011/12/31/ninject-extensions-factory-introduction/).
+
+**Q**. What if I want to create my own scope to work with, i.e. not only consume it but also provide?
+
+**A**. First you should somehow get an instance of root `IServiceProvider`.
+Then create scope by calling `CreateScope()` method on it and set it into `GenericScope`:
+
+```csharp
+var rootProvider = ...;
+using var scope = rootProvider.CreateScope();
+GenericScope<SomeClass>.CurrentScope = scope;
+...
+... some code here that works with scopes
+...
+GenericScope<T>.CurrentScope = null;
+```
+
+Or you can use a bit simpler approach with [`Scoped<T>`](src/SteroidsDI.Core/Scoped.cs) struct.
+See [ScopedTestBase](src/SteroidsDI.Tests/Cases/ScopedTestBase.cs) and [ScopedTestDerived](src/SteroidsDI.Tests/Cases/ScopedTestDerived.cs)
+for more info. This example shows how you can add scope support to all unit tests.
