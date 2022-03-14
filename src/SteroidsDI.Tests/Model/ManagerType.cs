@@ -1,11 +1,10 @@
-namespace SteroidsDI.Tests
+namespace SteroidsDI.Tests;
+
+public enum ManagerType
 {
-    public enum ManagerType
-    {
-        Good,
+    Good,
 
-        Bad,
+    Bad,
 
-        Angry,
-    }
+    Angry,
 }

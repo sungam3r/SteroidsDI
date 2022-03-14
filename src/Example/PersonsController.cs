@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Example
+namespace Example;
+
+[Route("api/[controller]")]
+public class PersonsController : ControllerBase
 {
-    [Route("api/[controller]")]
-    public class PersonsController : ControllerBase
+    private readonly IEntryPoint _entry;
+
+    public PersonsController(IEntryPoint entry)
     {
-        private readonly IEntryPoint _entry;
-
-        public PersonsController(IEntryPoint entry)
-        {
-            _entry = entry;
-        }
-
-        [HttpGet]
-        public object Get() => new { Count = _entry.DoSomethingImportant() };
+        _entry = entry;
     }
+
+    [HttpGet]
+    public object Get() => new { Count = _entry.DoSomethingImportant() };
 }
