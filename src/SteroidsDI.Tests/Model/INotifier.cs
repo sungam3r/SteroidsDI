@@ -1,14 +1,11 @@
-using System;
+namespace SteroidsDI.Tests;
 
-namespace SteroidsDI.Tests
+public interface INotifier
 {
-    public interface INotifier
-    {
-        void Notify();
-    }
+    void Notify();
+}
 
-    internal class Notifier : INotifier
-    {
-        public void Notify() => Console.WriteLine("Notifier");
-    }
+internal class Notifier : INotifier
+{
+    public void Notify() => Console.WriteLine("Notifier");
 }

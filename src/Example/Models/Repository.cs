@@ -1,38 +1,33 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
+namespace Example;
 
-namespace Example
+public interface IRepository
 {
-    public interface IRepository
+    List<Person> GetPersons();
+}
+
+public class Repository : IRepository
+{
+    public Repository()
     {
-        List<Person> GetPersons();
+        Console.WriteLine("Initializing repository");
+        Thread.Sleep(3000);
+        Console.WriteLine("Repository initialized");
     }
 
-    public class Repository : IRepository
+    public List<Person> GetPersons()
     {
-        public Repository()
+        return new List<Person>
         {
-            Console.WriteLine("Initializing repository");
-            Thread.Sleep(3000);
-            Console.WriteLine("Repository initialized");
-        }
-
-        public List<Person> GetPersons()
-        {
-            return new List<Person>
+            new Person
             {
-                new Person
-                {
-                    Name = "Chip",
-                    Age = 31
-                },
-                new Person
-                {
-                    Name = "Dale",
-                    Age = 32
-                }
-            };
-        }
+                Name = "Chip",
+                Age = 31
+            },
+            new Person
+            {
+                Name = "Dale",
+                Age = 32
+            }
+        };
     }
 }

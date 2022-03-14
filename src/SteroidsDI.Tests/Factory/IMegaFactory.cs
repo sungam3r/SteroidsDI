@@ -1,14 +1,13 @@
-namespace SteroidsDI.Tests
+namespace SteroidsDI.Tests;
+
+/// <summary> An factory for which implementation is generated in runtime. </summary>
+public interface IMegaFactory
 {
-    /// <summary> An factory for which implementation is generated in runtime. </summary>
-    public interface IMegaFactory
-    {
-        IBuilder AAA();
+    IBuilder AAA();
 
-        INotifier BBB();
+    INotifier BBB();
 
-        IBuilder CCC(string name);
+    IBuilder CCC(string name);
 
-        IBuilder DDD(ManagerType type);
-    }
+    IBuilder DDD(ManagerType type);
 }

@@ -1,8 +1,7 @@
-namespace Example
+namespace Example;
+
+public interface IRepositoryFactory
 {
-    public interface IRepositoryFactory
-    {
-        // method name does not matter
-        IRepository GetPersonsRepo();
-    }
+    // method name does not matter
+    IRepository GetPersonsRepo();
 }

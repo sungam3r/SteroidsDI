@@ -31,17 +31,13 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
-      - name: Setup .NET Core 3.1 SDK
+      - name: Setup .NET Core SDKs
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '3.1.x'
-          source-url: https://nuget.pkg.github.com/sungam3r/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Setup .NET Core 5.0 SDK
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: '5.0.x'
+          dotnet-version: |
+            3.1.x
+            5.0.x
+            6.0.102
           source-url: https://nuget.pkg.github.com/sungam3r/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -52,8 +48,7 @@ jobs:
         if: ${{ startsWith(matrix.os, 'ubuntu') }}
         working-directory: src
         run: |
-          dotnet tool install -g dotnet-format --version 6.0.243104 --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
-          dotnet format --check -v diag --fix-style warn --fix-analyzers warn || (echo "Run 'dotnet format' to fix formatting issues" && exit 1)
+          dotnet format --no-restore --verify-no-changes --severity warn || (echo "Run 'dotnet format' to fix issues" && exit 1)
       - name: Build solution [Release]
         working-directory: src
         run: dotnet build --no-restore -c Release
@@ -67,7 +62,7 @@ jobs:
         if: ${{ startsWith(matrix.os, 'ubuntu') }}
         uses: codecov/codecov-action@v2.1.0
         with:
-          files: .coverage/SteroidsDI.Tests/coverage.netcoreapp3.1.opencover.xml
+          files: .coverage/SteroidsDI.Tests/coverage.net6.opencover.xml
 
   buildcheck:
     needs:
