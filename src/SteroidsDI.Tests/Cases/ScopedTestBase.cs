@@ -29,7 +29,7 @@ public class ScopedTestBase : IDisposable
         services.AddGenericScope<ScopedTestBase>();
     }
 
-    protected T GetService<T>() => ((IServiceScope)_scoped.Scope).ServiceProvider.GetService<T>();
+    protected T? GetService<T>() => ((IServiceScope)_scoped.Scope).ServiceProvider.GetService<T>();
 
     protected T GetRequiredService<T>() => ((IServiceScope)_scoped.Scope).ServiceProvider.GetRequiredService<T>();
 

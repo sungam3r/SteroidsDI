@@ -19,7 +19,7 @@ public class ScopedTestDerived : ScopedTestBase
     [Test]
     public void Scoped_Should_Work()
     {
-        var repo = GetService<IRepo>();
+        var repo = GetRequiredService<IRepo>();
         repo.Name.ShouldBe("12345");
     }
 }
