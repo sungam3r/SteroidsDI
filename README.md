@@ -371,11 +371,26 @@ var rootProvider = ...;
 using var scope = rootProvider.CreateScope();
 GenericScope<SomeClass>.CurrentScope = scope;
 ...
-... some code here that works with scopes
+... Some code here that works with scopes.
+... All registered Func<T>, [I]Defer<T> and
+... factories use created scope.
 ...
 GenericScope<T>.CurrentScope = null;
 ```
 
 Or you can use a bit simpler approach with [`Scoped<T>`](src/SteroidsDI.Core/Scoped.cs) struct.
-See [ScopedTestBase](src/SteroidsDI.Tests/Cases/ScopedTestBase.cs) and [ScopedTestDerived](src/SteroidsDI.Tests/Cases/ScopedTestDerived.cs)
+
+```csharp
+IScopeFactory scopeFactory = ...; // can be obtained from DI, see AddMicrosoftScopeFactory extension method
+using (new Scoped<SomeClass>(scopeFactory))
+{
+...
+... Some code here that works with scopes.
+... All registered Func<T>, [I]Defer<T> and
+... factories use created scope.
+...
+} 
+```
+
+Also see [ScopedTestBase](src/SteroidsDI.Tests/Cases/ScopedTestBase.cs) and [ScopedTestDerived](src/SteroidsDI.Tests/Cases/ScopedTestDerived.cs)
 for more info. This example shows how you can add scope support to all unit tests.
