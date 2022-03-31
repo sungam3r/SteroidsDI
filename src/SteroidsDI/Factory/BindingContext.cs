@@ -3,8 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 namespace SteroidsDI;
 
 /// <summary>
-/// Binding context for type <typeparamref name="TService" />. Currently serving named bindings, i.e. the context is
-/// only the binding name, but may add additional context in the future.
+/// Binding context for type <typeparamref name="TService" />. Currently serving named bindings,
+/// i.e. the context is only the binding name, but may add additional context in the future.
 /// </summary>
 /// <typeparam name="TService"> The service type which context is customized. </typeparam>
 public sealed class BindingContext<TService>
@@ -22,7 +22,10 @@ public sealed class BindingContext<TService>
     /// <summary> A collection of DI container services. </summary>
     public IServiceCollection Services { get; }
 
-    /// <summary> Register a named binding from type <typeparamref name="TService" /> to type <typeparamref name="TImplementation" />.</summary>
+    /// <summary>
+    /// Registers a named binding from type <typeparamref name="TService" />
+    /// to type <typeparamref name="TImplementation" />.
+    /// </summary>
     /// <typeparam name="TImplementation"> Implementation type. </typeparam>
     /// <param name="name">
     /// The name of the binding. The name of the binding can be not only a string, but an arbitrary object.
@@ -52,7 +55,7 @@ already has a binding on type {typeof(TImplementation)} with different character
     }
 
     /// <summary>
-    /// Register a named binding from type <typeparamref name="TService" /> to type <typeparamref name="TImplementation" />
+    /// Registers a named binding from type <typeparamref name="TService" /> to type <typeparamref name="TImplementation" />
     /// with a lifetime equal to the lifetime of the object from the default binding.
     /// </summary>
     /// <typeparam name="TImplementation">Implementation type. </typeparam>

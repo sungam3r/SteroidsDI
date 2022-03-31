@@ -1,13 +1,13 @@
 namespace SteroidsDI.Core;
 
 /// <summary>
-/// Auxiliary class for creating and destroying scopes. These are sections of code within which
+/// Auxiliary class for creating and destroying scopes. Scopes are sections of code within which
 /// scoped dependencies are resolved. This class controls the state of <see cref="GenericScope{T}" />,
 /// initializing its initial state and cleaning/destroying it at the exit.
 /// </summary>
 /// <typeparam name="T">
-/// An arbitrary type that is used to create various static AsyncLocal fields. The caller may set unique
-/// closed type, thereby providing its own storage, to which only it will have access.
+/// An arbitrary type that is used to create various static AsyncLocal fields. The caller may
+/// set unique closed type, thereby providing its own storage, to which only it will have access.
 /// </typeparam>
 public struct Scoped<T> : IDisposable
 {

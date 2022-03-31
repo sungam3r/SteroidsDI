@@ -6,8 +6,8 @@ using Microsoft.Extensions.Options;
 namespace SteroidsDI;
 
 /// <summary>
-/// The class generates a factory using the specified factory interface. The factory implementation delegates
-/// resolve of objects to the appropriate <see cref="IServiceProvider" />.
+/// This class generates a factory using the specified factory interface. The factory implementation
+/// delegates resolve of objects to the appropriate <see cref="IServiceProvider" />.
 /// </summary>
 /// <remarks> See the manually written IMegaFactory_Generated example class in the test assembly. </remarks>
 internal static class FactoryGenerator

@@ -53,9 +53,9 @@ public class AllowRootProviderResolveTests
             using (var scope = provider.CreateScope())
             {
                 var service = scope.ServiceProvider.GetService<Service>()!;
-                Should.Throw<InvalidOperationException>(() => service.Scoped.Value).Message.ShouldBe(@"The current scope is missing. Unable to get object of type 'ScopedAsSingleton' from the root provider.
-Be sure to add the required provider (IScopeProvider) to the container using the TryAddEnumerable method or a special method from your transport library.
-An object can be obtained from the root provider if it has a non-scoped lifetime and the parameter 'ServiceProviderAdvancedOptions.AllowRootProviderResolve' = true.");
+                Should.Throw<InvalidOperationException>(() => service.Scoped.Value).Message.ShouldBe(@"The current scope is missing. Unable to resolve service 'ScopedAsSingleton' from the root service provider.
+Be sure to add the required provider (IScopeProvider) to the DI container by using appropriate extension method.
+Note that a service can be obtained from the root service provider only if it has a non-scoped lifetime (i.e. singleton or transient) and 'ServiceProviderAdvancedOptions.AllowRootProviderResolve' option is enabled.");
             }
         }
     }

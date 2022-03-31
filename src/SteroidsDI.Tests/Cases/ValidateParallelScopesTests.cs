@@ -51,10 +51,10 @@ public class ValidateParallelScopesTests
             using (var scope = provider.CreateScope())
             {
                 var service = scope.ServiceProvider.GetService<Service>()!;
-                Should.Throw<InvalidOperationException>(() => service.Scoped.Value).Message.ShouldBe(@"An error occurred while resolving the type 'Scoped'
-The type is declared as scoped within the context of the request, but an attempt to resolve the type is made outside the context of the request.
-An application can simultaneously have several entry points that initialize their request contexts.
-Be sure to add the required provider (IScopeProvider) to the container using the TryAddEnumerable method.");
+                Should.Throw<InvalidOperationException>(() => service.Scoped.Value).Message.ShouldBe(@"An error occurred while resolving service 'Scoped'.
+The service was registered as scoped, but an attempt to resolve this service is made outside of any scope.
+An application can simultaneously have several entry points that initialize their scopes.
+Be sure to add the required provider (IScopeProvider) to the DI container by using appropriate extension method.");
             }
         }
     }
@@ -126,8 +126,8 @@ Be sure to add the required provider (IScopeProvider) to the container using the
             using (var scope = provider.CreateScope())
             {
                 var service = scope.ServiceProvider.GetService<Service>()!;
-                Should.Throw<InvalidOperationException>(() => service.Scoped.Value).Message.ShouldBe(@"When 'ServiceProviderAdvancedOptions.ValidateParallelScopes' option is turned on, the simultaneous existence of several scopes from different providers was detected.
-Scopes obtained from the following providers: SteroidsDI.GenericScopeProvider`1[SteroidsDI.Tests.Cases.ValidateParallelScopesTests+B], SteroidsDI.GenericScopeProvider`1[SteroidsDI.Tests.Cases.ValidateParallelScopesTests+A]");
+                Should.Throw<InvalidOperationException>(() => service.Scoped.Value).Message.ShouldBe(@"'ServiceProviderAdvancedOptions.ValidateParallelScopes' option is ON. The simultaneous existence of several scopes from different providers was detected.
+Scopes were obtained from the following providers: SteroidsDI.GenericScopeProvider`1[SteroidsDI.Tests.Cases.ValidateParallelScopesTests+B], SteroidsDI.GenericScopeProvider`1[SteroidsDI.Tests.Cases.ValidateParallelScopesTests+A]");
             }
         }
     }

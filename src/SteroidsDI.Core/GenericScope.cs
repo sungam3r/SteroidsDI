@@ -5,12 +5,12 @@ namespace SteroidsDI.Core;
 /// Works in conjunction with <see cref="IScopeProvider" />.
 /// </summary>
 /// <typeparam name="T">
-/// An arbitrary type that is used to create various static AsyncLocal fields. The caller may set unique
-/// closed type, thereby providing its own storage, to which only it will have access.
+/// An arbitrary type that is used to create various static AsyncLocal fields. The caller may
+/// set unique closed type, thereby providing its own storage, to which only it will have access.
 /// </typeparam>
 public static class GenericScope<T>
 {
-    private static readonly AsyncLocal<IDisposable?> _currentScope = new AsyncLocal<IDisposable?>();
+    private static readonly AsyncLocal<IDisposable?> _currentScope = new();
 
     /// <summary> Gets or sets the current scope. </summary>
     public static IDisposable? CurrentScope

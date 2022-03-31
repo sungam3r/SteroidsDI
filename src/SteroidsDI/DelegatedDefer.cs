@@ -4,14 +4,15 @@ namespace SteroidsDI;
 
 internal sealed class DelegatedDefer<T> : Defer<T>
 {
-    private readonly IServiceProvider _provider;
+    private readonly IServiceProvider _rootProvider;
     private readonly ServiceProviderAdvancedOptions _options;
 
-    public DelegatedDefer(IServiceProvider provider, IOptions<ServiceProviderAdvancedOptions> options)
+    public DelegatedDefer(IServiceProvider rootProvider, IOptions<ServiceProviderAdvancedOptions> options)
     {
-        _provider = provider;
+        _rootProvider = rootProvider;
         _options = options.Value;
     }
 
-    public override T Value => _provider.Resolve<T>(_options);
+    /// <inheritdoc/>
+    public override T Value => _rootProvider.Resolve<T>(_options);
 }

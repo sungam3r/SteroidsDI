@@ -3,8 +3,8 @@ using System.Diagnostics;
 namespace SteroidsDI;
 
 /// <summary>
-/// Named binding, binds the type <see cref="ServiceType" /> to the type <see cref="ImplementationType" />
-/// in the required context.
+/// Named binding, binds the type <see cref="ServiceType" /> to the
+/// type <see cref="ImplementationType" /> in the required context.
 /// </summary>
 [DebuggerDisplay("{Name}: {ServiceType.Name} -> {ImplementationType.Name}")]
 internal sealed class NamedBinding
