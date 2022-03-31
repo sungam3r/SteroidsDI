@@ -77,7 +77,7 @@ public static class ServiceCollectionExtensions
                    .AddSingleton(typeof(IDefer<>), typeof(DelegatedDefer<>));
 
     /// <summary>
-    /// Registers <see cref="GenericScopeProvider{T}" />  in DI as one of
+    /// Registers <see cref="GenericScopeProvider{T}" /> in DI as one of
     /// the possible implementations of <see cref="IScopeProvider" />.
     /// </summary>
     /// <typeparam name="T">
