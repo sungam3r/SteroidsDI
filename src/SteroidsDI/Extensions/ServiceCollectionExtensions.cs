@@ -18,7 +18,10 @@ public static class ServiceCollectionExtensions
     public static BindingContext<TService> For<TService>(this IServiceCollection services)
         where TService : class => new BindingContext<TService>(services);
 
-    /// <summary> Add the specified type <paramref name="factoryType" /> to the DI container as a factory that performs factory methods for creating objects. </summary>
+    /// <summary>
+    /// Adds the specified type <paramref name="factoryType" /> to the DI container
+    /// as a factory that performs factory methods for creating objects.
+    /// </summary>
     /// <param name="services"> A collection of DI container services. </param>
     /// <param name="factoryType"> Factory type. </param>
     /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
@@ -32,7 +35,10 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    /// <summary> Add the specified type <typeparamref name="TFactory"/> to the DI container as a factory that performs factory methods for creating objects. </summary>
+    /// <summary>
+    /// Adds the specified type <typeparamref name="TFactory"/> to the DI container
+    /// as a factory that performs factory methods for creating objects.
+    /// </summary>
     /// <typeparam name="TFactory"> Factory type. </typeparam>
     /// <param name="services"> A collection of DI container services. </param>
     /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
@@ -40,19 +46,21 @@ public static class ServiceCollectionExtensions
         => services.AddAdvancedOptions().AddFactory(typeof(TFactory));
 
     /// <summary>
-    /// Register the factory <see cref="Func {TService}" /> to create an object of type <typeparamref name="TService" />.
-    /// This factory can find/select the correct scope (if one exists at all) through which you need to get the required object.
-    /// Differs from <see cref="AddDefer(IServiceCollection)" >AddDefer</see > by the fact that it works for only one specified
-    /// type, that is, this method may need to be called several times.
+    /// Registers the factory <see cref="Func {TService}" /> to create an object of type
+    /// <typeparamref name="TService" />. This factory can find/select the correct scope
+    /// (if one exists at all) through which you need to get the required object. Differs
+    /// from <see cref="AddDefer(IServiceCollection)" >AddDefer</see > by the fact that
+    /// it works for only one specified type, that is, this method may need to be called
+    /// several times.
     /// </summary>
     /// <typeparam name="TService"> Service type. </typeparam>
     /// <param name="services"> A collection of DI container services. </param>
     /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
     public static IServiceCollection AddFunc<TService>(this IServiceCollection services)
-        => services.AddAdvancedOptions().AddSingleton(provider =>
+        => services.AddAdvancedOptions().AddSingleton(rootProvider =>
             {
-                var options = provider.GetRequiredService<IOptions<ServiceProviderAdvancedOptions>>();
-                return new Func<TService>(() => provider.Resolve<TService>(options.Value));
+                var options = rootProvider.GetRequiredService<IOptions<ServiceProviderAdvancedOptions>>();
+                return new Func<TService>(() => rootProvider.Resolve<TService>(options.Value));
             });
 
     /// <summary>
@@ -68,10 +76,13 @@ public static class ServiceCollectionExtensions
                    .AddSingleton(typeof(Defer<>), typeof(DelegatedDefer<>))
                    .AddSingleton(typeof(IDefer<>), typeof(DelegatedDefer<>));
 
-    /// <summary> Register <see cref="GenericScopeProvider{T}" />  in DI as one of the possible implementations of <see cref="IScopeProvider" />. </summary>
+    /// <summary>
+    /// Registers <see cref="GenericScopeProvider{T}" />  in DI as one of
+    /// the possible implementations of <see cref="IScopeProvider" />.
+    /// </summary>
     /// <typeparam name="T">
-    /// An arbitrary type that is used to create various static AsyncLocal fields. The caller may set unique
-    /// closed type, thereby providing its own storage, to which only it will have access.
+    /// An arbitrary type that is used to create various static AsyncLocal fields. The caller may
+    /// set unique closed type, thereby providing its own storage, to which only it will have access.
     /// </typeparam>
     /// <param name="services"> A collection of DI container services. </param>
     /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
@@ -82,7 +93,10 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    /// <summary> Register <see cref="MicrosoftScopeFactory" /> in DI as one of the possible the implementations of <see cref="IScopeFactory" />. </summary>
+    /// <summary>
+    /// Registers <see cref="MicrosoftScopeFactory" /> in DI as one of
+    /// the possible implementations of <see cref="IScopeFactory" />.
+    /// </summary>
     /// <param name="services"> A collection of DI container services. </param>
     /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
     public static IServiceCollection AddMicrosoftScopeFactory(this IServiceCollection services)

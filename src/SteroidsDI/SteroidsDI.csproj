@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SteroidsDI.Core\SteroidsDI.Core.csproj" />
+    <InternalsVisibleTo Include="DynamicAssembly_Factory_Projections;SteroidsDI.Tests" />
   </ItemGroup>
 
 </Project>
