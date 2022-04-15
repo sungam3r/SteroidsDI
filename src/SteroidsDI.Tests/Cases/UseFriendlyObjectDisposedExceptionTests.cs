@@ -31,7 +31,7 @@ internal class UseFriendlyObjectDisposedExceptionTests
 
                 var ex = Should.Throw<ObjectDisposedException>(() => service.Scoped.Value);
                 ex.Message.ShouldBe(@"ObjectDisposedException occurred while resolving service 'ScopedService' by scoped service provider obtained from 'SteroidsDI.GenericScopeProvider`1[[SteroidsDI.Tests.Cases.UseFriendlyObjectDisposedExceptionTests, SteroidsDI.Tests, Version=1.0.3.0, Culture=neutral, PublicKeyToken=null]]'.
-Most likely this happened because the scope (and scoped provider as well) was disposed BEFORE the actual completion of the user code.
+Most likely this happened because the scope and scoped provider were disposed BEFORE the actual completion of the user code.
 Often, this is due to the forgotten 'await' operator somewhere in the user code. Make sure you await all the created tasks correctly.
 You see this message because 'ServiceProviderAdvancedOptions.UseFriendlyObjectDisposedException' option is enabled.");
                 ex.InnerException.ShouldBeOfType<ObjectDisposedException>().Message.ShouldBe(@"Cannot access a disposed object.
