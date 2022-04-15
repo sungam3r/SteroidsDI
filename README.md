@@ -121,7 +121,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Note that you should call `AddFunc` for each dependency which you want to inject as `Func<T>`.
+Note that you should call `AddFunc` for each dependency `T` which you want to inject as `Func<T>`.
 
 ## IDefer\<T> and Defer\<T>
 
@@ -349,8 +349,10 @@ You can see how to use all the aforementioned APIs in the [example project](http
 
 **A**. Yes, ServiceLocator is a [known antipattern](https://blog.ploeh.dk/2010/02/03/ServiceLocatorisanAnti-Pattern/).
 The fundamental difference with the proposed solutions is that ServiceLocator allows you to resolve
-any dependency in runtime while `Func<T>`, `Defer<T>` and Named Factory are designed to resolve
-only specific dependencies specified at the compile-time.
+**any** dependency in runtime while `Func<T>`, `Defer<T>` and Named Factory are designed to resolve
+only **known** dependencies specified at the compile-time. Thus, the principal difference is that all
+the dependences of the class are declared explicitly and are injected into it. The class itself **does
+not pull** these dependencies secretly within its implementation.
 
 <br/>
 
@@ -358,6 +360,22 @@ only specific dependencies specified at the compile-time.
 
 **A**. Actually not. A description of this approach can be found in articles/blogs many years ago, for example
 [here](https://www.planetgeek.ch/2011/12/31/ninject-extensions-factory-introduction/).
+
+<br/>
+
+**Q**. What should I prefer - `Func<>` or `[I]Defer<>`?
+
+**A**. The main thing is they all work equally under the hood. The difference is in which context you are
+going to use these APIs.
+
+There are two main differences:
+
+1) The advantage of `Func<>` is that the code in which you inject `Func<>` does not require any new
+dependency, it is well-known .NET delegate type. On the contrary `[I]Defer<>` requires a reference to
+`SteroidsDI.Core` package.
+
+2) You should call `AddFunc` for each dependency `T` which you want to inject as `Func<T>`. On the
+contrary the `AddDefer` method needs to be called only once.
 
 <br/>
 
