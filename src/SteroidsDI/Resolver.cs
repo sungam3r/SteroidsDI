@@ -58,7 +58,7 @@ Scopes were obtained from the following providers: {string.Join(", ", parallelSc
                 {
                     throw new ObjectDisposedException($@"ObjectDisposedException occurred while resolving service '{type.Name}' by scoped service provider obtained from '{scopeProvider.GetType().FullName}'.
 Most likely this happened because the scope and scoped provider were disposed BEFORE the actual completion of the user code.
-Often, this is due to the forgotten 'await' operator somewhere in the user code. Make sure you await all the created tasks correctly.
+Often, this is due to a forgotten 'await' operator somewhere in the user code. Make sure you await all the created tasks correctly.
 You see this message because 'ServiceProviderAdvancedOptions.UseFriendlyObjectDisposedException' option is enabled.", e);
                 }
             }
