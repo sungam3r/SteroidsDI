@@ -37,6 +37,7 @@ namespace SteroidsDI
     {
         public ServiceProviderAdvancedOptions() { }
         public bool AllowRootProviderResolve { get; set; }
+        public bool UseFriendlyObjectDisposedException { get; set; }
         public bool ValidateParallelScopes { get; set; }
     }
 }
