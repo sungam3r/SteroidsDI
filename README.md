@@ -345,14 +345,14 @@ You can see how to use all the aforementioned APIs in the [example project](http
 
 <br/>
 
-**Q**. Isn't what you offer is a **ServiceLocator**? I heard that the ServiceLocator is antipattern.
+**Q**. Isn't what you offer is a **ServiceLocator**? I heard that the ServiceLocator is anti-pattern.
 
 **A**. Yes, ServiceLocator is a [known antipattern](https://blog.ploeh.dk/2010/02/03/ServiceLocatorisanAnti-Pattern/).
 The fundamental difference with the proposed solutions is that ServiceLocator allows you to resolve
 **any** dependency in runtime while `Func<T>`, `Defer<T>` and Named Factory are designed to resolve
 only **known** dependencies specified at the compile-time. Thus, the principal difference is that all
 the dependences of the class are declared explicitly and are injected into it. The class itself **does
-not pull** these dependencies secretly within its implementation.
+not pull** these dependencies secretly within its implementation. This is so called [Explicit Dependencies Principle](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles#explicit-dependencies).
 
 <br/>
 
