@@ -12,7 +12,13 @@ namespace SteroidsDI.Core
     {
         System.IServiceProvider? GetScopedServiceProvider(System.IServiceProvider rootProvider);
     }
-    public struct Scoped<T> : System.IDisposable
+    public readonly struct Scoped : System.IDisposable
+    {
+        public Scoped(System.Type type, SteroidsDI.Core.IScopeFactory scopeFactory) { }
+        public System.IDisposable Scope { get; }
+        public void Dispose() { }
+    }
+    public readonly struct Scoped<T> : System.IDisposable
     {
         public Scoped(SteroidsDI.Core.IScopeFactory scopeFactory) { }
         public System.IDisposable Scope { get; }

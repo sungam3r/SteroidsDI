@@ -12,6 +12,7 @@ public class ScopedTests
     public void Should_Throw_If_Null()
     {
         Should.Throw<ArgumentNullException>(() => new Scoped<int>(null!)).ParamName.ShouldBe("scopeFactory");
+        Should.Throw<ArgumentNullException>(() => new Scoped(null!, null!)).ParamName.ShouldBe("scopeFactory");
     }
 
     [Test]
@@ -20,13 +21,17 @@ public class ScopedTests
     {
         GenericScope<int>.CurrentScope = new NoopScope();
         Should.Throw<InvalidOperationException>(() => new Scoped<int>(new NoopScopeFactory())).Message.ShouldBe($"The current scope of GenericScope<Int32> is not null when trying to initialize it.");
+        Should.Throw<InvalidOperationException>(() => new Scoped(typeof(int), new NoopScopeFactory())).Message.ShouldBe($"The current scope of GenericScope<Int32> is not null when trying to initialize it.");
     }
 
     [Test]
     public void Should_Not_Throw_If_Null_Scope()
     {
-        using var s = new Scoped<int>(new NullScopeFactory());
-        s.Scope.ShouldBeNull();
+        using var s1 = new Scoped<int>(new NullScopeFactory());
+        s1.Scope.ShouldBeNull();
+
+        using var s2 = new Scoped(typeof(int), new NullScopeFactory());
+        s2.Scope.ShouldBeNull();
     }
 
     private sealed class NoopScope : IDisposable
