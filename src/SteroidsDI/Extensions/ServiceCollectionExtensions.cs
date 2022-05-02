@@ -82,7 +82,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <typeparam name="T">
     /// An arbitrary type that is used to create various static AsyncLocal fields. The caller may
-    /// set unique closed type, thereby providing its own storage, to which only it will have access.
+    /// set unique closed type, thereby providing its own storage, to which only he will have access.
     /// </typeparam>
     /// <param name="services"> A collection of DI container services. </param>
     /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
@@ -90,6 +90,25 @@ public static class ServiceCollectionExtensions
     {
         services.AddMicrosoftScopeFactory(); // this is not necessary, but in 99.99% of cases this is exactly what you need
         services.TryAddEnumerable(ServiceDescriptor.Singleton<IScopeProvider, GenericScopeProvider<T>>());
+        return services;
+    }
+
+    /// <summary>
+    /// Registers <see cref="GenericScopeProvider{T}" /> in DI as one of
+    /// the possible implementations of <see cref="IScopeProvider" />.
+    /// <br/><br/>
+    /// Non-generic version of <see cref="AddGenericScope{T}(IServiceCollection)"/>.
+    /// </summary>
+    /// <param name="type">
+    /// An arbitrary type that is used to create various static AsyncLocal fields. The caller may
+    /// set unique closed type, thereby providing its own storage, to which only he will have access.
+    /// </param>
+    /// <param name="services"> A collection of DI container services. </param>
+    /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
+    public static IServiceCollection AddGenericScope(this IServiceCollection services, Type type)
+    {
+        services.AddMicrosoftScopeFactory(); // this is not necessary, but in 99.99% of cases this is exactly what you need
+        services.TryAddEnumerable(ServiceDescriptor.Singleton(typeof(IScopeProvider), typeof(GenericScopeProvider<>).MakeGenericType(type)));
         return services;
     }
 

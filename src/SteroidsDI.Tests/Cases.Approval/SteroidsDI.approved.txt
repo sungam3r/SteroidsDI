@@ -6,6 +6,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddFactory(this Microsoft.Extensions.DependencyInjection.IServiceCollection services, System.Type factoryType) { }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddFactory<TFactory>(this Microsoft.Extensions.DependencyInjection.IServiceCollection services) { }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddFunc<TService>(this Microsoft.Extensions.DependencyInjection.IServiceCollection services) { }
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddGenericScope(this Microsoft.Extensions.DependencyInjection.IServiceCollection services, System.Type type) { }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddGenericScope<T>(this Microsoft.Extensions.DependencyInjection.IServiceCollection services) { }
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddMicrosoftScopeFactory(this Microsoft.Extensions.DependencyInjection.IServiceCollection services) { }
         public static SteroidsDI.BindingContext<TService> For<TService>(this Microsoft.Extensions.DependencyInjection.IServiceCollection services)

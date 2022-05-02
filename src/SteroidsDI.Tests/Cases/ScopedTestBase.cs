@@ -11,7 +11,7 @@ namespace SteroidsDI.Tests.Cases;
 public class ScopedTestBase : IDisposable
 {
     private readonly ServiceProvider _rootProvider;
-    private readonly Scoped<ScopedTestBase> _scoped;
+    private readonly Scoped _scoped;
 
     public ScopedTestBase()
     {
@@ -19,14 +19,14 @@ public class ScopedTestBase : IDisposable
         ConfigureServices(services);
 
         _rootProvider = services.BuildServiceProvider();
-        _scoped = new Scoped<ScopedTestBase>(_rootProvider.GetRequiredService<IScopeFactory>());
+        _scoped = new Scoped(GetType(), _rootProvider.GetRequiredService<IScopeFactory>()); // GetType instead of <ScopedTestBase> to do not mix the same scope in case of parallel tests
     }
 
     // override this method to specify required services for unit tests
     protected virtual void ConfigureServices(IServiceCollection services)
     {
         services.AddDefer();
-        services.AddGenericScope<ScopedTestBase>();
+        services.AddGenericScope(GetType()); // GetType instead of <ScopedTestBase> to do not mix the same scope in case of parallel tests
     }
 
     protected T? GetService<T>() => ((IServiceScope)_scoped.Scope).ServiceProvider.GetService<T>();
