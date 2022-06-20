@@ -14,10 +14,30 @@ public class ScopedTestDerived : ScopedTestBase
     }
 
     /// <summary>
-    /// This method works in context of prepared scope like ASP.NET Core app does.
+    /// This method works in context of prepared unique DI scope like ASP.NET Core app does.
     /// </summary>
     [Test]
-    public void Scoped_Should_Work()
+    public void Scoped_Should_Work_1()
+    {
+        var repo = GetRequiredService<IRepo>();
+        repo.Name.ShouldBe("12345");
+    }
+
+    /// <summary>
+    /// This method works in context of prepared unique DI scope like ASP.NET Core app does.
+    /// </summary>
+    [Test]
+    public void Scoped_Should_Work_2()
+    {
+        var repo = GetRequiredService<IRepo>();
+        repo.Name.ShouldBe("12345");
+    }
+
+    /// <summary>
+    /// This method works in context of prepared unique scope like ASP.NET Core app does.
+    /// </summary>
+    [Test]
+    public void Scoped_Should_Work_3()
     {
         var repo = GetRequiredService<IRepo>();
         repo.Name.ShouldBe("12345");

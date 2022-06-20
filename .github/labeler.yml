@@ -4,6 +4,8 @@ tests:
 CI:
   - .github/workflows/**/*
   - .github/dependabot.yml
+  - .github/codecov.yml
+  - .github/labeler.yml
 
 code style:
   - .editorconfig

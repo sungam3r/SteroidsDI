@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using NUnit.Framework;
 using SteroidsDI.Core;
 
 namespace SteroidsDI.Tests.Cases;
@@ -7,7 +8,11 @@ namespace SteroidsDI.Tests.Cases;
 /// Base test that provides ability to work with scopes. Each test method in
 /// derived classes can get query DI container via <see cref="GetService"/> method,
 /// see <see cref="ScopedTestDerived"/> class.
+/// <br/>
+/// Note that you should add [FixtureLifeCycle(LifeCycle.InstancePerTestCase)] to your
+/// test class to make each test method work with its own unique scope created in ctor.
 /// </summary>
+[FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
 public class ScopedTestBase : IDisposable
 {
     private readonly ServiceProvider _rootProvider;
