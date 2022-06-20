@@ -4,6 +4,7 @@ using Shouldly;
 
 namespace SteroidsDI.Tests.Cases;
 
+[FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
 public class ScopedTestDerived : ScopedTestBase
 {
     protected override void ConfigureServices(IServiceCollection services)
@@ -18,6 +19,16 @@ public class ScopedTestDerived : ScopedTestBase
     /// </summary>
     [Test]
     public void Scoped_Should_Work()
+    {
+        var repo = GetRequiredService<IRepo>();
+        repo.Name.ShouldBe("12345");
+    }
+
+    /// <summary>
+    /// This method works in context of prepared scope like ASP.NET Core app does.
+    /// </summary>
+    [Test]
+    public void Scoped_Should_Work1()
     {
         var repo = GetRequiredService<IRepo>();
         repo.Name.ShouldBe("12345");
