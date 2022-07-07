@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Condition="$(TargetFramework) == 'netstandard2.0'" Include="Microsoft.AspNetCore.Http" Version="2.1.0" />
+    <PackageReference Condition="$(TargetFramework) == 'netstandard2.0'" Include="Microsoft.AspNetCore.Http" Version="2.1.22" />
     <FrameworkReference Condition="$(TargetFramework) != 'netstandard2.0'" Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
