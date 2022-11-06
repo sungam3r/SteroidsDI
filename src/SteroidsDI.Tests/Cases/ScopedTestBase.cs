@@ -30,17 +30,20 @@ public class ScopedTestBase : IDisposable
     // override this method to specify required services for unit tests
     protected virtual void ConfigureServices(IServiceCollection services)
     {
-        services.AddDefer();
-        services.AddGenericScope(GetType()); // GetType instead of <ScopedTestBase> to do not mix the same scope in case of parallel tests
+        _ = services
+            .AddDefer()
+            .AddGenericScope(GetType()); // GetType instead of <ScopedTestBase> to do not mix the same scope in case of parallel tests
     }
 
     protected T? GetService<T>() => ((IServiceScope)_scoped.Scope).ServiceProvider.GetService<T>();
 
-    protected T GetRequiredService<T>() => ((IServiceScope)_scoped.Scope).ServiceProvider.GetRequiredService<T>();
+    protected T GetRequiredService<T>() where T : notnull
+        => ((IServiceScope)_scoped.Scope).ServiceProvider.GetRequiredService<T>();
 
     public void Dispose()
     {
         _scoped.Dispose();
         _rootProvider.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
