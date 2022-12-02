@@ -4,20 +4,23 @@
 
 ![License](https://img.shields.io/github/license/sungam3r/SteroidsDI)
 
+[![codecov](https://codecov.io/gh/sungam3r/SteroidsDI/branch/master/graph/badge.svg?token=0ZRHIUEQM4)](https://codecov.io/gh/sungam3r/SteroidsDI)
+[![Nuget](https://img.shields.io/nuget/dt/SteroidsDI.Core)](https://www.nuget.org/packages/SteroidsDI.Core)
+[![Nuget](https://img.shields.io/nuget/v/SteroidsDI.Core)](https://www.nuget.org/packages/SteroidsDI.Core)
+
+[![GitHub Release Date](https://img.shields.io/github/release-date/sungam3r/SteroidsDI?label=released)](https://github.com/sungam3r/SteroidsDI/releases)
+[![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/sungam3r/SteroidsDI/latest?label=new+commits)](https://github.com/sungam3r/SteroidsDI/commits/master)
+![Size](https://img.shields.io/github/repo-size/sungam3r/SteroidsDI)
+
+[![GitHub contributors](https://img.shields.io/github/contributors/sungam3r/SteroidsDI)](https://github.com/sungam3r/SteroidsDI/graphs/contributors)
 ![Activity](https://img.shields.io/github/commit-activity/w/sungam3r/SteroidsDI)
 ![Activity](https://img.shields.io/github/commit-activity/m/sungam3r/SteroidsDI)
 ![Activity](https://img.shields.io/github/commit-activity/y/sungam3r/SteroidsDI)
-
-![Size](https://img.shields.io/github/repo-size/sungam3r/SteroidsDI)
 
 [![Run unit tests](https://github.com/sungam3r/SteroidsDI/actions/workflows/test.yml/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions/workflows/test.yml)
 [![Publish preview to GitHub registry](https://github.com/sungam3r/SteroidsDI/actions/workflows/publish-preview.yml/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions/workflows/publish-preview.yml)
 [![Publish release to Nuget registry](https://github.com/sungam3r/SteroidsDI/actions/workflows/publish-release.yml/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions/workflows/publish-release.yml)
 [![CodeQL analysis](https://github.com/sungam3r/SteroidsDI/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/sungam3r/SteroidsDI/actions/workflows/codeql-analysis.yml)
-
-[![codecov](https://codecov.io/gh/sungam3r/SteroidsDI/branch/master/graph/badge.svg?token=0ZRHIUEQM4)](https://codecov.io/gh/sungam3r/SteroidsDI)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/sungam3r/SteroidsDI.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/sungam3r/SteroidsDI/alerts/)
-[![Language grade: C#](https://img.shields.io/lgtm/grade/csharp/g/sungam3r/SteroidsDI.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/sungam3r/SteroidsDI/context:csharp)
 
 Advanced Dependency Injection to use every day.
 
