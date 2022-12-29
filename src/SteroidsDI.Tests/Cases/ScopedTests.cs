@@ -26,13 +26,31 @@ public class ScopedTests
     }
 
     [Test]
-    public void Should_Not_Throw_If_Null_Scope()
+    public async Task Should_Not_Throw_If_Null_Scope()
     {
         using var s1 = new Scoped<int>(new NullScopeFactory());
         s1.Scope.ShouldBeNull();
 
         using var s2 = new Scoped(typeof(int), new NullScopeFactory());
         s2.Scope.ShouldBeNull();
+
+        await using var s3 = new Scoped<int>(new NullScopeFactory());
+        s1.Scope.ShouldBeNull();
+
+        await using var s4 = new Scoped(typeof(int), new NullScopeFactory());
+        s2.Scope.ShouldBeNull();
+    }
+
+    [Test]
+    public async Task Should_Support_Custom_Scope_That_Does_Not_Implement_IAsyncDisposable()
+    {
+        await using (new Scoped<bool>(new NoopScopeFactory()))
+        {
+        }
+
+        await using (new Scoped(typeof(bool), new NoopScopeFactory()))
+        {
+        }
     }
 
     [Test]
@@ -63,6 +81,47 @@ public class ScopedTests
         }
 
         await using (new Scoped<bool>(provider.GetRequiredService<IScopeFactory>()))
+        {
+            var foo = singleton.Foo.Value;
+
+            foo.Count.ShouldBe(0); // counter eq 0 because we are in a new scope
+            foo.Count++;
+            foo.Count.ShouldBe(1);
+
+            foo = singleton.Foo.Value;
+
+            foo.Count.ShouldBe(1); // the same instance with counter eq 1
+        }
+    }
+
+    [Test]
+    public async Task Should_Support_IAsyncDisposable_NonGeneric()
+    {
+        var services = new ServiceCollection()
+            .AddGenericScope<bool>()
+            .AddMicrosoftScopeFactory()
+            .AddDefer()
+            .AddSingleton<Singleton>()
+            .AddScoped<IFoo, Foo>();
+
+        await using var provider = services.BuildServiceProvider();
+
+        var singleton = provider.GetRequiredService<Singleton>();
+
+        await using (new Scoped(typeof(bool), provider.GetRequiredService<IScopeFactory>()))
+        {
+            var foo = singleton.Foo.Value;
+
+            foo.Count.ShouldBe(0);
+            foo.Count++;
+            foo.Count.ShouldBe(1);
+
+            foo = singleton.Foo.Value;
+
+            foo.Count.ShouldBe(1); // the same instance with counter eq 1
+        }
+
+        await using (new Scoped(typeof(bool), provider.GetRequiredService<IScopeFactory>()))
         {
             var foo = singleton.Foo.Value;
 
