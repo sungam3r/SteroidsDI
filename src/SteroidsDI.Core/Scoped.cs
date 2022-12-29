@@ -5,13 +5,14 @@ namespace SteroidsDI.Core;
 /// <summary>
 /// Auxiliary class for creating and destroying scopes. Scopes are sections of code within which
 /// scoped dependencies are resolved. This class controls the state of <see cref="GenericScope{T}" />,
-/// initializing its initial state and cleaning/destroying it at the exit.
+/// initializing its initial state and cleaning/destroying it "at the exit", i.e when calling
+/// <see cref="Dispose"/> or <see cref="DisposeAsync"/>.
 /// </summary>
 /// <typeparam name="T">
 /// An arbitrary type that is used to create various static AsyncLocal fields. The caller may
 /// set unique closed type, thereby providing its own storage, to which only he will have access.
 /// </typeparam>
-public readonly struct Scoped<T> : IDisposable
+public readonly struct Scoped<T> : IDisposable, IAsyncDisposable
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Scoped{T}"/>.
@@ -34,22 +35,34 @@ public readonly struct Scoped<T> : IDisposable
     /// </summary>
     public IDisposable Scope { get; }
 
-    /// <summary> Dispose scope. </summary>
+    /// <inheritdoc />
     public void Dispose()
     {
         GenericScope<T>.CurrentScope = null;
         Scope?.Dispose(); // in some cases scopeFactory.CreateScope() MAY return null
+    }
+
+    /// <inheritdoc />
+    public ValueTask DisposeAsync()
+    {
+        GenericScope<T>.CurrentScope = null;
+        if (Scope is IAsyncDisposable ad)
+            return ad.DisposeAsync();
+        Scope?.Dispose(); // in some cases scopeFactory.CreateScope() MAY return null
+        // ValueTask.CompletedTask is only available in net5.0 and later.
+        return default;
     }
 }
 
 /// <summary>
 /// Auxiliary class for creating and destroying scopes. Scopes are sections of code within which
 /// scoped dependencies are resolved. This class controls the state of <see cref="GenericScope{T}" />,
-/// initializing its initial state and cleaning/destroying it at the exit.
+/// initializing its initial state and cleaning/destroying it "at the exit", i.e when calling
+/// <see cref="Dispose"/> or <see cref="DisposeAsync"/>.
 /// <br/><br/>
 /// Non-generic version of <see cref="Scoped{T}"/>.
 /// </summary>
-public readonly struct Scoped : IDisposable
+public readonly struct Scoped : IDisposable, IAsyncDisposable
 {
     private readonly PropertyInfo _currentScopeProperty;
 
@@ -79,10 +92,21 @@ public readonly struct Scoped : IDisposable
     /// </summary>
     public IDisposable Scope { get; }
 
-    /// <summary> Dispose scope. </summary>
+    /// <inheritdoc />
     public void Dispose()
     {
         _currentScopeProperty.SetValue(null, null);
         Scope?.Dispose(); // in some cases scopeFactory.CreateScope() MAY return null
+    }
+
+    /// <inheritdoc />
+    public ValueTask DisposeAsync()
+    {
+        _currentScopeProperty.SetValue(null, null);
+        if (Scope is IAsyncDisposable ad)
+            return ad.DisposeAsync();
+        Scope?.Dispose(); // in some cases scopeFactory.CreateScope() MAY return null
+        // ValueTask.CompletedTask is only available in net5.0 and later.
+        return default;
     }
 }
