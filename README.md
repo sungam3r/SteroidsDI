@@ -404,6 +404,8 @@ Or you can use a bit simpler approach with [`Scoped<T>`](src/SteroidsDI.Core/Sco
 ```csharp
 IScopeFactory scopeFactory = ...; // can be obtained from DI, see AddMicrosoftScopeFactory extension method
 using (new Scoped<SomeClass>(scopeFactory))
+or
+await using (new Scoped<SomeClass>(scopeFactory)) // Scoped class supports IAsyncDisposable as well
 {
 ...
 ... Some code here that works with scopes.

@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Shouldly;
 using SteroidsDI.Core;
@@ -34,6 +35,47 @@ public class ScopedTests
         s2.Scope.ShouldBeNull();
     }
 
+    [Test]
+    public async Task Should_Support_IAsyncDisposable()
+    {
+        var services = new ServiceCollection()
+            .AddGenericScope<bool>()
+            .AddMicrosoftScopeFactory()
+            .AddDefer()
+            .AddSingleton<Singleton>()
+            .AddScoped<IFoo, Foo>();
+
+        await using var provider = services.BuildServiceProvider();
+
+        var singleton = provider.GetRequiredService<Singleton>();
+
+        await using (new Scoped<bool>(provider.GetRequiredService<IScopeFactory>()))
+        {
+            var foo = singleton.Foo.Value;
+
+            foo.Count.ShouldBe(0);
+            foo.Count++;
+            foo.Count.ShouldBe(1);
+
+            foo = singleton.Foo.Value;
+
+            foo.Count.ShouldBe(1); // the same instance with counter eq 1
+        }
+
+        await using (new Scoped<bool>(provider.GetRequiredService<IScopeFactory>()))
+        {
+            var foo = singleton.Foo.Value;
+
+            foo.Count.ShouldBe(0); // counter eq 0 because we are in a new scope
+            foo.Count++;
+            foo.Count.ShouldBe(1);
+
+            foo = singleton.Foo.Value;
+
+            foo.Count.ShouldBe(1); // the same instance with counter eq 1
+        }
+    }
+
     private sealed class NoopScope : IDisposable
     {
         public void Dispose()
@@ -49,5 +91,27 @@ public class ScopedTests
     private sealed class NullScopeFactory : IScopeFactory
     {
         public IDisposable CreateScope() => null!;
+    }
+
+    private class Singleton
+    {
+        public Singleton(Defer<IFoo> foo)
+        {
+            Foo = foo;
+        }
+
+        public Defer<IFoo> Foo { get; }
+    }
+
+    private interface IFoo
+    {
+        int Count { get; set; }
+    }
+
+    private class Foo : IFoo, IAsyncDisposable
+    {
+        public int Count { get; set; }
+
+        public ValueTask DisposeAsync() => default;
     }
 }
