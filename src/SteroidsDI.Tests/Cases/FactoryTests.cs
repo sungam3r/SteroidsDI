@@ -22,115 +22,105 @@ Use the 'Named' overload with explicit Lifetime or first set the default binding
     [Test]
     public void Factory_And_Named_Bindings_Should_Work()
     {
-        using (var provider = ServicesBuilder.BuildDefault().BuildServiceProvider(validateScopes: true))
-        {
-            using (var scope = provider.CreateScope())
-            {
-                GenericScope<ServicesBuilder>.CurrentScope = scope;
+        using var provider = ServicesBuilder.BuildDefault().BuildServiceProvider(validateScopes: true);
+        using var scope = provider.CreateScope();
 
-                var controller = scope.ServiceProvider.GetRequiredService<Controller>();
+        GenericScope<ServicesBuilder>.CurrentScope = scope;
 
-                var builder1 = controller.Factory.AAA();
-                builder1.ShouldBeAssignableTo<Builder>();
-                builder1.Build();
+        var controller = scope.ServiceProvider.GetRequiredService<Controller>();
 
-                var notifier = controller.Factory.BBB();
-                notifier.ShouldBeAssignableTo<Notifier>();
-                notifier.Notify();
+        var builder1 = controller.Factory.AAA();
+        builder1.ShouldBeAssignableTo<Builder>();
+        builder1.Build();
 
-                var builder2 = controller.Factory.CCC("xxx");
-                builder2.ShouldBeAssignableTo<SpecialBuilder>();
-                builder2.Build();
+        var notifier = controller.Factory.BBB();
+        notifier.ShouldBeAssignableTo<Notifier>();
+        notifier.Notify();
 
-                var builder3 = controller.Factory.CCC("yyy");
-                builder3.ShouldBeAssignableTo<SpecialBuilder>();
-                builder3.Build();
+        var builder2 = controller.Factory.CCC("xxx");
+        builder2.ShouldBeAssignableTo<SpecialBuilder>();
+        builder2.Build();
 
-                var builder4 = controller.Factory.CCC("oops");
-                builder4.ShouldBeAssignableTo<SpecialBuilderOver9000Level>();
-                builder4.Build();
+        var builder3 = controller.Factory.CCC("yyy");
+        builder3.ShouldBeAssignableTo<SpecialBuilder>();
+        builder3.Build();
 
-                var builder5 = controller.Factory.DDD(ManagerType.Good);
-                builder5.ShouldBeAssignableTo<SpecialBuilder>();
-                builder5.Build();
+        var builder4 = controller.Factory.CCC("oops");
+        builder4.ShouldBeAssignableTo<SpecialBuilderOver9000Level>();
+        builder4.Build();
 
-                var builder6 = controller.Factory.DDD(ManagerType.Bad);
-                builder6.ShouldBeAssignableTo<SpecialBuilderOver9000Level>();
-                builder6.Build();
-            }
-        }
+        var builder5 = controller.Factory.DDD(ManagerType.Good);
+        builder5.ShouldBeAssignableTo<SpecialBuilder>();
+        builder5.Build();
+
+        var builder6 = controller.Factory.DDD(ManagerType.Bad);
+        builder6.ShouldBeAssignableTo<SpecialBuilderOver9000Level>();
+        builder6.Build();
     }
 
     [Test]
     [Category("Generic")]
     public void Generic_Factory_And_Named_Bindings_Should_Work()
     {
-        using (var provider = ServicesBuilder.BuildDefault().BuildServiceProvider(validateScopes: true))
-        {
-            using (var scope = provider.CreateScope())
-            {
-                GenericScope<ServicesBuilder>.CurrentScope = scope;
+        using var provider = ServicesBuilder.BuildDefault().BuildServiceProvider(validateScopes: true);
+        using var scope = provider.CreateScope();
 
-                var controller = scope.ServiceProvider.GetRequiredService<Controller>();
+        GenericScope<ServicesBuilder>.CurrentScope = scope;
 
-                var builder1 = controller.Generic.AAA();
-                builder1.ShouldBeAssignableTo<Builder>();
-                builder1.Build();
+        var controller = scope.ServiceProvider.GetRequiredService<Controller>();
 
-                var notifier = controller.Generic.BBB();
-                notifier.ShouldBeAssignableTo<Notifier>();
-                notifier.Notify();
+        var builder1 = controller.Generic.AAA();
+        builder1.ShouldBeAssignableTo<Builder>();
+        builder1.Build();
 
-                var builder2 = controller.Generic.CCC("xxx");
-                builder2.ShouldBeAssignableTo<SpecialBuilder>();
-                builder2.Build();
+        var notifier = controller.Generic.BBB();
+        notifier.ShouldBeAssignableTo<Notifier>();
+        notifier.Notify();
 
-                var builder3 = controller.Generic.CCC("yyy");
-                builder3.ShouldBeAssignableTo<SpecialBuilder>();
-                builder3.Build();
+        var builder2 = controller.Generic.CCC("xxx");
+        builder2.ShouldBeAssignableTo<SpecialBuilder>();
+        builder2.Build();
 
-                var builder4 = controller.Generic.CCC("oops");
-                builder4.ShouldBeAssignableTo<SpecialBuilderOver9000Level>();
-                builder4.Build();
+        var builder3 = controller.Generic.CCC("yyy");
+        builder3.ShouldBeAssignableTo<SpecialBuilder>();
+        builder3.Build();
 
-                var builder5 = controller.Generic.DDD(ManagerType.Good);
-                builder5.ShouldBeAssignableTo<SpecialBuilder>();
-                builder5.Build();
+        var builder4 = controller.Generic.CCC("oops");
+        builder4.ShouldBeAssignableTo<SpecialBuilderOver9000Level>();
+        builder4.Build();
 
-                var builder6 = controller.Generic.DDD(ManagerType.Bad);
-                builder6.ShouldBeAssignableTo<SpecialBuilderOver9000Level>();
-                builder6.Build();
-            }
-        }
+        var builder5 = controller.Generic.DDD(ManagerType.Good);
+        builder5.ShouldBeAssignableTo<SpecialBuilder>();
+        builder5.Build();
+
+        var builder6 = controller.Generic.DDD(ManagerType.Bad);
+        builder6.ShouldBeAssignableTo<SpecialBuilderOver9000Level>();
+        builder6.Build();
     }
 
     [Test]
     [Category("Throw")]
     public void Null_Binding_Should_Throw()
     {
-        using (var provider = ServicesBuilder.BuildDefault().BuildServiceProvider(validateScopes: true))
-        {
-            var controller = provider.GetRequiredService<Controller>();
+        using var provider = ServicesBuilder.BuildDefault().BuildServiceProvider(validateScopes: true);
+        var controller = provider.GetRequiredService<Controller>();
 
-            Should.Throw<InvalidOperationException>(() => controller.Factory.CCC(null!));
-            Should.Throw<InvalidOperationException>(() => controller.Generic.CCC(null!));
-        }
+        Should.Throw<InvalidOperationException>(() => controller.Factory.CCC(null!));
+        Should.Throw<InvalidOperationException>(() => controller.Generic.CCC(null!));
     }
 
     [Test]
     [Category("Throw")]
     public void Unknown_Binding_Should_Throw()
     {
-        using (var provider = ServicesBuilder.BuildDefault().BuildServiceProvider(validateScopes: true))
-        {
-            var controller = provider.GetRequiredService<Controller>();
+        using var provider = ServicesBuilder.BuildDefault().BuildServiceProvider(validateScopes: true);
+        var controller = provider.GetRequiredService<Controller>();
 
-            Should.Throw<InvalidOperationException>(() => controller.Factory.CCC("Zorro"));
-            Should.Throw<InvalidOperationException>(() => controller.Generic.CCC("Zorro"));
+        Should.Throw<InvalidOperationException>(() => controller.Factory.CCC("Zorro"));
+        Should.Throw<InvalidOperationException>(() => controller.Generic.CCC("Zorro"));
 
-            Should.Throw<InvalidOperationException>(() => controller.Factory.DDD(ManagerType.Angry));
-            Should.Throw<InvalidOperationException>(() => controller.Generic.DDD(ManagerType.Angry));
-        }
+        Should.Throw<InvalidOperationException>(() => controller.Factory.DDD(ManagerType.Angry));
+        Should.Throw<InvalidOperationException>(() => controller.Generic.DDD(ManagerType.Angry));
     }
 
     [Test]
