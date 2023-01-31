@@ -24,7 +24,7 @@ Use the 'Named' overload with explicit Lifetime or first set the default binding
     {
         using var provider = ServicesBuilder.BuildDefault().BuildServiceProvider(validateScopes: true);
         using var scope = provider.CreateScope();
-        
+
         GenericScope<ServicesBuilder>.CurrentScope = scope;
 
         var controller = scope.ServiceProvider.GetRequiredService<Controller>();
@@ -64,7 +64,7 @@ Use the 'Named' overload with explicit Lifetime or first set the default binding
     {
         using var provider = ServicesBuilder.BuildDefault().BuildServiceProvider(validateScopes: true);
         using var scope = provider.CreateScope();
-            
+
         GenericScope<ServicesBuilder>.CurrentScope = scope;
 
         var controller = scope.ServiceProvider.GetRequiredService<Controller>();
