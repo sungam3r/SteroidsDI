@@ -28,14 +28,10 @@ public class AllowRootProviderResolveTests
            .AddSingleton<ScopedAsSingleton>()
            .AddSingleton<Service>();
 
-        using (var rootProvider = services.BuildServiceProvider())
-        {
-            using (var scope = rootProvider.CreateScope())
-            {
-                var service = scope.ServiceProvider.GetService<Service>()!;
-                service.Scoped.Value.ShouldNotBeNull();
-            }
-        }
+        using var rootProvider = services.BuildServiceProvider();
+        using var scope = rootProvider.CreateScope();
+        var service = scope.ServiceProvider.GetService<Service>()!;
+        service.Scoped.Value.ShouldNotBeNull();
     }
 
     [Test]
@@ -48,16 +44,12 @@ public class AllowRootProviderResolveTests
            .AddSingleton<ScopedAsSingleton>()
            .AddSingleton<Service>();
 
-        using (var rootProvider = services.BuildServiceProvider())
-        {
-            using (var scope = rootProvider.CreateScope())
-            {
-                var service = scope.ServiceProvider.GetService<Service>()!;
-                Should.Throw<InvalidOperationException>(() => service.Scoped.Value).Message.ShouldBe(@"The current scope is missing. Unable to resolve service 'ScopedAsSingleton' from the root service provider.
+        using var rootProvider = services.BuildServiceProvider();
+        using var scope = rootProvider.CreateScope();
+        var service = scope.ServiceProvider.GetService<Service>()!;
+        Should.Throw<InvalidOperationException>(() => service.Scoped.Value).Message.ShouldBe(@"The current scope is missing. Unable to resolve service 'ScopedAsSingleton' from the root service provider.
 Be sure to add the required provider (IScopeProvider) to the DI container by using appropriate extension method.
 Note that a service can be obtained from the root service provider only if it has a non-scoped lifetime (i.e. singleton or transient) and 'ServiceProviderAdvancedOptions.AllowRootProviderResolve' option is enabled.");
-            }
-        }
     }
 
     [Test]
@@ -69,13 +61,9 @@ Note that a service can be obtained from the root service provider only if it ha
            .AddDefer()
            .AddSingleton<Service>();
 
-        using (var rootProvider = services.BuildServiceProvider())
-        {
-            using (var scope = rootProvider.CreateScope())
-            {
-                var service = scope.ServiceProvider.GetService<Service>()!;
-                Should.Throw<InvalidOperationException>(() => service.Scoped.Value).Message.ShouldBe("No service for type 'SteroidsDI.Tests.Cases.AllowRootProviderResolveTests+ScopedAsSingleton' has been registered.");
-            }
-        }
+        using var rootProvider = services.BuildServiceProvider();
+        using var scope = rootProvider.CreateScope();
+        var service = scope.ServiceProvider.GetService<Service>()!;
+        Should.Throw<InvalidOperationException>(() => service.Scoped.Value).Message.ShouldBe("No service for type 'SteroidsDI.Tests.Cases.AllowRootProviderResolveTests+ScopedAsSingleton' has been registered.");
     }
 }

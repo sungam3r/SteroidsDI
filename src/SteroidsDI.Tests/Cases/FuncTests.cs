@@ -100,14 +100,10 @@ public class FuncTests
     {
         Should.Throw<InvalidOperationException>(() =>
         {
-            using (var provider = ServicesBuilder.BuildDefault(addScopeProvider: false).BuildServiceProvider(validateScopes: true))
-            {
-                using (var scope = provider.CreateScope())
-                {
-                    var controller = scope.ServiceProvider.GetService<Controller>()!;
-                    var service = controller.ScopedFunc();
-                }
-            }
+            using var provider = ServicesBuilder.BuildDefault(addScopeProvider: false).BuildServiceProvider(validateScopes: true);
+            using var scope = provider.CreateScope();
+            var controller = scope.ServiceProvider.GetService<Controller>()!;
+            var service = controller.ScopedFunc();
         });
     }
 }

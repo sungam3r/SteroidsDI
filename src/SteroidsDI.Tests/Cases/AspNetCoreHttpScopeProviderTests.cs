@@ -19,14 +19,14 @@ public class AspNetCoreHttpScopeProviderTests
     [Test]
     public void Should_Return_Null_If_Called_Out_Of_HttpContext()
     {
-        var rootProvider = new ServiceCollection().AddHttpScope().BuildServiceProvider();
+        using var rootProvider = new ServiceCollection().AddHttpScope().BuildServiceProvider();
         new AspNetCoreHttpScopeProvider().GetScopedServiceProvider(rootProvider).ShouldBe(null);
     }
 
     [Test]
     public void Should_Return_Null_If_Called_With_HttpContext_Without_Provider()
     {
-        var rootProvider = new ServiceCollection().AddHttpScope().BuildServiceProvider();
+        using var rootProvider = new ServiceCollection().AddHttpScope().BuildServiceProvider();
         new HttpContextAccessor().HttpContext = new DefaultHttpContext();
         new AspNetCoreHttpScopeProvider().GetScopedServiceProvider(rootProvider).ShouldBeNull();
     }
@@ -34,7 +34,7 @@ public class AspNetCoreHttpScopeProviderTests
     [Test]
     public void Should_Return_Provider_If_Called_With_HttpContext_With_Provider()
     {
-        var rootProvider = new ServiceCollection().AddHttpScope().BuildServiceProvider();
+        using var rootProvider = new ServiceCollection().AddHttpScope().BuildServiceProvider();
         new HttpContextAccessor().HttpContext = new DefaultHttpContext()
         {
             RequestServices = new ServiceCollection().BuildServiceProvider()
