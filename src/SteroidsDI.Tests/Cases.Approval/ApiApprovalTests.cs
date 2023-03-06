@@ -21,7 +21,7 @@ public class ApiApprovalTests
         string publicApi = type.Assembly.GeneratePublicApi(new ApiGeneratorOptions
         {
             IncludeAssemblyAttributes = false,
-            WhitelistedNamespacePrefixes = new[] { "Microsoft.Extensions.DependencyInjection" },
+            AllowNamespacePrefixes = new[] { "System", "Microsoft.Extensions.DependencyInjection" },
             ExcludeAttributes = new[] { "System.Diagnostics.DebuggerDisplayAttribute" },
         });
 
