@@ -62,7 +62,7 @@ jobs:
         run: dotnet test --no-restore -p:CollectCoverage=true
       - name: Upload coverage to codecov
         if: ${{ startsWith(matrix.os, 'ubuntu') }}
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           files: .coverage/SteroidsDI.Tests/coverage.net7.opencover.xml
 
