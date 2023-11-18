@@ -16,18 +16,18 @@ public class Repository : IRepository
 
     public List<Person> GetPersons()
     {
-        return new List<Person>
-        {
-            new Person
+        return
+        [
+            new()
             {
                 Name = "Chip",
                 Age = 31
             },
-            new Person
+            new()
             {
                 Name = "Dale",
                 Age = 32
             }
-        };
+        ];
     }
 }

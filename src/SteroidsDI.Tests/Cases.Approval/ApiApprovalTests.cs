@@ -7,7 +7,6 @@ using SteroidsDI.Core;
 namespace SteroidsDI.Tests.Cases;
 
 /// <summary> Tests for checking changes to the public API. </summary>
-/// <see href="https://github.com/JakeGinnivan/ApiApprover"/>
 [TestFixture]
 public class ApiApprovalTests
 {
@@ -21,8 +20,8 @@ public class ApiApprovalTests
         string publicApi = type.Assembly.GeneratePublicApi(new ApiGeneratorOptions
         {
             IncludeAssemblyAttributes = false,
-            AllowNamespacePrefixes = new[] { "System", "Microsoft.Extensions.DependencyInjection" },
-            ExcludeAttributes = new[] { "System.Diagnostics.DebuggerDisplayAttribute" },
+            AllowNamespacePrefixes = ["System", "Microsoft.Extensions.DependencyInjection"],
+            ExcludeAttributes = ["System.Diagnostics.DebuggerDisplayAttribute"],
         });
 
         publicApi.ShouldMatchApproved(options => options!.WithFilenameGenerator((testMethodInfo, discriminator, fileType, fileExtension) => $"{type.Assembly.GetName().Name!}.{fileType}.{fileExtension}"));
