@@ -9,14 +9,8 @@ public class AllowRootProviderResolveTests
 {
     private sealed class ScopedAsSingleton { }
 
-    private class Service
+    private record Service(Defer<ScopedAsSingleton> Scoped)
     {
-        public Service(Defer<ScopedAsSingleton> scoped)
-        {
-            Scoped = scoped;
-        }
-
-        public Defer<ScopedAsSingleton> Scoped { get; }
     }
 
     [Test]

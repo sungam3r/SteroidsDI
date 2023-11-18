@@ -14,14 +14,8 @@ public class ValidateParallelScopesTests
 
     private sealed class Scoped { }
 
-    private class Service
+    private record Service(Defer<Scoped> Scoped)
     {
-        public Service(Defer<Scoped> scoped)
-        {
-            Scoped = scoped;
-        }
-
-        public Defer<Scoped> Scoped { get; }
     }
 
     private sealed class TestScope : IDisposable, IServiceScope, IServiceProvider
