@@ -110,7 +110,7 @@ internal static class FactoryGenerator
             ilGenerator.Emit(OpCodes.Ldfld, providerField);
             ilGenerator.Emit(OpCodes.Ldarg_0); // this
             ilGenerator.Emit(OpCodes.Ldfld, optionsField);
-            ilGenerator.Emit(OpCodes.Call, typeof(Resolver).GetMethods(BindingFlags.NonPublic | BindingFlags.Static).Single(m => m.Name == nameof(Resolver.Resolve) && m.IsGenericMethod == true).MakeGenericMethod(method.ReturnType));
+            ilGenerator.Emit(OpCodes.Call, typeof(Resolver).GetMethods(BindingFlags.NonPublic | BindingFlags.Static).Single(m => m.Name == nameof(Resolver.Resolve) && m.IsGenericMethod).MakeGenericMethod(method.ReturnType));
             ilGenerator.Emit(OpCodes.Ret);
         }
         else

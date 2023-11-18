@@ -103,7 +103,7 @@ public class FuncTests
             using var provider = ServicesBuilder.BuildDefault(addScopeProvider: false).BuildServiceProvider(validateScopes: true);
             using var scope = provider.CreateScope();
             var controller = scope.ServiceProvider.GetService<Controller>()!;
-            var service = controller.ScopedFunc();
+            _ = controller.ScopedFunc(); // throws
         });
     }
 }

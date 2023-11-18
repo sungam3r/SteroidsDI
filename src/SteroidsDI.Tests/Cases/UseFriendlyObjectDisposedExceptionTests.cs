@@ -41,6 +41,9 @@ Object name: 'IServiceProvider'.");
         outerScope.Dispose();
         cts2.Cancel();
         t.Wait();
+
+        cts2.Dispose();
+        cts1.Dispose();
     }
 
     [Test]
@@ -75,6 +78,9 @@ Object name: 'IServiceProvider'.");
         outerScope.Dispose();
         cts2.Cancel();
         t.Wait();
+
+        cts2.Dispose();
+        cts1.Dispose();
     }
 
     private sealed class ScopedService { }
