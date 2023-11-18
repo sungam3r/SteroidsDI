@@ -20,8 +20,8 @@ internal class UseFriendlyObjectDisposedExceptionTests
         var service = rootProvider.GetRequiredService<SingletonService>();
         var outerScope = new Scoped<UseFriendlyObjectDisposedExceptionTests>(rootProvider.GetRequiredService<IScopeFactory>());
 
-        var cts1 = new CancellationTokenSource();
-        var cts2 = new CancellationTokenSource();
+        using var cts1 = new CancellationTokenSource();
+        using var cts2 = new CancellationTokenSource();
 
         var t = Task.Run(() =>
         {
@@ -41,9 +41,6 @@ Object name: 'IServiceProvider'.");
         outerScope.Dispose();
         cts2.Cancel();
         t.Wait();
-
-        cts2.Dispose();
-        cts1.Dispose();
     }
 
     [Test]
@@ -60,8 +57,8 @@ Object name: 'IServiceProvider'.");
         var service = rootProvider.GetRequiredService<SingletonService>();
         var outerScope = new Scoped<UseFriendlyObjectDisposedExceptionTests>(rootProvider.GetRequiredService<IScopeFactory>());
 
-        var cts1 = new CancellationTokenSource();
-        var cts2 = new CancellationTokenSource();
+        using var cts1 = new CancellationTokenSource();
+        using var cts2 = new CancellationTokenSource();
 
         var t = Task.Run(() =>
         {
@@ -78,9 +75,6 @@ Object name: 'IServiceProvider'.");
         outerScope.Dispose();
         cts2.Cancel();
         t.Wait();
-
-        cts2.Dispose();
-        cts1.Dispose();
     }
 
     private sealed class ScopedService { }
