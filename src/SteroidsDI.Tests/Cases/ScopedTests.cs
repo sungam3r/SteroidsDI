@@ -152,14 +152,8 @@ public class ScopedTests
         public IDisposable CreateScope() => null!;
     }
 
-    private class Singleton
+    private record Singleton(Defer<IFoo> Foo)
     {
-        public Singleton(Defer<IFoo> foo)
-        {
-            Foo = foo;
-        }
-
-        public Defer<IFoo> Foo { get; }
     }
 
     private interface IFoo

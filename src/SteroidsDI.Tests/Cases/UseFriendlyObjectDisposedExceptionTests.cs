@@ -79,13 +79,7 @@ Object name: 'IServiceProvider'.");
 
     private sealed class ScopedService { }
 
-    private class SingletonService
+    private record SingletonService(IDefer<ScopedService> Scoped)
     {
-        public SingletonService(IDefer<ScopedService> scoped)
-        {
-            Scoped = scoped;
-        }
-
-        public IDefer<ScopedService> Scoped { get; }
     }
 }
