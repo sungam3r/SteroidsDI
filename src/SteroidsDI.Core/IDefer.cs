@@ -6,9 +6,9 @@ namespace System;
 /// Has a more explicit/simple API compared to Func. This type must be used for
 /// those constructor arguments that require deferred calculation of T.
 /// </summary>
-/// <typeparam name="T"> Type of dependency. </typeparam>
+/// <typeparam name="T">Type of dependency.</typeparam>
 public interface IDefer<out T>
 {
-    /// <summary> Get required dependency. </summary>
+    /// <summary>Get required dependency.</summary>
     T Value { get; }
 }

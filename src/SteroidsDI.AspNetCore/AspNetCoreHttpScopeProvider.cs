@@ -9,9 +9,9 @@ namespace SteroidsDI.AspNetCore;
 /// </summary>
 public sealed class AspNetCoreHttpScopeProvider : IScopeProvider
 {
-    /// <summary> Gets scoped <see cref="IServiceProvider" /> for the current HTTP request. </summary>
-    /// <param name="rootProvider"> The root <see cref="IServiceProvider" /> object to obtain <see cref="IHttpContextAccessor"/>. </param>
-    /// <returns> The scoped <see cref="IServiceProvider" /> object or <c>null</c> if there is no current HTTP request. </returns>
+    /// <summary>Gets scoped <see cref="IServiceProvider" /> for the current HTTP request.</summary>
+    /// <param name="rootProvider">The root <see cref="IServiceProvider" /> object to obtain <see cref="IHttpContextAccessor"/>.</param>
+    /// <returns>The scoped <see cref="IServiceProvider" /> object or <c>null</c> if there is no current HTTP request.</returns>
     public IServiceProvider? GetScopedServiceProvider(IServiceProvider rootProvider)
     {
         var accessor = rootProvider.GetService<IHttpContextAccessor>();

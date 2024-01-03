@@ -9,7 +9,7 @@ namespace SteroidsDI;
 /// This class generates a factory using the specified factory interface. The factory implementation
 /// delegates resolve of objects to the appropriate <see cref="IServiceProvider" />.
 /// </summary>
-/// <remarks> See the manually written IMegaFactory_Generated example class in the test assembly. </remarks>
+/// <remarks>See the manually written IMegaFactory_Generated example class in the test assembly.</remarks>
 internal static class FactoryGenerator
 {
     private static readonly AssemblyBuilder _asmBuilder;
@@ -38,10 +38,10 @@ internal static class FactoryGenerator
         }
     }
 
-    /// <summary> Generate a type that implements the specified factory. </summary>
-    /// <param name="factoryType"> Factory type. </param>
-    /// <remarks> Works both for .NET Framework and .NET Core. </remarks>
-    /// <returns> A type that can be used as an implementation type for <paramref name="factoryType" /> in DI. </returns>
+    /// <summary>Generate a type that implements the specified factory.</summary>
+    /// <param name="factoryType">Factory type.</param>
+    /// <remarks>Works both for .NET Framework and .NET Core.</remarks>
+    /// <returns>A type that can be used as an implementation type for <paramref name="factoryType" /> in DI.</returns>
     public static Type Generate(Type factoryType)
     {
         if (factoryType == null)

@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace SteroidsDI.Tests;
 
-/// <summary> It was required to test scoped dependencies in singleton objects through Func. </summary>
+/// <summary>It was required to test scoped dependencies in singleton objects through Func.</summary>
 [DebuggerDisplay("ScopedService {Index}")]
 internal class ScopedService : IDisposable
 {

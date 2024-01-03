@@ -6,12 +6,12 @@ using SteroidsDI.Core;
 
 namespace SteroidsDI.Tests.Cases;
 
-/// <summary> Tests for checking changes to the public API. </summary>
+/// <summary>Tests for checking changes to the public API.</summary>
 [TestFixture]
 public class ApiApprovalTests
 {
-    /// <summary> Check for changes to the public APIs. </summary>
-    /// <param name="type"> The type used as a marker for the assembly whose public API change you want to check. </param>
+    /// <summary>Check for changes to the public APIs.</summary>
+    /// <param name="type">The type used as a marker for the assembly whose public API change you want to check.</param>
     [TestCase(typeof(MicrosoftScopeFactory))]
     [TestCase(typeof(IScopeProvider))]
     [TestCase(typeof(AspNetCoreHttpScopeProvider))]

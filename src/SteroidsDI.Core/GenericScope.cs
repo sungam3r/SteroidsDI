@@ -12,7 +12,7 @@ public static class GenericScope<T>
 {
     private static readonly AsyncLocal<IDisposable?> _currentScope = new();
 
-    /// <summary> Gets or sets the current scope. </summary>
+    /// <summary>Gets or sets the current scope.</summary>
     public static IDisposable? CurrentScope
     {
         get => _currentScope.Value;

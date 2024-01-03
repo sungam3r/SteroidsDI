@@ -17,7 +17,7 @@ public readonly struct Scoped<T> : IDisposable, IAsyncDisposable
     /// <summary>
     /// Initializes a new instance of the <see cref="Scoped{T}"/>.
     /// </summary>
-    /// <param name="scopeFactory"> A factory for creating scopes. </param>
+    /// <param name="scopeFactory">A factory for creating scopes.</param>
     public Scoped(IScopeFactory scopeFactory)
     {
         if (scopeFactory == null)
@@ -73,7 +73,7 @@ public readonly struct Scoped : IDisposable, IAsyncDisposable
     /// An arbitrary type that is used to create various static AsyncLocal fields. The caller may
     /// set unique closed type, thereby providing its own storage, to which only he will have access.
     /// </param>
-    /// <param name="scopeFactory"> A factory for creating scopes. </param>
+    /// <param name="scopeFactory">A factory for creating scopes.</param>
     public Scoped(Type type, IScopeFactory scopeFactory)
     {
         if (scopeFactory == null)

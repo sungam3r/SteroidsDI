@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace SteroidsDI.Tests;
 
-/// <summary> It was required to test transient dependencies in singleton objects through Func. </summary>
+/// <summary>It was required to test transient dependencies in singleton objects through Func.</summary>
 [DebuggerDisplay("TransientService {Index}")]
 internal class TransientService : IDisposable
 {

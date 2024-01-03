@@ -33,6 +33,6 @@ public sealed class ServiceProviderAdvancedOptions
     /// </summary>
     public bool AllowRootProviderResolve { get; set; }
 
-    /// <summary> For internal use only. </summary>
+    /// <summary>For internal use only.</summary>
     internal IServiceCollection? Services { get; set; }
 }

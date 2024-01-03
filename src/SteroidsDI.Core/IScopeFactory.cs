@@ -5,7 +5,7 @@ namespace SteroidsDI.Core;
 /// </summary>
 public interface IScopeFactory
 {
-    /// <summary> Create scope. </summary>
+    /// <summary>Create scope.</summary>
     /// <returns>
     /// Scope object which should be destroyed at the end of scope.
     /// It SHOULD NOT be null, but MAY be null.

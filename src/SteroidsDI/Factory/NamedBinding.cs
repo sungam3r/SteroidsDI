@@ -16,12 +16,12 @@ internal sealed class NamedBinding
         ImplementationType = implementationType;
     }
 
-    /// <summary> Gets the name of the binding. An arbitrary object, not just a string. </summary>
+    /// <summary>Gets the name of the binding. An arbitrary object, not just a string.</summary>
     public object Name { get; }
 
-    /// <summary> Gets the service type. </summary>
+    /// <summary>Gets the service type.</summary>
     public Type ServiceType { get; }
 
-    /// <summary> Gets the service implementation type. </summary>
+    /// <summary>Gets the service implementation type.</summary>
     public Type ImplementationType { get; }
 }

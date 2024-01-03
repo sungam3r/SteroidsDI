@@ -6,33 +6,33 @@ namespace SteroidsDI;
 /// Binding context for type <typeparamref name="TService" />. Currently serving named bindings,
 /// i.e. the context is only the binding name, but may add additional context in the future.
 /// </summary>
-/// <typeparam name="TService"> The service type which context is customized. </typeparam>
+/// <typeparam name="TService">The service type which context is customized.</typeparam>
 public sealed class BindingContext<TService>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BindingContext{TService}" /> class to bind to the
     /// type <typeparamref name="TService" /> inside the given <see cref="IServiceCollection" />.
     /// </summary>
-    /// <param name="services"> A collection of DI container services. </param>
+    /// <param name="services">A collection of DI container services.</param>
     public BindingContext(IServiceCollection services)
     {
         Services = services;
     }
 
-    /// <summary> A collection of DI container services. </summary>
+    /// <summary>A collection of DI container services.</summary>
     public IServiceCollection Services { get; }
 
     /// <summary>
     /// Registers a named binding from type <typeparamref name="TService" />
     /// to type <typeparamref name="TImplementation" />.
     /// </summary>
-    /// <typeparam name="TImplementation"> Implementation type. </typeparam>
+    /// <typeparam name="TImplementation">Implementation type.</typeparam>
     /// <param name="name">
     /// The name of the binding. The name of the binding can be not only a string, but an arbitrary object.
     /// This object selects the required binding in the place where there is a binding context.
     /// </param>
-    /// <param name="lifetime"> The lifetime of the dependency object. </param>
-    /// <returns> Reference to <c>this</c> to be able to call methods in a chain. </returns>
+    /// <param name="lifetime">The lifetime of the dependency object.</param>
+    /// <returns>Reference to <c>this</c> to be able to call methods in a chain.</returns>
     public BindingContext<TService> Named<TImplementation>(object name, ServiceLifetime lifetime = ServiceLifetime.Transient)
         where TImplementation : TService
     {
@@ -63,7 +63,7 @@ already has a binding on type {typeof(TImplementation)} with different character
     /// The name of the binding. The name of the binding can be not only a string, but an arbitrary object.
     /// This object selects the required binding in the place where there is a binding context.
     /// </param>
-    /// <returns> Reference to <c>this</c> to be able to call methods in a chain. </returns>
+    /// <returns>Reference to <c>this</c> to be able to call methods in a chain.</returns>
     public BindingContext<TService> Named<TImplementation>(object name)
         where TImplementation : TService
         => Named<TImplementation>(name, GetServiceLifetime());
