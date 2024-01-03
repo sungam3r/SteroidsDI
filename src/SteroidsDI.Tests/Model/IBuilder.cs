@@ -19,3 +19,8 @@ internal class SpecialBuilderOver9000Level : IBuilder
 {
     public void Build() => Console.WriteLine("!!!!!!!SpecialBuilderOver9000Level!!!!!!!");
 }
+
+internal class DefaultBuilder : IBuilder
+{
+    public void Build() => Console.WriteLine("Default");
+}

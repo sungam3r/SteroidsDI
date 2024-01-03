@@ -208,7 +208,10 @@ public void ConfigureServices(IServiceCollection services)
 Implementation for `IRepositoryFactory` will be generated at runtime.
 
 In fact, each factory method can take one parameter of an arbitrary type - string, enum, custom class, whatever.
-In this case, a _named binding_ should be specified.
+In this case, a _named binding_ should be specified. Then you may resolve required services passing the name of
+the binding into factory methods. If you want to provide a default implementation then you may configure _default
+binding_. Default binding is such a binding used in the absence of a named one. A user should set default binding
+explicitly to be able to resolve services for unregistered names.
 
 ```csharp
 public interface IRepositoryFactory
@@ -236,6 +239,11 @@ public class RandomRepository : IRepository
 ...
 }
 
+public class DefaultRepository : IRepository
+{
+...
+}
+
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddTransient<IRepository, DemoRepository>()
@@ -245,7 +253,8 @@ public void ConfigureServices(IServiceCollection services)
                 .For<IRepository>()
                     .Named<DemoRepository>("demo")
                     .Named<ProductionRepository>("prod")
-                    .Named<RandomRepository>("rnd");
+                    .Named<RandomRepository>("rnd")
+                    .Default<DefaultRepository>();
 }
 
 public class Person
@@ -262,20 +271,24 @@ public class SomeClassWithDependency
         _factory = factory;
     }
 
+    private bool SomeInterestingCondition => ...
+
     public void DoSomething(Person person)
     {
         if (person.Name == "demoUser")
-            _factory.GetPersonsRepo("demo").Save(person);
+            _factory.GetPersonsRepo("demo").Save(person); // DemoRepository
         else if (person.Name.StartsWith("tester"))
-            _factory.GetPersonsRepo("rnd").Save(person);
+            _factory.GetPersonsRepo("rnd").Save(person); // RandomRepository
+        else if (SomeInterestingCondition)
+            _factory.GetPersonsRepo("prod").Save(person); // ProductionRepository
         else
-            _factory.GetPersonsRepo("prod").Save(person);
+            _factory.GetPersonsRepo(person.Name).Save(person); // DefaultRepository
     }
 }
 ```
 
 In the example above, the `GetPersonsRepo` method will return the corresponding implementation of the `IRepository`
-interface, configured for the provided name.
+interface, configured for the provided name. For all unregistered names (including null) it will return `DefaultRepository`.
 
 ## How it works?
 

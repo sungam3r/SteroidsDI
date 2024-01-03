@@ -19,6 +19,10 @@ namespace SteroidsDI
     {
         public BindingContext(Microsoft.Extensions.DependencyInjection.IServiceCollection services) { }
         public Microsoft.Extensions.DependencyInjection.IServiceCollection Services { get; }
+        public SteroidsDI.BindingContext<TService> Default<TImplementation>()
+            where TImplementation : TService { }
+        public SteroidsDI.BindingContext<TService> Default<TImplementation>(Microsoft.Extensions.DependencyInjection.ServiceLifetime lifetime = 2)
+            where TImplementation : TService { }
         public SteroidsDI.BindingContext<TService> Named<TImplementation>(object name)
             where TImplementation : TService { }
         public SteroidsDI.BindingContext<TService> Named<TImplementation>(object name, Microsoft.Extensions.DependencyInjection.ServiceLifetime lifetime = 2)

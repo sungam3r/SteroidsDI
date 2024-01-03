@@ -7,10 +7,22 @@ internal static class Resolver
 {
     internal static TService ResolveByNamedBinding<TService>(this IServiceProvider provider, object name, IEnumerable<NamedBinding> bindings, ServiceProviderAdvancedOptions options)
     {
-        var binding = bindings.Where(b => b.ServiceType == typeof(TService)).SingleOrDefault(b => b.Name.Equals(name));
+        // First look for particular named binding, then look for default binding.
+        // Note that default binding MAY be found on the first step but it does not matter.
+        var binding = bindings.Where(b => b.ServiceType == typeof(TService)).SingleOrDefault(b => Equals(b.Name, name))
+                   ?? bindings.Where(b => b.ServiceType == typeof(TService)).SingleOrDefault(b => b.Name is null);
+
         return binding == null
-            ? throw new InvalidOperationException($"Destination type not found for named binding '{name}' to type '{typeof(TService)}'. Verify that a named binding is specified in the DI container.")
+            ? throw new InvalidOperationException($"Destination type not found for named binding '{name}' to type '{typeof(TService)}' and no default binding exists. Verify that either a named binding or default binding is specified in the DI container.")
             : (TService)provider.Resolve(binding.ImplementationType, options);
+
+        bool Equals(object? first, object? second)
+        {
+            if (first is null)
+                return second is null;
+
+            return first.Equals(second);
+        }
     }
 
     internal static TService Resolve<TService>(this IServiceProvider rootProvider, ServiceProviderAdvancedOptions options)
