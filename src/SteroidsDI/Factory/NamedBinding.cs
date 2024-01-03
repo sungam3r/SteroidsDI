@@ -7,7 +7,7 @@ namespace SteroidsDI;
 /// type <see cref="ImplementationType" /> in the required context.
 /// </summary>
 [DebuggerDisplay("{Name}: {ServiceType.Name} -> {ImplementationType.Name}")]
-internal sealed class NamedBinding
+internal sealed record NamedBinding
 {
     public NamedBinding(object? name, Type serviceType, Type implementationType)
     {

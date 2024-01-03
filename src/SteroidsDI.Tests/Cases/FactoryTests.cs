@@ -22,6 +22,49 @@ Use the 'Named'/'Default' overloads with explicit Lifetime or first register 'St
     }
 
     [Test]
+    public void Named_Binding_Should_Allow_The_Same_Type_With_Different_Names()
+    {
+        var services = new ServiceCollection()
+            .AddTransient<IBuilder, Builder>()
+            .For<IBuilder>()
+                .Named<SpecialBuilder>("aaa")
+                .Named<SpecialBuilder>("bbb")
+                .Named<SpecialBuilder>("ccc")
+            .Services;
+        services.Count.ShouldBe(5);
+    }
+
+    [Test]
+    public void Default_Binding_Should_Allow_Redeclaration()
+    {
+        var services = new ServiceCollection()
+            .AddTransient<IBuilder, Builder>()
+            .For<IBuilder>()
+                .Default<SpecialBuilder>()
+                .Default<SpecialBuilder>()
+            .Services;
+        services.Count.ShouldBe(3);
+        var def = (NamedBinding)services.Last().ImplementationInstance!;
+        def.Name.ShouldBeNull();
+        def.ImplementationType.ShouldBe(typeof(SpecialBuilder));
+    }
+
+    [Test]
+    public void Default_Binding_Should_Allow_Replace()
+    {
+        var services = new ServiceCollection()
+            .AddTransient<IBuilder, Builder>()
+            .For<IBuilder>()
+                .Default<SpecialBuilder>()
+                .Default<SpecialBuilderOver9000Level>()
+            .Services;
+        services.Count.ShouldBe(4);
+        var def = (NamedBinding)services[2].ImplementationInstance!;
+        def.Name.ShouldBeNull();
+        def.ImplementationType.ShouldBe(typeof(SpecialBuilderOver9000Level));
+    }
+
+    [Test]
     [TestCase(true)]
     [TestCase(false)]
     public void Factory_And_Named_Bindings_Should_Work(bool useDefault)
