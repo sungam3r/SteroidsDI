@@ -5,12 +5,28 @@ namespace SteroidsDI;
 
 internal static class Resolver
 {
-    internal static TService ResolveByNamedBinding<TService>(this IServiceProvider provider, object name, IEnumerable<NamedBinding> bindings, ServiceProviderAdvancedOptions options)
+    internal static TService ResolveByNamedBinding<TService>(this IServiceProvider provider, object name, List<NamedBinding> bindings, ServiceProviderAdvancedOptions options)
     {
-        // First look for particular named binding, then look for default binding.
-        // Note that default binding MAY be found on the first step but it does not matter.
-        var binding = bindings.Where(b => b.ServiceType == typeof(TService)).SingleOrDefault(b => Equals(b.Name, name))
-                   ?? bindings.Where(b => b.ServiceType == typeof(TService)).SingleOrDefault(b => b.Name is null);
+        // Look for particular named binding or default binding.
+        NamedBinding? binding = null;
+        NamedBinding? def = null;
+        foreach (var b in bindings)
+        {
+            if (b.ServiceType == typeof(TService))
+            {
+                if (Equals(b.Name, name))
+                {
+                    binding = b;
+                    break;
+                }
+                else if (b.Name == null)
+                {
+                    def = b;
+                }
+            }
+        }
+
+        binding ??= def;
 
         return binding == null
             ? throw new InvalidOperationException($"Destination type not found for named binding '{name}' to type '{typeof(TService)}' and no default binding exists. Verify that either a named binding or default binding is specified in the DI container.")
