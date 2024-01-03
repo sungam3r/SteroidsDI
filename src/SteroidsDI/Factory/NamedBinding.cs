@@ -7,7 +7,7 @@ namespace SteroidsDI;
 /// type <see cref="ImplementationType" /> in the required context.
 /// </summary>
 [DebuggerDisplay("{Name}: {ServiceType.Name} -> {ImplementationType.Name}")]
-internal sealed record NamedBinding
+internal sealed class NamedBinding
 {
     /// <summary> Name for default bindings. </summary>
     internal static object DefaultName = new();
