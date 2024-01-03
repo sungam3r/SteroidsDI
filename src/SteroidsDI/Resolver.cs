@@ -7,37 +7,30 @@ internal static class Resolver
 {
     internal static TService ResolveByNamedBinding<TService>(this IServiceProvider provider, object name, List<NamedBinding> bindings, ServiceProviderAdvancedOptions options)
     {
-        // Look for particular named binding or default binding.
-        NamedBinding? binding = null;
-        NamedBinding? def = null;
-        foreach (var b in bindings)
-        {
-            if (b.ServiceType == typeof(TService))
-            {
-                if (Equals(b.Name, name))
-                {
-                    binding = b;
-                    break;
-                }
-                else if (b.Name == null)
-                {
-                    def = b;
-                }
-            }
-        }
-
-        binding ??= def;
+        var binding = FindBinding(name, bindings);
 
         return binding == null
             ? throw new InvalidOperationException($"Destination type not found for named binding '{name}' to type '{typeof(TService)}' and no default binding exists. Verify that either a named binding or default binding is specified in the DI container.")
             : (TService)provider.Resolve(binding.ImplementationType, options);
 
-        bool Equals(object? first, object? second)
+        // Look for particular named binding or default binding.
+        static NamedBinding? FindBinding(object name, List<NamedBinding> bindings)
         {
-            if (first is null)
-                return second is null;
+            NamedBinding? binding = null;
 
-            return first.Equals(second);
+            foreach (var namedBinding in bindings)
+            {
+                if (namedBinding.ServiceType != typeof(TService))
+                    continue;
+
+                if (namedBinding.Name.Equals(name))
+                    return namedBinding;
+
+                if (namedBinding.Name.Equals(NamedBinding.DefaultName))
+                    binding = namedBinding;
+            }
+
+            return binding;
         }
     }
 

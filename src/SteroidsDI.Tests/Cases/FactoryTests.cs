@@ -45,7 +45,7 @@ Use the 'Named'/'Default' overloads with explicit Lifetime or first register 'St
             .Services;
         services.Count.ShouldBe(3);
         var def = (NamedBinding)services.Last().ImplementationInstance!;
-        def.Name.ShouldBeNull();
+        def.Name.ShouldBe(NamedBinding.DefaultName);
         def.ImplementationType.ShouldBe(typeof(SpecialBuilder));
     }
 
@@ -60,7 +60,7 @@ Use the 'Named'/'Default' overloads with explicit Lifetime or first register 'St
             .Services;
         services.Count.ShouldBe(4);
         var def = (NamedBinding)services[2].ImplementationInstance!;
-        def.Name.ShouldBeNull();
+        def.Name.ShouldBe(NamedBinding.DefaultName);
         def.ImplementationType.ShouldBe(typeof(SpecialBuilderOver9000Level));
     }
 

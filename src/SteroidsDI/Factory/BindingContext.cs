@@ -90,11 +90,11 @@ already has a binding on type {typeof(TImplementation)} with different character
         if (existing == null)
             Services.Add(new ServiceDescriptor(typeof(TImplementation), typeof(TImplementation), lifetime));
 
-        var def = new NamedBinding(null, typeof(TService), typeof(TImplementation));
+        var def = new NamedBinding(NamedBinding.DefaultName, typeof(TService), typeof(TImplementation));
         var descriptor = ServiceDescriptor.Singleton(def);
         for (int i = 0; i < Services.Count; ++i)
         {
-            if (Services[i].ImplementationInstance is NamedBinding named && named.Name is null && named.ServiceType == typeof(TService))
+            if (Services[i].ImplementationInstance is NamedBinding named && named.Name == NamedBinding.DefaultName && named.ServiceType == typeof(TService))
             {
                 Services[i] = descriptor;
                 return this;
