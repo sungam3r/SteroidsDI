@@ -33,7 +33,7 @@ public sealed class BindingContext<TService>
     /// </param>
     /// <param name="lifetime">The lifetime of the dependency object.</param>
     /// <returns>Reference to <c>this</c> to be able to call methods in a chain.</returns>
-    public BindingContext<TService> Named<TImplementation>(object name, ServiceLifetime lifetime = ServiceLifetime.Transient)
+    public BindingContext<TService> Named<TImplementation>(object name, ServiceLifetime lifetime)
         where TImplementation : TService
     {
         if (name == null)
@@ -77,7 +77,7 @@ already has a binding on type {typeof(TImplementation)} with different character
     /// <typeparam name="TImplementation">Implementation type.</typeparam>
     /// <param name="lifetime">The lifetime of the dependency object.</param>
     /// <returns>Reference to <c>this</c> to be able to call methods in a chain.</returns>
-    public BindingContext<TService> Default<TImplementation>(ServiceLifetime lifetime = ServiceLifetime.Transient)
+    public BindingContext<TService> Default<TImplementation>(ServiceLifetime lifetime)
          where TImplementation : TService
     {
         var existing = Services.SingleOrDefault(descriptor => descriptor.ServiceType == typeof(TImplementation));
