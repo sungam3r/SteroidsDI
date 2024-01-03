@@ -24,14 +24,21 @@ Use the 'Named'/'Default' overloads with explicit Lifetime or first register 'St
     [Test]
     public void Named_Binding_Should_Allow_The_Same_Type_With_Different_Names()
     {
+        // not specific to this test - just add some additional registration for other type to increase code coverage
         var services = new ServiceCollection()
-            .AddTransient<IBuilder, Builder>()
+            .For<IComparable>()
+                .Named<string>("xxx", ServiceLifetime.Singleton)
+            .Services;
+
+        services.AddTransient<IBuilder, Builder>()
             .For<IBuilder>()
                 .Named<SpecialBuilder>("aaa")
                 .Named<SpecialBuilder>("bbb")
                 .Named<SpecialBuilder>("ccc")
-            .Services;
-        services.Count.ShouldBe(5);
+                .Named<SpecialBuilder>("ddd")
+                .Named<SpecialBuilder>("eee");
+
+        services.Count.ShouldBe(9);
     }
 
     [Test]
