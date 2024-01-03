@@ -17,6 +17,8 @@ public class FactoryTests
         var context = services.For<IBuilder>();
         Should.Throw<InvalidOperationException>(() => context.Named<SpecialBuilder>("xxx")).Message.ShouldBe(@"The DI container does not register type 'SteroidsDI.Tests.IBuilder', so it is not possible to determine the value of Lifetime.
 Use the 'Named'/'Default' overloads with explicit Lifetime or first register 'SteroidsDI.Tests.IBuilder' in the DI container.");
+        Should.Throw<InvalidOperationException>(() => context.Default<SpecialBuilder>()).Message.ShouldBe(@"The DI container does not register type 'SteroidsDI.Tests.IBuilder', so it is not possible to determine the value of Lifetime.
+Use the 'Named'/'Default' overloads with explicit Lifetime or first register 'SteroidsDI.Tests.IBuilder' in the DI container.");
     }
 
     [Test]
