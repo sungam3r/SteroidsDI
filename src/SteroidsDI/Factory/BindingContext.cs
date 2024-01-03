@@ -58,7 +58,7 @@ already has a binding on type {typeof(TImplementation)} with different character
     /// Registers a named binding from type <typeparamref name="TService" /> to type <typeparamref name="TImplementation" />
     /// with a lifetime equal to the lifetime of the object from the default binding.
     /// </summary>
-    /// <typeparam name="TImplementation">Implementation type. </typeparam>
+    /// <typeparam name="TImplementation">Implementation type.</typeparam>
     /// <param name="name">
     /// The name of the binding. The name of the binding can be not only a string, but an arbitrary object.
     /// This object selects the required binding in the place where there is a binding context.

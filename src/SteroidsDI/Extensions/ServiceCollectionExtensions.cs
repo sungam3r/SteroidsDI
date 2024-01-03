@@ -24,7 +24,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">A collection of DI container services.</param>
     /// <param name="factoryType">Factory type.</param>
-    /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
+    /// <returns>Reference to the passed object <paramref name="services" /> to be able to call methods in a chain.</returns>
     public static IServiceCollection AddFactory(this IServiceCollection services, Type factoryType)
     {
         if (factoryType == null)
@@ -41,7 +41,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <typeparam name="TFactory">Factory type.</typeparam>
     /// <param name="services">A collection of DI container services.</param>
-    /// <returns> Reference to the passed object <paramref name="services" /> to be able to call methods in a chain. </returns>
+    /// <returns>Reference to the passed object <paramref name="services" /> to be able to call methods in a chain.</returns>
     public static IServiceCollection AddFactory<TFactory>(this IServiceCollection services)
         => services.AddAdvancedOptions().AddFactory(typeof(TFactory));
 
