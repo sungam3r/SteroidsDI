@@ -1,7 +1,7 @@
 namespace SteroidsDI.Tests;
 
-/// <summary>An factory for which implementation is generated in runtime.</summary>
-public interface IMegaFactory
+/// <summary>A factory for which implementation is generated in runtime.</summary>
+public interface INonGenericFactory
 {
     IBuilder AAA();
 

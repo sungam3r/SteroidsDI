@@ -3,13 +3,13 @@ using Microsoft.Extensions.Options;
 namespace SteroidsDI.Tests;
 
 /// <summary>This is an example of a generated factory.</summary>
-internal sealed class IMegaFactory_Generated : IMegaFactory
+internal sealed class INonGenericFactory_Generated : INonGenericFactory
 {
     private readonly IServiceProvider _provider;
     private readonly List<NamedBinding> _bindings; // all bindings
     private readonly ServiceProviderAdvancedOptions _options;
 
-    public IMegaFactory_Generated(IServiceProvider provider, IEnumerable<NamedBinding> bindings, IOptions<ServiceProviderAdvancedOptions> options)
+    public INonGenericFactory_Generated(IServiceProvider provider, IEnumerable<NamedBinding> bindings, IOptions<ServiceProviderAdvancedOptions> options)
     {
         _provider = provider;
         _bindings = bindings.ToList();

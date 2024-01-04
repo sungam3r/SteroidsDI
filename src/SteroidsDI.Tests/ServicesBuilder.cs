@@ -16,7 +16,7 @@ internal class ServicesBuilder
             .AddTransient<TransientService>().AddFunc<TransientService>()
 
             .AddSingleton<Controller>()
-            .AddFactory<IMegaFactory>()
+            .AddFactory<INonGenericFactory>()
             .AddFactory<IGenericFactory<IBuilder, INotifier>>()
             .AddTransient<IBuilder, Builder>()
             .AddSingleton<INotifier, Notifier>();

@@ -16,7 +16,7 @@ public static class ServiceCollectionExtensions
     /// <param name="services">A collection of DI container services.</param>
     /// <returns>Binding context.</returns>
     public static BindingContext<TService> For<TService>(this IServiceCollection services)
-        where TService : class => new BindingContext<TService>(services);
+        where TService : class => new(services);
 
     /// <summary>
     /// Adds the specified type <paramref name="factoryType" /> to the DI container

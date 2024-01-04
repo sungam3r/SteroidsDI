@@ -6,15 +6,15 @@ internal class Controller : IDisposable
 {
     public Controller(
         IScopeFactory scopeFactory,
-        IMegaFactory factory,
-        IGenericFactory<IBuilder, INotifier> generic,
+        INonGenericFactory nonGenericFactory,
+        IGenericFactory<IBuilder, INotifier> genericFactory,
         Func<ScopedService> scopedFunc,
         Func<TransientService> transientFunc,
         Defer<ScopedService> scopedDefer,
         Defer<TransientService> transientDefer)
     {
-        Factory = factory;
-        Generic = generic;
+        NonGenericFactory = nonGenericFactory;
+        GenericFactory = genericFactory;
         ScopedFunc = scopedFunc;
         ScopedDefer = scopedDefer;
         TransientFunc = transientFunc;
@@ -27,9 +27,9 @@ internal class Controller : IDisposable
         }
     }
 
-    public IMegaFactory Factory { get; }
+    public INonGenericFactory NonGenericFactory { get; }
 
-    public IGenericFactory<IBuilder, INotifier> Generic { get; set; }
+    public IGenericFactory<IBuilder, INotifier> GenericFactory { get; set; }
 
     public Func<ScopedService> ScopedFunc { get; set; }
 
