@@ -17,13 +17,13 @@ public class ApiApprovalTests
     [TestCase(typeof(AspNetCoreHttpScopeProvider))]
     public void PublicApi(Type type)
     {
-        string publicApi = type.Assembly.GeneratePublicApi(new ApiGeneratorOptions
+        string publicApi = type.Assembly.GeneratePublicApi(new()
         {
             IncludeAssemblyAttributes = false,
             AllowNamespacePrefixes = ["System", "Microsoft.Extensions.DependencyInjection"],
             ExcludeAttributes = ["System.Diagnostics.DebuggerDisplayAttribute"],
         });
 
-        publicApi.ShouldMatchApproved(options => options!.WithFilenameGenerator((testMethodInfo, discriminator, fileType, fileExtension) => $"{type.Assembly.GetName().Name!}.{fileType}.{fileExtension}"));
+        publicApi.ShouldMatchApproved(options => options.NoDiff().WithFilenameGenerator((testMethodInfo, discriminator, fileType, fileExtension) => $"{type.Assembly.GetName().Name!}.{fileType}.{fileExtension}"));
     }
 }

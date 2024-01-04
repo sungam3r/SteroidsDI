@@ -33,7 +33,7 @@ public sealed class BindingContext<TService>
     /// </param>
     /// <param name="lifetime">The lifetime of the dependency object.</param>
     /// <returns>Reference to <c>this</c> to be able to call methods in a chain.</returns>
-    public BindingContext<TService> Named<TImplementation>(object name, ServiceLifetime lifetime = ServiceLifetime.Transient)
+    public BindingContext<TService> Named<TImplementation>(object name, ServiceLifetime lifetime)
         where TImplementation : TService
     {
         if (name == null)
@@ -56,7 +56,7 @@ already has a binding on type {typeof(TImplementation)} with different character
 
     /// <summary>
     /// Registers a named binding from type <typeparamref name="TService" /> to type <typeparamref name="TImplementation" />
-    /// with a lifetime equal to the lifetime of the object from the default binding.
+    /// with a lifetime equal to the lifetime of <typeparamref name="TService"/>.
     /// </summary>
     /// <typeparam name="TImplementation">Implementation type.</typeparam>
     /// <param name="name">
@@ -68,10 +68,59 @@ already has a binding on type {typeof(TImplementation)} with different character
         where TImplementation : TService
         => Named<TImplementation>(name, GetServiceLifetime());
 
+    /// <summary>
+    /// Registers a default binding from type <typeparamref name="TService" />
+    /// to type <typeparamref name="TImplementation" />. Default binding is such
+    /// a binding used in the absence of a named one. A user should set default
+    /// binding explicitly to be able to resolve services for unregistered names.
+    /// </summary>
+    /// <typeparam name="TImplementation">Implementation type.</typeparam>
+    /// <param name="lifetime">The lifetime of the dependency object.</param>
+    /// <returns>Reference to <c>this</c> to be able to call methods in a chain.</returns>
+    public BindingContext<TService> Default<TImplementation>(ServiceLifetime lifetime)
+         where TImplementation : TService
+    {
+        var existing = Services.SingleOrDefault(descriptor => descriptor.ServiceType == typeof(TImplementation));
+        if (existing != null && (existing.ImplementationType != typeof(TImplementation) || existing.Lifetime != lifetime || existing.ImplementationFactory != null || existing.ImplementationInstance != null))
+        {
+            throw new InvalidOperationException($@"It is not possible to add a default binding for type {typeof(TService)}, because the DI container
+already has a binding on type {typeof(TImplementation)} with different characteristics. This is a limitation of the current implementation.");
+        }
+
+        if (existing == null)
+            Services.Add(new ServiceDescriptor(typeof(TImplementation), typeof(TImplementation), lifetime));
+
+        var def = new NamedBinding(NamedBinding.DefaultName, typeof(TService), typeof(TImplementation));
+        var descriptor = ServiceDescriptor.Singleton(def);
+        for (int i = 0; i < Services.Count; ++i)
+        {
+            if (Services[i].ImplementationInstance is NamedBinding named && named.Name == NamedBinding.DefaultName && named.ServiceType == typeof(TService))
+            {
+                Services[i] = descriptor;
+                return this;
+            }
+        }
+
+        Services.Add(descriptor);
+
+        return this;
+    }
+
+    /// <summary>
+    /// Registers a default binding from type <typeparamref name="TService" /> to type <typeparamref name="TImplementation" />
+    /// with a lifetime equal to the lifetime of the object from the default binding. Default binding is such a binding used in
+    /// the absence of a named one. A user should set default binding explicitly to be able to resolve services for unregistered names.
+    /// </summary>
+    /// <typeparam name="TImplementation">Implementation type.</typeparam>
+    /// <returns>Reference to <c>this</c> to be able to call methods in a chain.</returns>
+    public BindingContext<TService> Default<TImplementation>()
+       where TImplementation : TService
+       => Default<TImplementation>(GetServiceLifetime());
+
     private ServiceLifetime GetServiceLifetime()
     {
         return Services.FirstOrDefault(s => s.ServiceType == typeof(TService))?.Lifetime
-            ?? throw new InvalidOperationException($@"The DI container does not have a default binding for the type '{typeof(TService)}', so it is not possible to determine the value of Lifetime.
-Use the 'Named' overload with explicit Lifetime or first set the default binding in the DI container.");
+            ?? throw new InvalidOperationException($@"The DI container does not register type '{typeof(TService)}', so it is not possible to determine the value of Lifetime.
+Use the 'Named'/'Default' overloads with explicit Lifetime or first register '{typeof(TService)}' in the DI container.");
     }
 }

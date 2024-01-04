@@ -9,6 +9,9 @@ namespace SteroidsDI;
 [DebuggerDisplay("{Name}: {ServiceType.Name} -> {ImplementationType.Name}")]
 internal sealed class NamedBinding
 {
+    /// <summary> Name for default bindings. </summary>
+    internal static readonly object DefaultName = new();
+
     public NamedBinding(object name, Type serviceType, Type implementationType)
     {
         Name = name;
@@ -16,7 +19,12 @@ internal sealed class NamedBinding
         ImplementationType = implementationType;
     }
 
-    /// <summary>Gets the name of the binding. An arbitrary object, not just a string.</summary>
+    /// <summary>
+    /// Gets the name of the binding. An arbitrary object, not just a string.
+    /// <see cref="DefaultName"/> in case of default binding. Default binding is
+    /// such a binding used in the absence of a named one. A user should set
+    /// default binding explicitly to be able to resolve services for unregistered names.
+    /// </summary>
     public object Name { get; }
 
     /// <summary>Gets the service type.</summary>
