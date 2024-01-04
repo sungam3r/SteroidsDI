@@ -10,7 +10,7 @@ namespace SteroidsDI;
 internal sealed class NamedBinding
 {
     /// <summary> Name for default bindings. </summary>
-    internal static object DefaultName = new();
+    internal static readonly object DefaultName = new();
 
     public NamedBinding(object name, Type serviceType, Type implementationType)
     {

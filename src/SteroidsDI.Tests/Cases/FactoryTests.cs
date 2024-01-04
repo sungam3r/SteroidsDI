@@ -24,21 +24,17 @@ Use the 'Named'/'Default' overloads with explicit Lifetime or first register 'St
     [Test]
     public void Named_Binding_Should_Allow_The_Same_Type_With_Different_Names()
     {
-        // not specific to this test - just add some additional registration for other type to increase code coverage
         var services = new ServiceCollection()
-            .For<IComparable>()
-                .Named<string>("xxx", ServiceLifetime.Singleton)
-            .Services;
-
-        services.AddTransient<IBuilder, Builder>()
+            .AddTransient<IBuilder, Builder>()
             .For<IBuilder>()
                 .Named<SpecialBuilder>("aaa")
                 .Named<SpecialBuilder>("bbb")
                 .Named<SpecialBuilder>("ccc")
                 .Named<SpecialBuilder>("ddd")
-                .Named<SpecialBuilder>("eee");
+                .Named<SpecialBuilder>("eee")
+                .Services;
 
-        services.Count.ShouldBe(9);
+        services.Count.ShouldBe(7);
     }
 
     [Test]
@@ -76,7 +72,14 @@ Use the 'Named'/'Default' overloads with explicit Lifetime or first register 'St
     [TestCase(false)]
     public void Factory_And_Named_Bindings_Should_Work(bool useDefault)
     {
-        using var provider = ServicesBuilder.BuildDefault(addDefalt: useDefault).BuildServiceProvider(validateScopes: true);
+        var services = ServicesBuilder.BuildDefault(addDefalt: useDefault);
+
+        // not specific to this test - just add some additional registration for another type and place it in front of other registrations to increase code coverage
+        services.For<IComparable>().Named<string>("some", ServiceLifetime.Singleton);
+        services.Insert(0, services.Last());
+        services.RemoveAt(services.Count - 1);
+
+        using var provider = services.BuildServiceProvider(validateScopes: true);
         using var scope = provider.CreateScope();
 
         GenericScope<ServicesBuilder>.CurrentScope = scope;
