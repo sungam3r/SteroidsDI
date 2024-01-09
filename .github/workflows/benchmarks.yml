@@ -37,7 +37,6 @@ jobs:
           tool: 'benchmarkdotnet'
           output-file-path: src/Benchmarks/BenchmarkDotNet.Artifacts/results/Combined.Benchmarks.json
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          auto-push: true
           alert-threshold: '101%'
           comment-on-alert: true
           fail-on-alert: true
