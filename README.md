@@ -430,3 +430,7 @@ await using (new Scoped<SomeClass>(scopeFactory)) // Scoped class supports IAsyn
 
 Also see [ScopedTestBase](src/SteroidsDI.Tests/Cases/ScopedTestBase.cs) and [ScopedTestDerived](src/SteroidsDI.Tests/Cases/ScopedTestDerived.cs)
 for more info. This example shows how you can add scope support to all unit tests.
+
+## Benchmarks
+
+The results are available [here](https://sungam3r.github.io/SteroidsDI/dev/bench/).
