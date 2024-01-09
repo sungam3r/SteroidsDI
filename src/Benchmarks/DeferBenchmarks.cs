@@ -28,6 +28,8 @@ public class DeferBenchmarks
     public void ResolveDefer()
     {
         var defer = _provider.GetRequiredService<Defer<Dependency>>();
+        for (int i = 0; i < 100; ++i)
+            ++i;
         _ = defer.Value;
     }
 

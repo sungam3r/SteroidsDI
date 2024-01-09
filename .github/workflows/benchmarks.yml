@@ -40,8 +40,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           alert-threshold: '101%'
           comment-on-alert: true
-      - name: AAA
-        run: echo 'https://$GITHUB_REPOSITORY_OWNER@sss' && echo '${{ github.repository }} or ${{ github.repository_owner }}'
       - name: Push benchmarks results
         if: github.event_name != 'pull_request'
-        run: git push 'https://$GITHUB_REPOSITORY_OWNER:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git' gh-pages:gh-pages
+        run: git push 'https://${{ github.repository_owner }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git' gh-pages:gh-pages
