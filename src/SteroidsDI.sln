@@ -40,6 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{0D490189-8C58-4B71-AB8D-5FBE973D0429}"
 	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\benchmarks.yml = ..\.github\workflows\benchmarks.yml
 		..\.github\workflows\codeql-analysis.yml = ..\.github\workflows\codeql-analysis.yml
 		..\.github\workflows\label.yml = ..\.github\workflows\label.yml
 		..\.github\workflows\publish-preview.yml = ..\.github\workflows\publish-preview.yml
@@ -47,6 +48,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		..\.github\workflows\stale.yml = ..\.github\workflows\stale.yml
 		..\.github\workflows\test.yml = ..\.github\workflows\test.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarks", "Benchmarks\Benchmarks.csproj", "{3A3F37A4-27BB-4A35-80A3-1973DDE6586B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,6 +77,10 @@ Global
 		{AAF4F983-A2CF-4E5F-9862-CAB7EC942850}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAF4F983-A2CF-4E5F-9862-CAB7EC942850}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAF4F983-A2CF-4E5F-9862-CAB7EC942850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A3F37A4-27BB-4A35-80A3-1973DDE6586B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A3F37A4-27BB-4A35-80A3-1973DDE6586B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A3F37A4-27BB-4A35-80A3-1973DDE6586B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A3F37A4-27BB-4A35-80A3-1973DDE6586B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
