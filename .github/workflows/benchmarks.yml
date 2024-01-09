@@ -37,6 +37,7 @@ jobs:
           name: SteroidsDI Benchmarks
           tool: 'benchmarkdotnet'
           output-file-path: src/Benchmarks/BenchmarkDotNet.Artifacts/results/Combined.Benchmarks.json
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           alert-threshold: '101%'
           comment-on-alert: true
           fail-on-alert: true
@@ -44,4 +45,4 @@ jobs:
         run: echo 'https://$GITHUB_REPOSITORY_OWNER@sss'
       - name: Push benchmarks results
         if: github.event_name != 'pull_request'
-        run: git push 'https://sungam3r:${{ secrets.GITHUB_TOKEN }}@github.com/sungam3r/SteroidsDI.git' gh-pages:gh-pages
+        run: git push 'https://$GITHUB_REPOSITORY_OWNER:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git' gh-pages:gh-pages
