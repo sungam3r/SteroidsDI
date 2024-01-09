@@ -23,11 +23,11 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Run benchmarks
-        working-directory: Benchmarks
+        working-directory: src/Benchmarks
         run: dotnet run -c Release --exporters json --filter '*'
 
       - name: Combine benchmarks results
-        working-directory: Benchmarks
+        working-directory: src/Benchmarks
         run: dotnet tool install -g dotnet-script && dotnet script combine-bechmarks.csx
 
       - name: Store benchmarks results
@@ -35,7 +35,7 @@ jobs:
         with:
           name: SteroidsDI Benchmarks
           tool: 'benchmarkdotnet'
-          output-file-path: Benchmarks/BenchmarkDotNet.Artifacts/results/Combined.Benchmarks.json
+          output-file-path: src/Benchmarks/BenchmarkDotNet.Artifacts/results/Combined.Benchmarks.json
           github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true
           alert-threshold: '101%'
