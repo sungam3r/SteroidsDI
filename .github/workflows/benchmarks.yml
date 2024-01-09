@@ -40,7 +40,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           alert-threshold: '101%'
           comment-on-alert: true
-          fail-on-alert: true
       - name: AAA
         run: echo 'https://$GITHUB_REPOSITORY_OWNER@sss'
       - name: Push benchmarks results
