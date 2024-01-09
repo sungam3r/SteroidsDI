@@ -1,4 +1,3 @@
-# https://github.com/benchmark-action/github-action-benchmark
 name: Continuous benchmarking
 on:
   pull_request:
