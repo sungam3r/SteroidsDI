@@ -1,3 +1,4 @@
+# https://github.com/benchmark-action/github-action-benchmark
 name: Continuous benchmarking
 on:
   pull_request:
@@ -40,7 +41,7 @@ jobs:
           comment-on-alert: true
           fail-on-alert: true
       - name: AAA
-        run: echo 'https://${{ GITHUB_REPOSITORY_OWNER }}@sss'
+        run: echo 'https://$GITHUB_REPOSITORY_OWNER@sss'
       - name: Push benchmarks results
         if: github.event_name != 'pull_request'
         run: git push 'https://sungam3r:${{ secrets.GITHUB_TOKEN }}@github.com/sungam3r/SteroidsDI.git' gh-pages:gh-pages
