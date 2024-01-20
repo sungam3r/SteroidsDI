@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1705733721397,
+  "lastUpdate": 1705737973187,
   "repoUrl": "https://github.com/sungam3r/SteroidsDI",
   "entries": {
     "SteroidsDI Benchmarks": [
@@ -108,6 +108,42 @@ window.BENCHMARK_DATA = {
             "value": 135.8630658944448,
             "unit": "ns",
             "range": "± 0.9498962127888863"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "sungam3r@yandex.ru",
+            "name": "Ivan Maximov",
+            "username": "sungam3r"
+          },
+          "committer": {
+            "email": "sungam3r@yandex.ru",
+            "name": "Ivan Maximov",
+            "username": "sungam3r"
+          },
+          "distinct": true,
+          "id": "eb536386df28adfaeca315b7f366acc5ea8ce5bb",
+          "message": "Fix readme packaging",
+          "timestamp": "2024-01-20T11:04:30+03:00",
+          "tree_id": "f423d0f728ca20eff0a8b93cb50116e3711ec738",
+          "url": "https://github.com/sungam3r/SteroidsDI/commit/eb536386df28adfaeca315b7f366acc5ea8ce5bb"
+        },
+        "date": 1705737972530,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveDefer",
+            "value": 113.41120579151007,
+            "unit": "ns",
+            "range": "± 0.42098229416953575"
+          },
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveIDefer",
+            "value": 111.18513837030956,
+            "unit": "ns",
+            "range": "± 0.33565628131289804"
           }
         ]
       }
