@@ -4,7 +4,7 @@
 
 ![License](https://img.shields.io/github/license/sungam3r/SteroidsDI)
 
-[![codecov](https://codecov.io/gh/sungam3r/SteroidsDI/branch/master/graph/badge.svg?token=0ZRHIUEQM4)](https://codecov.io/gh/sungam3r/SteroidsDI)
+[![codecov](https://codecov.io/gh/sungam3r/SteroidsDI/graph/badge.svg?token=0ZRHIUEQM4)](https://codecov.io/gh/sungam3r/SteroidsDI)
 [![Nuget](https://img.shields.io/nuget/dt/SteroidsDI.Core)](https://www.nuget.org/packages/SteroidsDI.Core)
 [![Nuget](https://img.shields.io/nuget/v/SteroidsDI.Core)](https://www.nuget.org/packages/SteroidsDI.Core)
 
