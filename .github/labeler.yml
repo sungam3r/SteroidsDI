@@ -1,14 +1,22 @@
 tests:
-  - src/SteroidsDI.Tests/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - src/SteroidsDI.Tests/**/*
 
 CI:
-  - .github/workflows/**/*
-  - .github/dependabot.yml
-  - .github/codecov.yml
-  - .github/labeler.yml
+- changed-files:
+  - any-glob-to-any-file:
+    - .github/workflows/**/*
+    - .github/dependabot.yml
+    - .github/codecov.yml
+    - .github/labeler.yml
 
 code style:
-  - .editorconfig
+- changed-files:
+  - any-glob-to-any-file:
+    - .editorconfig
 
 documentation:
-  - README.md
+- changed-files:
+  - any-glob-to-any-file:
+    - README.md
