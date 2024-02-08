@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1705914090707,
+  "lastUpdate": 1707368221623,
   "repoUrl": "https://github.com/sungam3r/SteroidsDI",
   "entries": {
     "SteroidsDI Benchmarks": [
@@ -216,6 +216,42 @@ window.BENCHMARK_DATA = {
             "value": 112.96826779842377,
             "unit": "ns",
             "range": "± 0.35603080621561783"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d2ecfbb671877180939ab95edfbe1e18a0609599",
+          "message": "Bump Microsoft.NET.Test.Sdk from 17.8.0 to 17.9.0 (#158)\n\nBumps [Microsoft.NET.Test.Sdk](https://github.com/microsoft/vstest) from 17.8.0 to 17.9.0.\r\n- [Release notes](https://github.com/microsoft/vstest/releases)\r\n- [Changelog](https://github.com/microsoft/vstest/blob/main/docs/releases.md)\r\n- [Commits](https://github.com/microsoft/vstest/compare/v17.8.0...v17.9.0)\r\n\r\n---\r\nupdated-dependencies:\r\n- dependency-name: Microsoft.NET.Test.Sdk\r\n  dependency-type: direct:production\r\n  update-type: version-update:semver-minor\r\n...\r\n\r\nSigned-off-by: dependabot[bot] <support@github.com>\r\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2024-02-08T07:55:08+03:00",
+          "tree_id": "72f1d79fa4b30cfe6ea4e46c886d0fe9eb557502",
+          "url": "https://github.com/sungam3r/SteroidsDI/commit/d2ecfbb671877180939ab95edfbe1e18a0609599"
+        },
+        "date": 1707368220543,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveDefer",
+            "value": 115.27326882802524,
+            "unit": "ns",
+            "range": "± 0.39229915625378803"
+          },
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveIDefer",
+            "value": 114.04733959986613,
+            "unit": "ns",
+            "range": "± 0.14368674978865847"
           }
         ]
       }
