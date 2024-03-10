@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1707368221623,
+  "lastUpdate": 1710090929455,
   "repoUrl": "https://github.com/sungam3r/SteroidsDI",
   "entries": {
     "SteroidsDI Benchmarks": [
@@ -252,6 +252,42 @@ window.BENCHMARK_DATA = {
             "value": 114.04733959986613,
             "unit": "ns",
             "range": "± 0.14368674978865847"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "505decab5bb8f9020caa68296caecc41234757a2",
+          "message": "Bump MinVer from 4.3.0 to 5.0.0 (#161)\n\nBumps [MinVer](https://github.com/adamralph/minver) from 4.3.0 to 5.0.0.\r\n- [Changelog](https://github.com/adamralph/minver/blob/main/CHANGELOG.md)\r\n- [Commits](https://github.com/adamralph/minver/compare/4.3.0...5.0.0)\r\n\r\n---\r\nupdated-dependencies:\r\n- dependency-name: MinVer\r\n  dependency-type: direct:production\r\n  update-type: version-update:semver-major\r\n...\r\n\r\nSigned-off-by: dependabot[bot] <support@github.com>\r\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2024-03-10T20:13:46+03:00",
+          "tree_id": "5a42de040d2f866ed572d4e9ac6b697b1c103ee0",
+          "url": "https://github.com/sungam3r/SteroidsDI/commit/505decab5bb8f9020caa68296caecc41234757a2"
+        },
+        "date": 1710090929103,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveDefer",
+            "value": 110.02808328185763,
+            "unit": "ns",
+            "range": "± 0.57018678358124"
+          },
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveIDefer",
+            "value": 113.11817188660304,
+            "unit": "ns",
+            "range": "± 0.4978574383885392"
           }
         ]
       }
