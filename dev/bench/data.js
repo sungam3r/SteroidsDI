@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1710310213688,
+  "lastUpdate": 1710355095212,
   "repoUrl": "https://github.com/sungam3r/SteroidsDI",
   "entries": {
     "SteroidsDI Benchmarks": [
@@ -360,6 +360,42 @@ window.BENCHMARK_DATA = {
             "value": 114.73104817592181,
             "unit": "ns",
             "range": "± 0.1880228606158987"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "2e38c487b357077ce421d60d48e75200ff2794aa",
+          "message": "Bump coverlet.msbuild from 6.0.0 to 6.0.2 (#162)\n\nBumps [coverlet.msbuild](https://github.com/coverlet-coverage/coverlet) from 6.0.0 to 6.0.2.\r\n- [Release notes](https://github.com/coverlet-coverage/coverlet/releases)\r\n- [Commits](https://github.com/coverlet-coverage/coverlet/compare/v6.0.0...v6.0.2)\r\n\r\n---\r\nupdated-dependencies:\r\n- dependency-name: coverlet.msbuild\r\n  dependency-type: direct:production\r\n  update-type: version-update:semver-patch\r\n...\r\n\r\nSigned-off-by: dependabot[bot] <support@github.com>\r\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2024-03-13T21:36:41+03:00",
+          "tree_id": "6834e907dc5251b4a6517de3ef1387829b075f2b",
+          "url": "https://github.com/sungam3r/SteroidsDI/commit/2e38c487b357077ce421d60d48e75200ff2794aa"
+        },
+        "date": 1710355094550,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveDefer",
+            "value": 116.8669002698018,
+            "unit": "ns",
+            "range": "± 0.9526389430548726"
+          },
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveIDefer",
+            "value": 114.01457059383392,
+            "unit": "ns",
+            "range": "± 0.7070316603730912"
           }
         ]
       }
