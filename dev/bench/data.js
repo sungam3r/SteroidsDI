@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1710355095212,
+  "lastUpdate": 1710775527393,
   "repoUrl": "https://github.com/sungam3r/SteroidsDI",
   "entries": {
     "SteroidsDI Benchmarks": [
@@ -396,6 +396,42 @@ window.BENCHMARK_DATA = {
             "value": 114.01457059383392,
             "unit": "ns",
             "range": "± 0.7070316603730912"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "sungam3r@yandex.ru",
+            "name": "Ivan Maximov",
+            "username": "sungam3r"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a648d883bfeb6e38d8654462b49e4cf8530686c7",
+          "message": "Remove SourceLink package (#163)",
+          "timestamp": "2024-03-18T18:24:10+03:00",
+          "tree_id": "60f4095a92d501fe7ca37d77341468fe7d540433",
+          "url": "https://github.com/sungam3r/SteroidsDI/commit/a648d883bfeb6e38d8654462b49e4cf8530686c7"
+        },
+        "date": 1710775526402,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveDefer",
+            "value": 115.04502998865567,
+            "unit": "ns",
+            "range": "± 0.5648136523627176"
+          },
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveIDefer",
+            "value": 115.61021794875462,
+            "unit": "ns",
+            "range": "± 0.5242447535068759"
           }
         ]
       }
