@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1710775527393,
+  "lastUpdate": 1737307281187,
   "repoUrl": "https://github.com/sungam3r/SteroidsDI",
   "entries": {
     "SteroidsDI Benchmarks": [
@@ -432,6 +432,42 @@ window.BENCHMARK_DATA = {
             "value": 115.61021794875462,
             "unit": "ns",
             "range": "± 0.5242447535068759"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b3c87587f4173ad6517764ea22adfe5ef47aa302",
+          "message": "Bump PublicApiGenerator from 11.2.0 to 11.3.0 in /src (#138)\n\nupdated-dependencies:\r\n- dependency-name: Microsoft.NET.Test.Sdk\r\n  dependency-type: direct:production\r\n  update-type: version-update:semver-minor\r\n...\r\n\r\nSigned-off-by: dependabot[bot] <support@github.com>\r\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2025-01-19T20:20:05+03:00",
+          "tree_id": "1a958466bacc89cdc33dc39c10bef457b1279564",
+          "url": "https://github.com/sungam3r/SteroidsDI/commit/b3c87587f4173ad6517764ea22adfe5ef47aa302"
+        },
+        "date": 1737307280273,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveDefer",
+            "value": 116.28819047609964,
+            "unit": "ns",
+            "range": "± 1.021959347490513"
+          },
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveIDefer",
+            "value": 116.95357503890992,
+            "unit": "ns",
+            "range": "± 1.562833707521769"
           }
         ]
       }
