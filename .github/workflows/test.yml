@@ -41,6 +41,8 @@ jobs:
             6.0.x
             7.0.x
             8.0.x
+            9.0.x
+            10.0.x
           source-url: https://nuget.pkg.github.com/sungam3r/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
