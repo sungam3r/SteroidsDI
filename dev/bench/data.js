@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1765829587749,
+  "lastUpdate": 1765829624248,
   "repoUrl": "https://github.com/sungam3r/SteroidsDI",
   "entries": {
     "SteroidsDI Benchmarks": [
@@ -684,6 +684,42 @@ window.BENCHMARK_DATA = {
             "value": 114.02676878656659,
             "unit": "ns",
             "range": "± 0.298538675830673"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "39f255532a0b7acbf788b71a24c2af648846c13e",
+          "message": "Bump actions/stale from 9 to 10 (#167)\n\nBumps [actions/stale](https://github.com/actions/stale) from 9 to 10.\n- [Release notes](https://github.com/actions/stale/releases)\n- [Changelog](https://github.com/actions/stale/blob/main/CHANGELOG.md)\n- [Commits](https://github.com/actions/stale/compare/v9...v10)\n\n---\nupdated-dependencies:\n- dependency-name: actions/stale\n  dependency-version: '10'\n  dependency-type: direct:production\n  update-type: version-update:semver-major\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2025-12-15T23:11:57+03:00",
+          "tree_id": "ad559f21b5fdef079a5a1c276698ac3205acc3d4",
+          "url": "https://github.com/sungam3r/SteroidsDI/commit/39f255532a0b7acbf788b71a24c2af648846c13e"
+        },
+        "date": 1765829623269,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveDefer",
+            "value": 113.94411902702771,
+            "unit": "ns",
+            "range": "± 0.4222650901248249"
+          },
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveIDefer",
+            "value": 118.12842599834714,
+            "unit": "ns",
+            "range": "± 0.36229454556949414"
           }
         ]
       }
