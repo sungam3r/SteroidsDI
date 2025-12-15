@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1765829546465,
+  "lastUpdate": 1765829587749,
   "repoUrl": "https://github.com/sungam3r/SteroidsDI",
   "entries": {
     "SteroidsDI Benchmarks": [
@@ -648,6 +648,42 @@ window.BENCHMARK_DATA = {
             "value": 114.8737564086914,
             "unit": "ns",
             "range": "± 0.25080420918382573"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "04008d55a43cc5c584324f241c2c7ebc638720cd",
+          "message": "Bump actions/upload-artifact from 4 to 6 (#168)\n\nBumps [actions/upload-artifact](https://github.com/actions/upload-artifact) from 4 to 6.\n- [Release notes](https://github.com/actions/upload-artifact/releases)\n- [Commits](https://github.com/actions/upload-artifact/compare/v4...v6)\n\n---\nupdated-dependencies:\n- dependency-name: actions/upload-artifact\n  dependency-version: '6'\n  dependency-type: direct:production\n  update-type: version-update:semver-major\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2025-12-15T23:11:29+03:00",
+          "tree_id": "0770e3cace399565f1e8a92b6beb018a8ba23b37",
+          "url": "https://github.com/sungam3r/SteroidsDI/commit/04008d55a43cc5c584324f241c2c7ebc638720cd"
+        },
+        "date": 1765829587216,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveDefer",
+            "value": 110.03565691198621,
+            "unit": "ns",
+            "range": "± 0.3518119422908965"
+          },
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveIDefer",
+            "value": 114.02676878656659,
+            "unit": "ns",
+            "range": "± 0.298538675830673"
           }
         ]
       }
