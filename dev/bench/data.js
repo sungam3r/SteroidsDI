@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1765829324220,
+  "lastUpdate": 1765829475493,
   "repoUrl": "https://github.com/sungam3r/SteroidsDI",
   "entries": {
     "SteroidsDI Benchmarks": [
@@ -576,6 +576,42 @@ window.BENCHMARK_DATA = {
             "value": 113.35901950200399,
             "unit": "ns",
             "range": "± 0.5240552308652444"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "25bae2afbbfdf9c51593a2256aa13b9b86f7050e",
+          "message": "Bump actions/checkout from 4 to 6 (#170)\n\nBumps [actions/checkout](https://github.com/actions/checkout) from 4 to 6.\n- [Release notes](https://github.com/actions/checkout/releases)\n- [Changelog](https://github.com/actions/checkout/blob/main/CHANGELOG.md)\n- [Commits](https://github.com/actions/checkout/compare/v4...v6)\n\n---\nupdated-dependencies:\n- dependency-name: actions/checkout\n  dependency-version: '6'\n  dependency-type: direct:production\n  update-type: version-update:semver-major\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2025-12-15T23:09:33+03:00",
+          "tree_id": "393388f6df442d9302177643fdbc72f1a84cd296",
+          "url": "https://github.com/sungam3r/SteroidsDI/commit/25bae2afbbfdf9c51593a2256aa13b9b86f7050e"
+        },
+        "date": 1765829475003,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveDefer",
+            "value": 107.50537108977636,
+            "unit": "ns",
+            "range": "± 0.9866226239185384"
+          },
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveIDefer",
+            "value": 110.61344447135926,
+            "unit": "ns",
+            "range": "± 0.6379868845481036"
           }
         ]
       }
