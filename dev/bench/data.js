@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1785648035759,
+  "lastUpdate": 1785648083981,
   "repoUrl": "https://github.com/sungam3r/SteroidsDI",
   "entries": {
     "SteroidsDI Benchmarks": [
@@ -864,6 +864,42 @@ window.BENCHMARK_DATA = {
             "value": 67.77540377208165,
             "unit": "ns",
             "range": "± 0.2181793412406058"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e304edd77caaa8c1c6b5e260f24ad51087b8bb09",
+          "message": "Bump codecov/codecov-action from 5 to 7 (#177)\n\nBumps [codecov/codecov-action](https://github.com/codecov/codecov-action) from 5 to 7.\n- [Release notes](https://github.com/codecov/codecov-action/releases)\n- [Changelog](https://github.com/codecov/codecov-action/blob/main/CHANGELOG.md)\n- [Commits](https://github.com/codecov/codecov-action/compare/v5...v7)\n\n---\nupdated-dependencies:\n- dependency-name: codecov/codecov-action\n  dependency-version: '7'\n  dependency-type: direct:production\n  update-type: version-update:semver-major\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-08-02T08:19:51+03:00",
+          "tree_id": "c730fd8cb6e8f52b4d9250a7a196881677de3a32",
+          "url": "https://github.com/sungam3r/SteroidsDI/commit/e304edd77caaa8c1c6b5e260f24ad51087b8bb09"
+        },
+        "date": 1785648083487,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveDefer",
+            "value": 113.46509253184,
+            "unit": "ns",
+            "range": "± 0.4677343861166722"
+          },
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveIDefer",
+            "value": 114.70277278763908,
+            "unit": "ns",
+            "range": "± 0.22044975218280674"
           }
         ]
       }
