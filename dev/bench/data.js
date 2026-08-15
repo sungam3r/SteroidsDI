@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1785648109818,
+  "lastUpdate": 1786769405019,
   "repoUrl": "https://github.com/sungam3r/SteroidsDI",
   "entries": {
     "SteroidsDI Benchmarks": [
@@ -936,6 +936,42 @@ window.BENCHMARK_DATA = {
             "value": 114.27084604501724,
             "unit": "ns",
             "range": "± 1.0808428246008603"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "fe242e3c78bd0322364135984d2625b4fb483659",
+          "message": "Bump actions/labeler from 6 to 7 (#182)\n\nBumps [actions/labeler](https://github.com/actions/labeler) from 6 to 7.\n- [Release notes](https://github.com/actions/labeler/releases)\n- [Commits](https://github.com/actions/labeler/compare/v6...v7)\n\n---\nupdated-dependencies:\n- dependency-name: actions/labeler\n  dependency-version: '7'\n  dependency-type: direct:production\n  update-type: version-update:semver-major\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-08-15T07:48:35+03:00",
+          "tree_id": "db8764366b83416be5f3cf18b5f20ad5a731de82",
+          "url": "https://github.com/sungam3r/SteroidsDI/commit/fe242e3c78bd0322364135984d2625b4fb483659"
+        },
+        "date": 1786769404229,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveDefer",
+            "value": 113.36824835198266,
+            "unit": "ns",
+            "range": "± 0.32702051885754957"
+          },
+          {
+            "name": "Benchmarks.DeferBenchmarks.ResolveIDefer",
+            "value": 118.6043496131897,
+            "unit": "ns",
+            "range": "± 0.36565793873038077"
           }
         ]
       }
